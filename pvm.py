@@ -22,9 +22,9 @@ print(media.has_vout())
 def parse_commands(*args):
     # data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
     # data = data.decode('UTF-8').split()
-    command = args[0]
-    if len(args)>1:
-    	value = args[1]
+    command = args[1]
+    if len(args)>2:
+    	value = args[2]
     	pass
     if command=="start":
     	media.play()
