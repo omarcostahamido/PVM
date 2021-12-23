@@ -2,7 +2,9 @@ import vlc
 # from pythonosc import dispatcher, osc_server, udp_client
 import socket
 
-media = vlc.MediaPlayer("jellyfish720p.mp4")
+inst = vlc.Instance('--input-repeat=-1')
+media = inst.media_player_new("jellyfish720p.mp4")
+# media = vlc.MediaPlayer("jellyfish720p.mp4")
 
 #media.set_fullscreen(True)
 
@@ -35,7 +37,9 @@ while True:
     data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
     data = data.decode('UTF-8').split()
     command = data[0]
-    argument = data[1]
+    if len(data)>1:
+    	argument = data[1]
+    	pass
     if command=="start":
     	media.play()
     	pass
@@ -43,7 +47,7 @@ while True:
     	media.stop()
     	pass
     if command=="set_position":
-		media.set_position(float(data[1]))
+    	media.set_position(float(data[1]))
     	pass
     if command=="fullscreen":
     	# media.set_fullscreen(True)
