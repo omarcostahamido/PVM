@@ -1,5 +1,5 @@
 import vlc
-# from pythonosc import dispatcher, osc_server, udp_client
+from pythonosc import dispatcher, osc_server, udp_client
 import socket
 
 inst = vlc.Instance('--input-repeat=65535','--video-x=100')
@@ -18,29 +18,36 @@ print(media.has_vout())
 #     	print(arg)
 
 
-# def main(RECEIVE_PORT):
-#     #OSC server
-#     callback = dispatcher.Dispatcher()
-#     server = osc_server.ThreadingOSCUDPServer(("127.0.0.1", RECEIVE_PORT), callback)
-#     callback.map("/PVM", parse_qasm)
-#     server.serve_forever()
+def main(RECEIVE_PORT):
+    #OSC server
+    callback = dispatcher.Dispatcher()
+    server = osc_server.ThreadingOSCUDPServer(("", RECEIVE_PORT), callback)
+    callback.map("/PVM", parse_commands)
+    server.serve_forever()
 
-# main(8001)
+if __name__ == '__main__':
+    p = argparse.ArgumentParser()
+    p.add_argument('--port', type=int, nargs='?', default=8001, help='The port that pvm.py will use to receive control messages. Default port is 8001')
+    args = p.parse_args()
+    print('PVM - Pi Video Machine')
+    print('Omar Costa Hamido 2022')
+    main(args.port)
 
 
-UDP_IP = ""
-UDP_PORT = 8000 #add possibility to change this
+# UDP_IP = ""
+# UDP_PORT = 8000 #add possibility to change this
 
-sock = socket.socket(socket.AF_INET, # Internet
-                     socket.SOCK_DGRAM) # UDP
-sock.bind((UDP_IP, UDP_PORT))
+# sock = socket.socket(socket.AF_INET, # Internet
+#                      socket.SOCK_DGRAM) # UDP
+# sock.bind((UDP_IP, UDP_PORT))
 
-while True:
-    data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
-    data = data.decode('UTF-8').split()
-    command = data[0]
-    if len(data)>1:
-    	argument = data[1]
+# while True:
+def parse_commands(*args):
+    # data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
+    # data = data.decode('UTF-8').split()
+    command = args[0]
+    if len(args)>1:
+    	value = args[1]
     	pass
     if command=="start":
     	media.play()
@@ -49,7 +56,7 @@ while True:
     	media.stop()
     	pass
     if command=="set_position":
-    	media.set_position(float(data[1]))
+    	media.set_position(float(value))
     	pass
     if command=="fullscreen":
     	# media.set_fullscreen(True)
@@ -57,7 +64,7 @@ while True:
     	pass
     if command=="set_rate":
     	# media.set_fullscreen(True)
-    	media.set_rate(float(data[1]))
+    	media.set_rate(float(value))
     	pass
     if command=="pause":
     	# media.set_fullscreen(True)
