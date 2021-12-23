@@ -68,4 +68,4 @@ while True:
     	media.next_frame()
     	pass
     else:
-    	print("I received command \"%s\" but I don't know what to do with it, yet." % data)
+    	print("I received command \"%s\" but I don't know what to do with it, yet." % command)
