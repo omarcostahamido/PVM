@@ -5,8 +5,6 @@ import argparse
 
 inst = vlc.Instance('--input-repeat=65535','--video-x=100')
 media = inst.media_player_new("jellyfish720p.mp4")
-print("How many video outputs does this media player have?")
-print(media.has_vout())
 # media = vlc.MediaPlayer("jellyfish720p.mp4")
 
 #media.set_fullscreen(True)
@@ -55,8 +53,11 @@ def parse_commands(*args):
     	print("I received command \"%s\" but I don't know what to do with it, yet." % command)
 
 
-def main(RECEIVE_PORT):
+def main(RECEIVE_PORT,FILE):
     #OSC server
+    media = inst.media_player_new(FILE)
+	print("How many video outputs does this media player have?")
+	print(media.has_vout())
     callback = dispatcher.Dispatcher()
     server = osc_server.ThreadingOSCUDPServer(("", RECEIVE_PORT), callback)
     callback.map("/PVM", parse_commands)
@@ -65,10 +66,11 @@ def main(RECEIVE_PORT):
 if __name__ == '__main__':
     p = argparse.ArgumentParser()
     p.add_argument('--port', type=int, nargs='?', default=8001, help='The port that pvm.py will use to receive control messages. Default port is 8001')
+    p.add_argument('--file', nargs='?', default='jellyfish720p.mp4', help='The file that pvm.py will load. Default is jellyfish720p.mp4')
     args = p.parse_args()
     print('PVM - Pi Video Machine')
     print('Omar Costa Hamido 2022')
-    main(args.port)
+    main(args.port,args.file)
 
 
 # UDP_IP = ""
