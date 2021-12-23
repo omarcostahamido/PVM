@@ -1,6 +1,7 @@
 import vlc
 from pythonosc import dispatcher, osc_server, udp_client
 import socket
+import argparse
 
 inst = vlc.Instance('--input-repeat=65535','--video-x=100')
 media = inst.media_player_new("jellyfish720p.mp4")
@@ -16,30 +17,6 @@ print(media.has_vout())
 # def parse_qasm(*args):
 #     for arg in args:
 #     	print(arg)
-
-
-def main(RECEIVE_PORT):
-    #OSC server
-    callback = dispatcher.Dispatcher()
-    server = osc_server.ThreadingOSCUDPServer(("", RECEIVE_PORT), callback)
-    callback.map("/PVM", parse_commands)
-    server.serve_forever()
-
-if __name__ == '__main__':
-    p = argparse.ArgumentParser()
-    p.add_argument('--port', type=int, nargs='?', default=8001, help='The port that pvm.py will use to receive control messages. Default port is 8001')
-    args = p.parse_args()
-    print('PVM - Pi Video Machine')
-    print('Omar Costa Hamido 2022')
-    main(args.port)
-
-
-# UDP_IP = ""
-# UDP_PORT = 8000 #add possibility to change this
-
-# sock = socket.socket(socket.AF_INET, # Internet
-#                      socket.SOCK_DGRAM) # UDP
-# sock.bind((UDP_IP, UDP_PORT))
 
 # while True:
 def parse_commands(*args):
@@ -76,3 +53,27 @@ def parse_commands(*args):
     	pass
     else:
     	print("I received command \"%s\" but I don't know what to do with it, yet." % command)
+
+
+def main(RECEIVE_PORT):
+    #OSC server
+    callback = dispatcher.Dispatcher()
+    server = osc_server.ThreadingOSCUDPServer(("", RECEIVE_PORT), callback)
+    callback.map("/PVM", parse_commands)
+    server.serve_forever()
+
+if __name__ == '__main__':
+    p = argparse.ArgumentParser()
+    p.add_argument('--port', type=int, nargs='?', default=8001, help='The port that pvm.py will use to receive control messages. Default port is 8001')
+    args = p.parse_args()
+    print('PVM - Pi Video Machine')
+    print('Omar Costa Hamido 2022')
+    main(args.port)
+
+
+# UDP_IP = ""
+# UDP_PORT = 8000 #add possibility to change this
+
+# sock = socket.socket(socket.AF_INET, # Internet
+#                      socket.SOCK_DGRAM) # UDP
+# sock.bind((UDP_IP, UDP_PORT))
