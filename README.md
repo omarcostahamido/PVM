@@ -41,3 +41,6 @@ Start the script
 - explain how to remote control
 - add start position offset
 - set script autostart
+
+## Known limitations
+videos only repeat 65535 times (this may be reworked later)
