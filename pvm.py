@@ -1,5 +1,6 @@
-import vlc
-from pythonosc import dispatcher, osc_server, udp_client
+# import vlc
+# from pythonosc import dispatcher, osc_server, udp_client
+import socket
 
 # media = vlc.MediaPlayer("jellyfish720p.mp4", "--intf macosx")
 
@@ -23,10 +24,8 @@ from pythonosc import dispatcher, osc_server, udp_client
 # main(8001)
 
 
-import socket
-
-UDP_IP = "127.0.0.1"
-UDP_PORT = 5005
+UDP_IP = ""
+UDP_PORT = 8000 #add possibility to change this
 
 sock = socket.socket(socket.AF_INET, # Internet
                      socket.SOCK_DGRAM) # UDP
@@ -34,4 +33,10 @@ sock.bind((UDP_IP, UDP_PORT))
 
 while True:
     data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
-    print("received message: %s" % data)
+    if data=="john":
+    	print("welcome john")
+    	pass
+    else:
+    	print("something else arrived")
+
+    # print("received message: %s" % data)
