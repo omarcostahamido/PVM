@@ -2,7 +2,7 @@ import vlc
 # from pythonosc import dispatcher, osc_server, udp_client
 import socket
 
-inst = vlc.Instance('--input-repeat=65535')
+inst = vlc.Instance('--input-repeat=65535','--video-x=100')
 media = inst.media_player_new("jellyfish720p.mp4")
 print("How many video outputs does this media player have?")
 print(media.has_vout())
