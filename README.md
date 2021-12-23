@@ -22,7 +22,7 @@ Open your venv
 
 install dependencies
 
-`pip install python-vlc python-osc`
+`pip install python-vlc python-osc pynput`
 
 (optional) download a sample video
 
