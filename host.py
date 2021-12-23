@@ -2,6 +2,7 @@ from pythonosc import dispatcher, osc_server, udp_client
 import random
 import argparse
 from pynput import keyboard
+import socket
 
 global ips, port
 
@@ -28,24 +29,35 @@ global ips, port
 #     ips = args.ip
 #     port = args.port
 
-# def on_press(key):
-#     try:
-#         if key.char == 's':
-#         	print("we pressed S!")
-#         	for ip in ips:
-#         		client = udp_client.SimpleUDPClient(ip, port)
-#         		client.send_message("/PVM", random.random())
-#         	pass
-#         # print('alphanumeric key {0} pressed'.format(
-#         #     key.char))
-#     except AttributeError:
-#         pass
-#         # print('special key {0} pressed'.format(
-#         #     key))
+def on_press(key):
+    try:
+        if key.char == 's':
+        	print("we pressed S!")
+        	for ip in UDP_IP:
+        		# client = udp_client.SimpleUDPClient(ip, port)
+        		# client.send_message("/PVM", random.random())
+        		MESSAGE = b"something else" 
+				sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+				sock.sendto(MESSAGE, (ip, UDP_PORT))
+        	pass
+        if key.char=='j':
+        	print("we pressed J!")
+        	for ip in UDP_IP:
+        		MESSAGE = b"john" 
+				sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+				sock.sendto(MESSAGE, (ip, UDP_PORT))
+        		pass
+        	pass
+        # print('alphanumeric key {0} pressed'.format(
+        #     key.char))
+    except AttributeError:
+        pass
+        # print('special key {0} pressed'.format(
+        #     key))
 
-# with keyboard.Listener(
-#         on_press=on_press) as listener:
-# 	listener.join()
+with keyboard.Listener(
+        on_press=on_press) as listener:
+	listener.join()
 
 
 # def parse_qasm(*args):
@@ -53,13 +65,13 @@ global ips, port
 #     for arg in args:
 #     	print(arg)
 
-import socket
 
-UDP_IP = "127.0.0.1"
-UDP_PORT = 5005
+
+UDP_IP = "192.168.1.103"
+UDP_PORT = 8000
 MESSAGE = b"Hello, World!" 
-print("UDP target IP: %s" % UDP_IP)
-print("UDP target port: %s" % UDP_PORT)
-print("message: %s" % MESSAGE) 
+# print("UDP target IP: %s" % UDP_IP)
+# print("UDP target port: %s" % UDP_PORT)
+# print("message: %s" % MESSAGE) 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
