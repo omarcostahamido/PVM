@@ -59,6 +59,30 @@ def on_press(key):
         	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         	sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
         	pass
+        if key.char=='z':
+        	print("we pressed Z to set half speed!")
+        	MESSAGE = b"set_rate 0.5"
+        	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        	sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+        	pass
+        if key.char=='x':
+        	print("we pressed X to set double speed!")
+        	MESSAGE = b"set_rate 2.0"
+        	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        	sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+        	pass
+        if key.char=='c':
+        	print("we pressed C to pause!")
+        	MESSAGE = b"pause"
+        	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        	sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+        	pass
+        if key.char=='v':
+        	print("we pressed V to go to next frame!")
+        	MESSAGE = b"next_frame"
+        	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        	sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+        	pass
         # print('alphanumeric key {0} pressed'.format(
         #     key.char))
     except AttributeError:
