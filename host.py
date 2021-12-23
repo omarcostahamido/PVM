@@ -6,6 +6,10 @@ import socket
 
 global ips, port
 
+UDP_IP = "192.168.1.103"
+UDP_PORT = 8000
+MESSAGE = b"Hello, World!" 
+
 # def main(UDP_IP, SEND_PORT):
 #     # if UDP_IP=="localhost":
 #     #     UDP_IP="127.0.0.1"
@@ -32,21 +36,28 @@ global ips, port
 def on_press(key):
     try:
         if key.char == 's':
-        	print("we pressed S!")
-        	for ip in UDP_IP:
-        		# client = udp_client.SimpleUDPClient(ip, port)
-        		# client.send_message("/PVM", random.random())
-        		MESSAGE = b"something else" 
-				sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-				sock.sendto(MESSAGE, (ip, UDP_PORT))
+        	print("we pressed S for start!")
+        	MESSAGE = b"start"
+        	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        	sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
         	pass
-        if key.char=='j':
-        	print("we pressed J!")
-        	for ip in UDP_IP:
-        		MESSAGE = b"john" 
-				sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-				sock.sendto(MESSAGE, (ip, UDP_PORT))
-        		pass
+        if key.char=='d':
+        	print("we pressed D for stop!")
+        	MESSAGE = b"stop"
+        	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        	sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+        	pass
+        if key.char=='f':
+        	print("we pressed F for fullscreen!")
+        	MESSAGE = b"fullscreen"
+        	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        	sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+        	pass
+        if key.char=='g':
+        	print("we pressed G to go to position!")
+        	MESSAGE = b"set_position 0.5"
+        	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        	sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
         	pass
         # print('alphanumeric key {0} pressed'.format(
         #     key.char))
@@ -67,11 +78,9 @@ with keyboard.Listener(
 
 
 
-UDP_IP = "192.168.1.103"
-UDP_PORT = 8000
-MESSAGE = b"Hello, World!" 
+
 # print("UDP target IP: %s" % UDP_IP)
 # print("UDP target port: %s" % UDP_PORT)
 # print("message: %s" % MESSAGE) 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+# sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+# sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
