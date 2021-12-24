@@ -56,8 +56,8 @@ def parse_commands(*args):
 def main(RECEIVE_PORT,FILE):
     #OSC server
     media = inst.media_player_new(FILE)
-	print("How many video outputs does this media player have?")
-	print(media.has_vout())
+    print("How many video outputs does this media player have?")
+    print(media.has_vout())
     callback = dispatcher.Dispatcher()
     server = osc_server.ThreadingOSCUDPServer(("", RECEIVE_PORT), callback)
     callback.map("/PVM", parse_commands)
