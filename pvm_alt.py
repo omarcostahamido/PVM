@@ -28,38 +28,38 @@ def parse_commands(*args):
     if command=="stop":
     	# media.stop()
     	p.stdin.write(b"stop\n")
-		p.stdin.flush()
+    	p.stdin.flush()
     	pass
     if command=="set_position":
     	# media.set_position(float(value))
     	cmd = b"seek \"%f\"" % float(value)
     	p.stdin.write(cmd)
-		p.stdin.flush()
+    	p.stdin.flush()
     	pass
     if command=="fullscreen":
     	# media.set_fullscreen(True)
     	# media.toggle_fullscreen()
     	p.stdin.write(b"fullscreen\n")
-		p.stdin.flush()
+    	p.stdin.flush()
     	pass
     if command=="set_rate":
     	# media.set_fullscreen(True)
     	# media.set_rate(float(value))
     	cmd = b"rate \"%f\"" % float(value)
     	p.stdin.write(cmd)
-		p.stdin.flush()
+    	p.stdin.flush()
     	pass
     if command=="pause":
     	# media.set_fullscreen(True)
     	# media.pause()
     	p.stdin.write(b"pause\n")
-		p.stdin.flush()
+    	p.stdin.flush()
     	pass
     if command=="next_frame":
     	# media.set_fullscreen(True)
     	# media.next_frame()
     	p.stdin.write(b"frame\n")
-		p.stdin.flush()
+    	p.stdin.flush()
     	pass
     else:
     	print("I received command \"%s\" but I don't know what to do with it, yet." % command)
