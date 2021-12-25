@@ -8,10 +8,10 @@ import argparse
 cmd1 = "vlc jellyfish720p.mp4 -I rc"
 cmd2 = b"loop\n"
 
-p = Popen(cmd1.split(),stdin=PIPE)
+proc = Popen(cmd1.split(),stdin=PIPE)
 
-p.stdin.write(cmd2)
-p.stdin.flush()
+proc.stdin.write(cmd2)
+proc.stdin.flush()
 
 def parse_commands(*args):
     # data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
@@ -22,44 +22,44 @@ def parse_commands(*args):
     	pass
     if command=="start":
     	# media.play()
-    	p.stdin.write(b"play\n")
-    	p.stdin.flush()
+    	proc.stdin.write(b"play\n")
+    	proc.stdin.flush()
     	pass
     if command=="stop":
     	# media.stop()
-    	p.stdin.write(b"stop\n")
-    	p.stdin.flush()
+    	proc.stdin.write(b"stop\n")
+    	proc.stdin.flush()
     	pass
     if command=="set_position":
     	# media.set_position(float(value))
     	cmd = b"seek \"%f\"" % float(value)
-    	p.stdin.write(cmd)
-    	p.stdin.flush()
+    	proc.stdin.write(cmd)
+    	proc.stdin.flush()
     	pass
     if command=="fullscreen":
     	# media.set_fullscreen(True)
     	# media.toggle_fullscreen()
-    	p.stdin.write(b"fullscreen\n")
-    	p.stdin.flush()
+    	proc.stdin.write(b"fullscreen\n")
+    	proc.stdin.flush()
     	pass
     if command=="set_rate":
     	# media.set_fullscreen(True)
     	# media.set_rate(float(value))
     	cmd = b"rate \"%f\"" % float(value)
-    	p.stdin.write(cmd)
-    	p.stdin.flush()
+    	proc.stdin.write(cmd)
+    	proc.stdin.flush()
     	pass
     if command=="pause":
     	# media.set_fullscreen(True)
     	# media.pause()
-    	p.stdin.write(b"pause\n")
-    	p.stdin.flush()
+    	proc.stdin.write(b"pause\n")
+    	proc.stdin.flush()
     	pass
     if command=="next_frame":
     	# media.set_fullscreen(True)
     	# media.next_frame()
-    	p.stdin.write(b"frame\n")
-    	p.stdin.flush()
+    	proc.stdin.write(b"frame\n")
+    	proc.stdin.flush()
     	pass
     else:
     	print("I received command \"%s\" but I don't know what to do with it, yet." % command)
