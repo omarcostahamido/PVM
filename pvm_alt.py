@@ -23,7 +23,7 @@ def parse_commands(*args):
     if command=="start":
     	# media.play()
     	p.stdin.write(b"play\n")
-		p.stdin.flush()
+    	p.stdin.flush()
     	pass
     if command=="stop":
     	# media.stop()
