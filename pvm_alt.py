@@ -5,7 +5,7 @@ from pythonosc import dispatcher, osc_server, udp_client
 import socket
 import argparse
 
-cmd1 = "vlc jellyfish720p.mp4 -I rc"
+cmd1 = "vlc zoetrope.mp4 -I rc"
 cmd2 = b"loop\n"
 
 proc = Popen(cmd1.split(),stdin=PIPE)
@@ -79,5 +79,6 @@ if __name__ == '__main__':
     # p.add_argument('--file', nargs='?', default='jellyfish720p.mp4', help='The file that pvm.py will load. Default is jellyfish720p.mp4')
     args = p.parse_args()
     print('PVM - Pi Video Machine')
+    print('alt version: vlc -I rc')
     print('Omar Costa Hamido 2022')
     main(args.port)
