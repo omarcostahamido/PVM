@@ -2,6 +2,8 @@
 Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry pi video player machine for installation work
 
 
+### { This is a work in progress }
+
 ## Installation
 
 Clone or download this repo
@@ -33,14 +35,17 @@ install dependencies
 
 Start the script
 
-`python {name-of-script}.py`
+`python pvm.py`
 
 
 ## Todo
 
+- add help options
 - explain how to remote control
+- replace video on launch (as a script argument)
 - add start position offset
 - set script autostart
 
 ## Known limitations
-videos only repeat 65535 times (this may be reworked later)
+- as of [v0.2.1](https://github.com/omarcostahamido/PVM/releases) videos only repeat 65535 times (see [here](omarcostahamido.com/pvm) helper tool)
+  - this is no longer the case with the current experimental version `pvm_alt.py`
