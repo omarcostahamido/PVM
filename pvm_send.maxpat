@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 651.0, 126.0, 340.0, 208.0 ],
+		"rect" : [ 651.0, 126.0, 340.0, 200.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,17 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-7",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 191.5, 157.0, 91.0, 22.0 ],
+					"text" : "print pvm_send"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-6",
 					"maxclass" : "newobj",
@@ -125,7 +136,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-1",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -137,7 +148,8 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-5", 0 ],
+					"destination" : [ "obj-4", 0 ],
+					"midpoints" : [ 37.5, 61.0, 241.0, 61.0 ],
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -146,6 +158,16 @@
 				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
 					"midpoints" : [ 130.5, 138.5, 37.5, 138.5 ],
+					"order" : 1,
+					"source" : [ "obj-11", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-7", 0 ],
+					"midpoints" : [ 130.5, 150.122589558362961, 201.0, 150.122589558362961 ],
+					"order" : 0,
 					"source" : [ "obj-11", 0 ]
 				}
 
@@ -170,6 +192,14 @@
 					"destination" : [ "obj-11", 0 ],
 					"midpoints" : [ 241.0, 94.5, 130.5, 94.5 ],
 					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-5", 0 ],
+					"midpoints" : [ 295.0, 187.214285731315613, 21.25, 187.214285731315613, 21.25, 64.043956339359283, 37.5, 64.043956339359283 ],
+					"source" : [ "obj-4", 2 ]
 				}
 
 			}
@@ -206,13 +236,21 @@
 				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
 					"midpoints" : [ 175.25, 150.5, 37.5, 150.5 ],
+					"order" : 1,
 					"source" : [ "obj-8", 0 ]
 				}
 
 			}
- ],
-		"dependency_cache" : [  ],
-		"autosave" : 0
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-7", 0 ],
+					"midpoints" : [ 175.25, 150.5, 201.0, 150.5 ],
+					"order" : 0,
+					"source" : [ "obj-8", 0 ]
+				}
+
+			}
+ ]
 	}
 
 }
