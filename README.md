@@ -38,13 +38,23 @@ Start the script
 `python pvm.py`
 
 
+## Autostart
+
+on the terminal run
+
+`sudo nano /etc/xdg/lxsession/LXDE-pi/autostart`
+
+after the last line add
+
+`@lxterminal -e sh /home/pi/PVM/launch.sh`
+
+Note: this is assuming that you clone this repo on your raspberry pi in the main /home/pi folder and followed the steps in <a target="_self" href="#installation">Installation</a> above.
+
 ## Todo
 
 - add help options
 - explain how to remote control
-- replace video on launch (as a script argument)
 - add start position offset
-- set script autostart
 
 ## Known limitations
 - as of [v0.2.1](https://github.com/omarcostahamido/PVM/releases) videos only repeat 65535 times (see [here](omarcostahamido.com/pvm) helper tool)
