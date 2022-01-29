@@ -24,12 +24,12 @@ def parse_commands(*args):
     print("command: "+command)
     if len(args)>2:
     	value = args[2]
-        print("value: "+value)
+		print("value: "+value)
     	pass
     if command=="file":
-        print(value)
-        media = inst.media_player_new(value)
-        pass
+		print(value)
+		media = inst.media_player_new(value)
+		pass
     if command=="start":
     	media.play()
     	pass
@@ -66,7 +66,7 @@ def main(RECEIVE_PORT):
     print(media.has_vout())
     callback = dispatcher.Dispatcher()
     server = osc_server.ThreadingOSCUDPServer(("", RECEIVE_PORT), callback)
-    print("server now listenning on port "+RECEIVE_PORT)
+    print("server now listenning on port "+str(RECEIVE_PORT))
     callback.map("/PVM", parse_commands)
     server.serve_forever()
 
