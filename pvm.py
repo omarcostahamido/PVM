@@ -21,10 +21,13 @@ def parse_commands(*args):
     # data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
     # data = data.decode('UTF-8').split()
     command = args[1]
+    print("command: "+command)
     if len(args)>2:
     	value = args[2]
+        print("value: "+value)
     	pass
     if command=="file":
+        print(value)
         media = inst.media_player_new(value)
         pass
     if command=="start":
@@ -63,6 +66,7 @@ def main(RECEIVE_PORT):
     print(media.has_vout())
     callback = dispatcher.Dispatcher()
     server = osc_server.ThreadingOSCUDPServer(("", RECEIVE_PORT), callback)
+    print("server now listenning on port "+RECEIVE_PORT)
     callback.map("/PVM", parse_commands)
     server.serve_forever()
 
