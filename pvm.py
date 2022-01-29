@@ -23,7 +23,7 @@ def parse_commands(*args):
 	command = args[1]
 	print("command: "+command)
 	if len(args)>2:
-    	value = args[2]
+		value = args[2]
 		print("value: "+value)
 		pass
 	if command=="file":
