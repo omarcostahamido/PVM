@@ -27,7 +27,7 @@ def parse_commands(*args):
 		print("value: "+value)
 		pass
 	if command=="file":
-		print(value)
+		global media
 		media = inst.media_player_new(value)
 		continue
 	if command=="start":
