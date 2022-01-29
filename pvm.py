@@ -24,7 +24,7 @@ def parse_commands(*args):
 	print("command: "+command)
 	if len(args)>2:
 		value = args[2]
-		print("value: "+value)
+		print("value: "+str(value))
 		pass
 	if command=="file":
 		global media
