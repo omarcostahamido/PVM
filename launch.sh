@@ -1,3 +1,3 @@
 #!/bin/bash
 source /home/pi/PVM/PVM/bin/activate
-python pvm.py
+python /home/pi/PVM/pvm.py
