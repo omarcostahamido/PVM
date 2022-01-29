@@ -56,7 +56,7 @@ def parse_commands(*args):
 		media.next_frame()
 		pass
 	else:
-    	print("I received command \"%s\" but I don't know what to do with it, yet." % command)
+		print("I received command \"%s\" but I don't know what to do with it, yet." % command)
 
 
 def main(RECEIVE_PORT):
