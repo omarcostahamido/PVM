@@ -24,6 +24,9 @@ def parse_commands(*args):
     if len(args)>2:
     	value = args[2]
     	pass
+    if command=="file":
+        media = inst.media_player_new(value)
+        pass
     if command=="start":
     	media.play()
     	pass
