@@ -29,7 +29,7 @@ def parse_commands(*args):
 	if command=="file":
 		print(value)
 		media = inst.media_player_new(value)
-		pass
+		continue
 	if command=="start":
 		media.play()
 		pass
