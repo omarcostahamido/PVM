@@ -29,32 +29,24 @@ def parse_commands(*args):
 	if command=="file":
 		global media
 		media = inst.media_player_new(value)
-		break
-	if command=="start":
+	elif command=="start":
 		media.play()
-		pass
-	if command=="stop":
+	elif command=="stop":
 		media.stop()
-		pass
-	if command=="set_position":
+	elif command=="set_position":
 		media.set_position(float(value))
-		pass
-	if command=="fullscreen":
+	elif command=="fullscreen":
 		# media.set_fullscreen(True)
 		media.toggle_fullscreen()
-		pass
-	if command=="set_rate":
+	elif command=="set_rate":
 		# media.set_fullscreen(True)
 		media.set_rate(float(value))
-		pass
-	if command=="pause":
+	elif command=="pause":
 		# media.set_fullscreen(True)
 		media.pause()
-		pass
-	if command=="next_frame":
+	elif command=="next_frame":
 		# media.set_fullscreen(True)
 		media.next_frame()
-		pass
 	else:
 		print("I received command \"%s\" but I don't know what to do with it, yet." % command)
 
