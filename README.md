@@ -48,7 +48,7 @@ after the last line add
 
 `@lxterminal -e sh /home/pi/PVM/launch.sh`
 
-Note: this is assuming that you clone this repo on your raspberry pi in the main /home/pi folder and followed the steps in <a target="_self" href="#installation">Installation</a> above.
+Note: this is assuming that you clone this repo on your raspberry pi in the main /home/pi folder and followed the steps in the <a target="_self" href="#installation">Installation</a> section above.
 
 ## Todo
 
@@ -57,5 +57,5 @@ Note: this is assuming that you clone this repo on your raspberry pi in the main
 - add start position offset
 
 ## Known limitations
-- as of [v0.2.1](https://github.com/omarcostahamido/PVM/releases) videos only repeat 65535 times (see [here](omarcostahamido.com/pvm) helper tool)
+- as of [v0.2.1](https://github.com/omarcostahamido/PVM/releases) videos only repeat 65535 times (see [here](https://omarcostahamido.com/pvm) helper tool)
   - this is no longer the case with the current experimental version `pvm_alt.py`
