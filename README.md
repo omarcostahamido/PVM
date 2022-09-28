@@ -4,6 +4,11 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 ### { This is a work in progress }
 
+## Requirements
+
+- [Python3](https://www.python.org/downloads/)
+- [Max/MSP](https://cycling74.com/)
+
 ## Installation
 
 Clone or download this repo
@@ -50,11 +55,13 @@ after the last line add
 
 Note: this is assuming that you clone this repo on your raspberry pi in the main /home/pi folder and followed the steps in the <a target="_self" href="#installation">Installation</a> section above.
 
+
 ## Todo
 
 - add help options
 - explain how to remote control
 - add start position offset
+
 
 ## Helpful links
 - https://www.raspberrypi.com/documentation/computers/remote-access.html#vnc
@@ -64,6 +71,7 @@ Note: this is assuming that you clone this repo on your raspberry pi in the main
 - https://www.olivieraubert.net/vlc/python-ctypes/doc/
 - https://www.geeksforgeeks.org/vlc-module-in-python-an-introduction/
 - [forum thread: Rpi4: YouTube Full HD 1080p is slow! How to fix?](https://forums.raspberrypi.com/viewtopic.php?t=302787)
+
 
 ## Known limitations
 - as of [v0.2.1](https://github.com/omarcostahamido/PVM/releases) videos only repeat 65535 times (see [here](https://omarcostahamido.com/pvm) helper tool)
