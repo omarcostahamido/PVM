@@ -39,13 +39,10 @@ def parse_commands(*args):
 		# media.set_fullscreen(True)
 		media.toggle_fullscreen()
 	elif command=="set_rate":
-		# media.set_fullscreen(True)
 		media.set_rate(float(value))
 	elif command=="pause":
-		# media.set_fullscreen(True)
 		media.pause()
 	elif command=="next_frame":
-		# media.set_fullscreen(True)
 		media.next_frame()
 	else:
 		print("I received command \"%s\" but I don't know what to do with it, yet." % command)
