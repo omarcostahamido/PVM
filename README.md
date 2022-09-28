@@ -56,6 +56,15 @@ Note: this is assuming that you clone this repo on your raspberry pi in the main
 - explain how to remote control
 - add start position offset
 
+## Helpful links
+- https://www.raspberrypi.com/documentation/computers/remote-access.html#vnc
+- https://wiki.videolan.org/VLC_command-line_help/
+- https://www.videolan.org/vlc/download-windows.html
+  - Already comes pre-installed with rpi4
+- https://www.olivieraubert.net/vlc/python-ctypes/doc/
+- https://www.geeksforgeeks.org/vlc-module-in-python-an-introduction/
+- [forum thread: Rpi4: YouTube Full HD 1080p is slow! How to fix?](https://forums.raspberrypi.com/viewtopic.php?t=302787)
+
 ## Known limitations
 - as of [v0.2.1](https://github.com/omarcostahamido/PVM/releases) videos only repeat 65535 times (see [here](https://omarcostahamido.com/pvm) helper tool)
   - this is no longer the case with the current experimental version `pvm_alt.py`
