@@ -42,6 +42,18 @@ Start the script
 
 `python pvm.py`
 
+Read the help
+
+`python pvm.py --help`
+
+```
+usage: pvm.py [-h] [--port [PORT]]
+
+optional arguments:
+  -h, --help     show this help message and exit
+  --port [PORT]  The port that pvm.py will use to receive control messages.
+                 Default port is 8001
+```
 
 ## Autostart
 
@@ -58,7 +70,6 @@ Note: this is assuming that you clone this repo on your raspberry pi in the main
 
 ## Todo
 
-- add help options
 - explain how to remote control
 - add start position offset
 
