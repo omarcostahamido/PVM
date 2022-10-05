@@ -86,12 +86,6 @@ _           | `doc_vlc_-h_--advanced.txt` | help log from `vlc` advanced options
 _           | `launch.sh`                 | shell script to start `pvm.py` with one _click_
 
 
-## Todo
-
-- explain how to remote control
-- add start position offset
-
-
 ## Helpful links
 - https://www.raspberrypi.com/documentation/computers/remote-access.html#vnc
 - https://wiki.videolan.org/VLC_command-line_help/
