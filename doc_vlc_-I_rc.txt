@@ -1,4 +1,4 @@
-MacBook-Pro:omarcostahamido.com omar$  vlc -I rc
+(PVM) MacBook-Pro:PVM user$  vlc -I rc
 >help
 +----[ CLI commands ]
 | add XYZ  . . . . . . . . . . . . . . . . . . . . add XYZ to playlist

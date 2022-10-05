@@ -1,4 +1,4 @@
-(PVM) MacBook-Pro:PVM omar$  vlc -h --advanced
+(PVM) MacBook-Pro:PVM user$  vlc -h --advanced
 VLC media player 3.0.6 Vetinari (revision 3.0.6-0-g5803e85f73)
 Usage: vlc [options] [stream] ...
 You can specify multiple streams on the commandline.
