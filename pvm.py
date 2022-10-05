@@ -18,8 +18,6 @@ media = inst.media_player_new("zoetrope.mp4")
 
 # while True:
 def parse_commands(*args):
-	# data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
-	# data = data.decode('UTF-8').split()
 	command = args[1]
 	print("command: "+command)
 	if len(args)>2:
