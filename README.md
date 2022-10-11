@@ -29,7 +29,7 @@ Open your venv
 
 install dependencies
 
-`pip install python-vlc python-osc`
+`pip install -r requirements.txt`
 
 (optional) download a sample video
 
