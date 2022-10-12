@@ -82,7 +82,7 @@ Note: this is assuming that you clone this repo on your raspberry pi in the main
 _           | filename                    | description
 ---------:  | :-----------                | :---------------------------------------------------
 **device**  | `pvm.py`                    | main python script, this runs on each pi device
-_           | `pvm_alt.py`                | (to be removed) alternative main python script, this runs on each pi device
+_           | `pvm_alt.py`                | (to be removed) alternative main python script, this runs on each pi device. Does not use `python-vlc`, instead controls vlc from a terminal stdin
 **control** | `max-init.txt`              | this file can make control patch setup faster
 _           | `pvm.maxpat`                | main control patch. controls 6 pvm devices at the same time
 _           | `pvm_control.maxpat`        | abstraction with the control patch GUI to be embedded as a bpatcher
