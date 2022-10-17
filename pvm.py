@@ -1,10 +1,21 @@
-import vlc
 from pythonosc import dispatcher, osc_server, udp_client
 import socket
 import argparse
+from omxplayer.player import OMXPlayer
+from pathlib import Path
+from time import sleep
+import logging
 
-inst = vlc.Instance('--input-repeat=65535','--video-x=100')
-media = inst.media_player_new("zoetrope.mp4")
+logging.basicConfig(level=logging.INFO)
+media_log = logging.getLogger("Player 1")
+
+VIDEO_PATH = "jellyfish720p.mp4"
+media = OMXPlayer(VIDEO_PATH, 
+        dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=['--loop'])
+
+media.pause()
+
+
 # media = vlc.MediaPlayer("jellyfish720p.mp4")
 
 #media.set_fullscreen(True)
@@ -26,11 +37,12 @@ def parse_commands(*args):
 		pass
 	if command=="file":
 		global media
-		media = inst.media_player_new(value)
+		media = OMXPlayer(value, args=['--loop'])
+		media.pause()
 	elif command=="start":
 		media.play()
 	elif command=="stop":
-		media.stop()
+		media.quit()
 	elif command=="set_position":
 		media.set_position(float(value))
 	elif command=="fullscreen":
@@ -49,8 +61,6 @@ def parse_commands(*args):
 def main(RECEIVE_PORT):
 	#OSC server
 	# media = inst.media_player_new(FILE)
-	print("How many video outputs does this media player have?")
-	print(media.has_vout())
 	callback = dispatcher.Dispatcher()
 	server = osc_server.ThreadingOSCUDPServer(("", RECEIVE_PORT), callback)
 	print("server now listenning on port "+str(RECEIVE_PORT))
