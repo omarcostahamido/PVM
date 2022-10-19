@@ -10,10 +10,7 @@ logging.basicConfig(level=logging.INFO)
 media_log = logging.getLogger("Player 1")
 
 VIDEO_PATH = "jellyfish720p.mp4"
-media = OMXPlayer(VIDEO_PATH, 
-        dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=['--loop'])
-
-media.pause()
+media = ""
 
 
 # media = vlc.MediaPlayer("jellyfish720p.mp4")
@@ -29,6 +26,8 @@ media.pause()
 
 # while True:
 def parse_commands(*args):
+	global media
+	global VIDEO_PATH
 	command = args[1]
 	print("command: "+command)
 	if len(args)>2:
@@ -36,17 +35,19 @@ def parse_commands(*args):
 		print("value: "+str(value))
 		pass
 	if command=="file":
-		global media
 		media = OMXPlayer(value, dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=['--loop'])
 		media.pause()
+		VIDEO_PATH = value
 	elif command=="start":
 		media.play()
 	elif command=="stop":
-		media.quit()
+		media.stop()
 	elif command=="set_position":
 		media.set_position(float(value))
 	elif command=="set_rate":
-		media.set_rate(float(value))
+		fps = str(30 * float(value))
+		media = OMXPlayer(VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
+		media.pause()
 	elif command=="pause":
 		media.pause()
 	else:
