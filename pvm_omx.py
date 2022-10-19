@@ -1,34 +1,37 @@
-from pythonosc import dispatcher, osc_server, udp_client
-import socket
+from pythonosc import dispatcher, osc_server
 import argparse
 from omxplayer.player import OMXPlayer
-from pathlib import Path
-from time import sleep
 import logging
+import sys
 
-logging.basicConfig(level=logging.INFO)
-media_log = logging.getLogger("Player 1")
+def _init_logger():
+	logger = logging.getLogger('PVM')
+	logger.setLevel(logging.INFO)
+	handler = logging.StreamHandler(sys.stderr)
+	handler.setLevel(logging.INFO)
+	formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s",
+                              "%Y-%m-%d %H:%M:%S")
+	handler.setFormatter(formatter)
+	logger.addHandler(handler)
+
+_init_logger()
+_logger = logging.getLogger('PVM')
+_logger.info("Logging system initilized!")
+# logging example:
+# _logger.info('App started in %s', os.getcwd())
+# _logger.debug('App started in %s', os.getcwd())
 
 VIDEO_PATH = "jellyfish720p.mp4"
+# TODO: rename the variable
 media = ""
 
-
-# media = vlc.MediaPlayer("jellyfish720p.mp4")
-
-#media.set_fullscreen(True)
-
-# media.play()
-
-#media.stop()
-# def parse_qasm(*args):
-#     for arg in args:
-#     	print(arg)
-
-# while True:
+# TODO: rewrite logging
+# TODO: rewrite logic between commands
 def parse_commands(*args):
 	global media
 	global VIDEO_PATH
 	command = args[1]
+	_logger.info("Command: %s", command)
 	print("command: "+command)
 	if len(args)>2:
 		value = args[2]
@@ -56,7 +59,6 @@ def parse_commands(*args):
 
 def main(RECEIVE_PORT):
 	#OSC server
-	# media = inst.media_player_new(FILE)
 	callback = dispatcher.Dispatcher()
 	server = osc_server.ThreadingOSCUDPServer(("", RECEIVE_PORT), callback)
 	print("server now listenning on port "+str(RECEIVE_PORT))
@@ -66,7 +68,6 @@ def main(RECEIVE_PORT):
 if __name__ == '__main__':
 	p = argparse.ArgumentParser()
 	p.add_argument('--port', type=int, nargs='?', default=8001, help='The port that pvm.py will use to receive control messages. Default port is 8001')
-	# p.add_argument('--file', nargs='?', default='jellyfish720p.mp4', help='The file that pvm.py will load. Default is jellyfish720p.mp4')
 	args = p.parse_args()
 	print('PVM - Pi Video Machine')
 	print('Omar Costa Hamido 2022')
