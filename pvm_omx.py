@@ -32,28 +32,34 @@ def parse_commands(*args):
 	global VIDEO_PATH
 	command = args[1]
 	_logger.info("Command: %s", command)
-	print("command: "+command)
 	if len(args)>2:
 		value = args[2]
-		print("value: "+str(value))
+		_logger.info("Value: %s", str(value))
 		pass
+	# TODO: Create another python file to control two display
 	if command=="file":
-		media = OMXPlayer(value, dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=['--loop'])
+		# TODO: create a isFileSet flag
+		media = OMXPlayer(value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
 		media.pause()
 		VIDEO_PATH = value
 	elif command=="start":
+		# TODO: if media.can_play()
 		media.play()
 	elif command=="stop":
+		# TODO: if media.can_stop()
 		media.stop()
 	elif command=="set_position":
 		media.set_position(float(value))
 	elif command=="set_rate":
+		# TODO: check isFileSet flag
 		fps = str(30 * float(value))
 		media = OMXPlayer(VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
 		media.pause()
 	elif command=="pause":
+		# TODO: if media.can_pause()
 		media.pause()
 	else:
+		# TODO: change loggind
 		print("I received command \"%s\" but I don't know what to do with it, yet." % command)
 
 
