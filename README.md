@@ -10,7 +10,40 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 - [Max/MSP](https://cycling74.com/)
 
 ## Installation
+### Prerequisites
+### Raspberry Pi OS
+The recommended Raspberry Pi OS version is:
 
+<img width="569" alt="image" src="https://user-images.githubusercontent.com/51472016/197014809-c39fc6c9-0a08-4b05-92cf-f79fead3c000.png">
+
+To install this to your Raspberry Pi, you need the following things:
++ SD card reader.
++ A laptop (windows/MacOSLinux).
+
+***Steps to install Raspberry OS***:
+ + remove the SD card on your Raspberry Pi and read it on your laptop using the SD card reader.
+ + Install Raspberry Pi Imager.
+    + Mac: https://downloads.raspberrypi.org/imager/imager_latest.dmg
+    + Windows: https://downloads.raspberrypi.org/imager/imager_latest.exe
+    + Linux: https://downloads.raspberrypi.org/imager/imager_latest_amd64.deb
+ + Open the Raspberry Pi Imager:
+  + Choose OS:
+    
+    <img width="680" alt="image" src="https://user-images.githubusercontent.com/51472016/197016636-3106d1e2-8327-4406-816c-fa07f0601f12.png">
+    
+    + Select Raspberry Pi OS (other):
+    
+    <img width="680" alt="image" src="https://user-images.githubusercontent.com/51472016/197016751-c49fe6cc-693f-4110-bec1-11ec06441bde.png">
+    
+    + Scroll down and select the recommended version.
+  + Choose Storage.
+     + Choose your inserted SD card.
+     + Write.
+  + After the writing process is finished, insert the SD card with the new OS version into your Raspberry Pi and turn it on.
+  + Done.
+
+
+### Set up environment
 Clone or download this repo
 
 Navigate with the terminal to where it is
