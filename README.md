@@ -127,6 +127,13 @@ _           | `host.py`                   | (to be removed) control a remote dev
 _           | `doc_vlc_-h_--advanced.txt` | help log from `vlc` advanced options CLI
 _           | `launch.sh`                 | shell script to start `pvm.py` with one _click_
 
+## Examples
+
+Navigate to the `examples` folder and open the `examples.maxproj` file.
+
+A series of quick examples appears listed on the Max project window.
+
+Patch `#00.maxpat` serves as an index of the examples provided.
 
 ## Helpful links
 - https://www.raspberrypi.com/documentation/computers/remote-access.html#vnc
