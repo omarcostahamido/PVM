@@ -94,7 +94,7 @@ On the control machine first edit the `max-init.txt` file. For each Pi device ad
 1, jellyfish720.mp4 192.168.1.108 8001;
 ```
 
-Then proceed to launch the main control patch: `pvm.maxpat`. The `pvm_init` patcher should automatically open and parse the `max-init.txt` file, and configure the multiple `pvm_send` patchers. If some changes were made or reloading is required, simply click the `reset` message box to retrigger this. At this point, the `pvm_control` bpatcher, on the top left portion, should be able to control all devices at the same time. The available controls should be mostly self explanatory: i) the toggle at top left works like a start/stop button; ii) the `next_frame` message box triggers the next frame of the video when it is paused; iii) the `fullscreen` message box toggles the fullscreen display; and iv) the two number boxes below change (and trigger) the `set_position` and `set_rate` commands. Should you want to control just one of the devices or a sub-selection, feel free to delete patch chords accordingly. To operate the warmup system at the bottom right, consisting of the `pvm_warmup` bpatcher, first dial some value in all the four number boxes and then press the toggle to activate it. The (proof of concept) resync system, on the top right portion of the patch, includes a toggle that enables a metro object to force the devices to go to position 0. (i.e. start of the clip) every `n` seconds, where `n` is determined by the number box just above.
+Then proceed to launch the main control interface: `pvm.maxproj`. The `pvm.maxpat` patch should automatically open. 
 
 
 ## Autostart
@@ -122,11 +122,14 @@ _           | `pvm_control.maxpat`        | abstraction with the control patch G
 _           | `pvm_init.maxpat`           | abstraction responsible for parsing the `max-init.txt` file
 _           | `pvm_send.maxpat`           | abstraction for OSC sending. Arguments: _ip port_. Attributes: `@ip` `@port` 
 _           | `pvm_warmup.maxpat`         | abstraction for interpolating playback rates, to be embedded as a bpatcher
+_           | `pvm.maxproj`               | Max project file. Openning this file will load all main control patches.
 _           | `host.py`                   | (to be removed) control a remote device using a python script instead
 **others**  | `doc_vlc_-I_rc.txt`         | help log from `vlc` interactive mode CLI
 _           | `doc_vlc_-h_--advanced.txt` | help log from `vlc` advanced options CLI
 _           | `launch.sh`                 | shell script to start `pvm.py` with one _click_
 
+
+Given the objective of making this project available to creative artists, the control interface was created as a Max project. The patch `pvm.maxpat` that opens automatically contains several objects and different abstractions that work together to generate/format and send the control messages to the PVM devices. The `pvm_init` patcher should automatically open and parse the `max-init.txt` file, and configure the multiple `pvm_send` patchers. If some changes were made or reloading is required, simply click the `reset` message box to retrigger this. At this point, the `pvm_control` bpatcher, on the top left portion, should be able to control all devices at the same time. The available controls should be mostly self explanatory: i) the toggle at top left works like a start/stop button; ii) the `next_frame` message box triggers the next frame of the video when it is paused; iii) the `fullscreen` message box toggles the fullscreen display; and iv) the two number boxes below change (and trigger) the `set_position` and `set_rate` commands. Should you want to control just one of the devices or a sub-selection, feel free to delete patch chords accordingly. To operate the warmup system at the bottom right, consisting of the `pvm_warmup` bpatcher, first dial some value in all the four number boxes and then press the toggle to activate it. The (proof of concept) resync system, on the top right portion of the patch, includes a toggle that enables a metro object to force the devices to go to position 0. (i.e. start of the clip) every `n` seconds, where `n` is determined by the number box just above.
 
 ## Helpful links
 - https://www.raspberrypi.com/documentation/computers/remote-access.html#vnc
