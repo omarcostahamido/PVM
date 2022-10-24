@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 2,
-			"revision" : 1,
+			"minor" : 3,
+			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1463.0, 829.0, 487.0, 480.0 ],
+		"rect" : [ 457.0, 176.0, 487.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -566,36 +566,36 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "pvm_send.maxpat",
-				"bootpath" : "~/Downloads/PVM",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
+				"name" : "max-init.txt",
+				"bootpath" : "~/Documents/GitHub/PVM",
+				"patcherrelativepath" : "..",
+				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "pvm_control.maxpat",
-				"bootpath" : "~/Downloads/PVM",
+				"bootpath" : "~/Documents/GitHub/PVM/lib",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "pvm_init.maxpat",
-				"bootpath" : "~/Downloads/PVM",
+				"bootpath" : "~/Documents/GitHub/PVM/lib",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "max-init.txt",
-				"bootpath" : "~/Downloads/PVM",
+				"name" : "pvm_send.maxpat",
+				"bootpath" : "~/Documents/GitHub/PVM/lib",
 				"patcherrelativepath" : ".",
-				"type" : "TEXT",
+				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "pvm_warmup.maxpat",
-				"bootpath" : "~/Downloads/PVM",
+				"bootpath" : "~/Documents/GitHub/PVM/lib",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
