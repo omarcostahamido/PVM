@@ -3,6 +3,12 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 
 ### { This is a work in progress }
+  
+- TODO: rename the variable
+- TODO: rewrite logging
+- TODO: rewrite logic between commands
+- TODO: Create another python file to control two display
+- TODO: create a isFileSet flag
 
 ## Requirements
 
@@ -94,7 +100,7 @@ On the control machine first edit the `max-init.txt` file. For each Pi device ad
 1, jellyfish720.mp4 192.168.1.108 8001;
 ```
 
-Then proceed to launch the main control patch: `pvm.maxpat`. The `pvm_init` patcher should automatically open and parse the `max-init.txt` file, and configure the multiple `pvm_send` patchers. If some changes were made or reloading is required, simply click the `reset` message box to retrigger this. At this point, the `pvm_control` bpatcher, on the top left portion, should be able to control all devices at the same time. The available controls should be mostly self explanatory: i) the toggle at top left works like a start/stop button; ii) the `next_frame` message box triggers the next frame of the video when it is paused; iii) the `fullscreen` message box toggles the fullscreen display; and iv) the two number boxes below change (and trigger) the `set_position` and `set_rate` commands. Should you want to control just one of the devices or a sub-selection, feel free to delete patch chords accordingly. To operate the warmup system at the bottom right, consisting of the `pvm_warmup` bpatcher, first dial some value in all the four number boxes and then press the toggle to activate it. The (proof of concept) resync system, on the top right portion of the patch, includes a toggle that enables a metro object to force the devices to go to position 0. (i.e. start of the clip) every `n` seconds, where `n` is determined by the number box just above.
+Then proceed to launch the main control interface: `pvm.maxproj`. The `pvm.maxpat` patch should automatically open. 
 
 
 ## Autostart
@@ -115,17 +121,16 @@ Note: this is assuming that you clone this repo on your raspberry pi in the main
 _           | filename                    | description
 ---------:  | :-----------                | :---------------------------------------------------
 **device**  | `pvm.py`                    | main python script, this runs on each pi device
-_           | `pvm_alt.py`                | (to be removed) alternative main python script, this runs on each pi device. Does not use `python-vlc`, instead controls vlc from a terminal stdin
 **control** | `max-init.txt`              | this file can make control patch setup faster
 _           | `pvm.maxpat`                | main control patch. controls 6 pvm devices at the same time
 _           | `pvm_control.maxpat`        | abstraction with the control patch GUI to be embedded as a bpatcher
 _           | `pvm_init.maxpat`           | abstraction responsible for parsing the `max-init.txt` file
 _           | `pvm_send.maxpat`           | abstraction for OSC sending. Arguments: _ip port_. Attributes: `@ip` `@port` 
 _           | `pvm_warmup.maxpat`         | abstraction for interpolating playback rates, to be embedded as a bpatcher
+_           | `pvm.maxproj`               | Max project file. Openning this file will load all main control patches.
 _           | `host.py`                   | (to be removed) control a remote device using a python script instead
-**others**  | `doc_vlc_-I_rc.txt`         | help log from `vlc` interactive mode CLI
-_           | `doc_vlc_-h_--advanced.txt` | help log from `vlc` advanced options CLI
-_           | `launch.sh`                 | shell script to start `pvm.py` with one _click_
+**others**  | `launch.sh`                 | shell script to start `pvm.py` with one _click_
+_           | `build_omxplayer.sh`                 | shell script to build `omxplayer` with one _click_
 
 ## Examples
 
@@ -134,6 +139,8 @@ Navigate to the `examples` folder and open the `examples.maxproj` file.
 A series of quick examples appears listed on the Max project window.
 
 Patch `#00.maxpat` serves as an index of the examples provided.
+
+Given the objective of making this project available to creative artists, the control interface was created as a Max project. The patch `pvm.maxpat` that opens automatically contains several objects and different abstractions that work together to generate/format and send the control messages to the PVM devices. The `pvm_init` patcher should automatically open and parse the `max-init.txt` file, and configure the multiple `pvm_send` patchers. If some changes were made or reloading is required, simply click the `reset` message box to retrigger this. At this point, the `pvm_control` bpatcher, on the top left portion, should be able to control all devices at the same time. The available controls should be mostly self explanatory: i) the toggle at top left works like a start/stop button; ii) the `next_frame` message box triggers the next frame of the video when it is paused; iii) the `fullscreen` message box toggles the fullscreen display; and iv) the two number boxes below change (and trigger) the `set_position` and `set_rate` commands. Should you want to control just one of the devices or a sub-selection, feel free to delete patch chords accordingly. To operate the warmup system at the bottom right, consisting of the `pvm_warmup` bpatcher, first dial some value in all the four number boxes and then press the toggle to activate it. The (proof of concept) resync system, on the top right portion of the patch, includes a toggle that enables a metro object to force the devices to go to position 0. (i.e. start of the clip) every `n` seconds, where `n` is determined by the number box just above.
 
 ## Helpful links
 - https://www.raspberrypi.com/documentation/computers/remote-access.html#vnc
