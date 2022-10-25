@@ -2,7 +2,7 @@
 	"name" : "examples",
 	"version" : 1,
 	"creationdate" : 3749418611,
-	"modificationdate" : 3749422875,
+	"modificationdate" : 3749575098,
 	"viewrect" : [ 25.0, 104.0, 300.0, 500.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
@@ -56,8 +56,8 @@
 ,
 	"searchpath" : 	{
 		"0" : 		{
-			"bootpath" : "~/Documents/GitHub/PVM",
-			"projectrelativepath" : "..",
+			"bootpath" : "~/Documents/GitHub/PVM/lib",
+			"projectrelativepath" : "../lib",
 			"label" : "",
 			"recursive" : 0,
 			"enabled" : 1,
