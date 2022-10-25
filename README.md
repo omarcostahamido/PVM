@@ -3,6 +3,12 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 
 ### { This is a work in progress }
+  
+- TODO: rename the variable
+- TODO: rewrite logging
+- TODO: rewrite logic between commands
+- TODO: Create another python file to control two display
+- TODO: create a isFileSet flag
 
 ## Requirements
 
@@ -82,7 +88,6 @@ Note: this is assuming that you clone this repo on your raspberry pi in the main
 _           | filename                    | description
 ---------:  | :-----------                | :---------------------------------------------------
 **device**  | `pvm.py`                    | main python script, this runs on each pi device
-_           | `pvm_alt.py`                | (to be removed) alternative main python script, this runs on each pi device. Does not use `python-vlc`, instead controls vlc from a terminal stdin
 **control** | `max-init.txt`              | this file can make control patch setup faster
 _           | `pvm.maxpat`                | main control patch. controls 6 pvm devices at the same time
 _           | `pvm_control.maxpat`        | abstraction with the control patch GUI to be embedded as a bpatcher
@@ -90,9 +95,8 @@ _           | `pvm_init.maxpat`           | abstraction responsible for parsing 
 _           | `pvm_send.maxpat`           | abstraction for OSC sending. Arguments: _ip port_. Attributes: `@ip` `@port` 
 _           | `pvm_warmup.maxpat`         | abstraction for interpolating playback rates, to be embedded as a bpatcher
 _           | `host.py`                   | (to be removed) control a remote device using a python script instead
-**others**  | `doc_vlc_-I_rc.txt`         | help log from `vlc` interactive mode CLI
-_           | `doc_vlc_-h_--advanced.txt` | help log from `vlc` advanced options CLI
-_           | `launch.sh`                 | shell script to start `pvm.py` with one _click_
+**others**  | `launch.sh`                 | shell script to start `pvm.py` with one _click_
+_           | `build_omxplayer.sh`                 | shell script to build `omxplayer` with one _click_
 
 
 ## Helpful links
