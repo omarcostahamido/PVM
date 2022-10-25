@@ -48,7 +48,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 415.0, 265.714285714285722, 52.0, 35.0 ],
-					"presentation_linecount" : 2,
 					"text" : "set_position $1"
 				}
 
@@ -565,8 +564,8 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "pvm_send.maxpat",
-				"bootpath" : "~/Documents/GitHub/PVM",
-				"patcherrelativepath" : "..",
+				"bootpath" : "~/Documents/GitHub/PVM/lib",
+				"patcherrelativepath" : "../lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}

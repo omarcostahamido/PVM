@@ -646,8 +646,8 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "pvm_send.maxpat",
-				"bootpath" : "~/Documents/GitHub/PVM",
-				"patcherrelativepath" : "..",
+				"bootpath" : "~/Documents/GitHub/PVM/lib",
+				"patcherrelativepath" : "../lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
