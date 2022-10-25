@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 789.0, 186.0, 464.0, 480.0 ],
+		"rect" : [ 360.0, 104.0, 464.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -233,8 +233,8 @@
 			}
 , 			{
 				"name" : "pvm_send.maxpat",
-				"bootpath" : "~/Documents/GitHub/PVM",
-				"patcherrelativepath" : "..",
+				"bootpath" : "~/Documents/GitHub/PVM/lib",
+				"patcherrelativepath" : "../lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
