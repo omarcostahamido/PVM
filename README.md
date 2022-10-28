@@ -3,6 +3,12 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 
 ### { This is a work in progress }
+  
+- TODO: rename the variable
+- TODO: rewrite logging
+- TODO: rewrite logic between commands
+- TODO: Create another python file to control two display
+- TODO: create a isFileSet flag
 
 - TODO: rename the variable
 - TODO: rewrite logging
