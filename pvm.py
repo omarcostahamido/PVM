@@ -21,6 +21,8 @@ _logger.info("Logging system initilized!")
 # _logger.info('App started in %s', os.getcwd())
 # _logger.debug('App started in %s', os.getcwd())
 
+# Place your videos in this folder for autostart
+PEFIX_PATH = "/home/pi/Videos/"
 VIDEO_PATH = "jellyfish720p.mp4"
 # TODO: rename the variable
 media = ""
@@ -39,7 +41,7 @@ def parse_commands(*args):
 	# TODO: Create another python file to control two display
 	if command=="file":
 		# TODO: create a isFileSet flag
-		media = OMXPlayer(value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
+		media = OMXPlayer(PEFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
 		media.pause()
 		VIDEO_PATH = value
 	elif command=="start":
@@ -53,7 +55,7 @@ def parse_commands(*args):
 	elif command=="set_rate":
 		# TODO: check isFileSet flag
 		fps = str(30 * float(value))
-		media = OMXPlayer(VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
+		media = OMXPlayer(PEFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
 		media.pause()
 	elif command=="pause":
 		# TODO: if media.can_pause()

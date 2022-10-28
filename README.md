@@ -3,7 +3,7 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 
 ### { This is a work in progress }
-  
+
 - TODO: rename the variable
 - TODO: rewrite logging
 - TODO: rewrite logic between commands
@@ -131,6 +131,23 @@ _           | `pvm.maxproj`               | Max project file. Openning this file
 _           | `host.py`                   | (to be removed) control a remote device using a python script instead
 **others**  | `launch.sh`                 | shell script to start `pvm.py` with one _click_
 _           | `build_omxplayer.sh`                 | shell script to build `omxplayer` with one _click_
+
+## How to deploy your code when you testing in multiple rpis?
+Use the [deploy_code_to_rpi.sh](https://github.com/omarcostahamido/PVM/blob/AddCDscript/deploy_code_to_rpi.sh) script.
+But there are two prerequisites:
+
+One is the need to set up passwordless ssh access.
+For the passwordless ssh access please follow [here](https://danidudas.medium.com/how-to-connect-to-raspberry-pi-via-ssh-without-password-using-ssh-keys-3abd782688a).
+
+Second is the need to set the autostart.
+
+Once you're done, run the command on your computer.
+
+`bash deploy_code_to_rpi.sh`
+
+`cd PVM && git pull`
+
+`sudo reboot`
 
 ## Examples
 
