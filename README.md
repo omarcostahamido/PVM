@@ -189,6 +189,8 @@ The (proof of concept) resync system, on the top right portion of the patch, inc
 - [forum thread: Rpi4: YouTube Full HD 1080p is slow! How to fix?](https://forums.raspberrypi.com/viewtopic.php?t=302787)
 - https://python-omxplayer-wrapper.readthedocs.io/en/latest/
 
+Also don't forget to checkout our [wiki](https://github.com/omarcostahamido/PVM/wiki)! It contains instructions on various topics like [setting up remote access to the Raspberry Pis](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely) and how to run the examples.
+
 
 ## Known limitations
 - as of [v0.2.1](https://github.com/omarcostahamido/PVM/releases) videos only repeat 65535 times (see [here](https://omarcostahamido.com/pvm) helper tool)
