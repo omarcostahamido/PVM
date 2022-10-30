@@ -16,14 +16,6 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 - [Max/MSP](https://cycling74.com/)
 
 ## Installation
-### Prerequisites
-
-### OMXPlayer
-
-To build the customized OMXPlayer, run the command below:
-
-`./build_omxplayer.sh`
-
 ### Raspberry Pi OS
 The recommended Raspberry Pi OS version is:
 
@@ -55,6 +47,12 @@ To install this to your Raspberry Pi, you need the following things:
   + After the writing process is finished, insert the SD card with the new OS version into your Raspberry Pi and turn it on.
   + Done.
 
+### OMXPlayer
+
+To build the customized OMXPlayer, run the command below:
+
+`./build_omxplayer.sh`
+
 ### Set up environment
 
 ```bash
@@ -68,6 +66,9 @@ python3 -m venv PVM
 
 # Activate venv
 source PVM/bin/activate
+
+# Update pip and setuptools
+pip install --upgrade pip setuptools
 
 # Install dependencies
 pip install -r requirements.txt
