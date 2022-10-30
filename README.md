@@ -47,6 +47,12 @@ To install this to your Raspberry Pi, you need the following things:
   + After the writing process is finished, insert the SD card with the new OS version into your Raspberry Pi and turn it on.
   + Done.
 
+  After installation, there are some other things need to be done on the first boot. Please checkout [this official guide](https://www.raspberrypi.com/documentation/computers/getting-started.html#configuration-on-first-boot) for details.
+
+### Connect to a Raspberry Pi
+
+Before running the below commands on the Raspberry Pi, you will need to connect to one. The easiest way would be to connect it to a physical screen, mouse, and keyboard. You could also try to connect remotely (preferably under the same local network). Please check out our [wiki](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely) on how to do this!
+
 ### OMXPlayer
 
 To build the customized OMXPlayer, run the command below:
