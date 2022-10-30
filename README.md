@@ -3,12 +3,6 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 
 ### { This is a work in progress }
-  
-- TODO: rename the variable
-- TODO: rewrite logging
-- TODO: rewrite logic between commands
-- TODO: Create another python file to control two display
-- TODO: create a isFileSet flag
 
 - TODO: rename the variable
 - TODO: rewrite logging
@@ -23,6 +17,13 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 ## Installation
 ### Prerequisites
+
+### OMXPlayer
+
+To build the customized OMXPlayer, run the command below:
+
+`./build_omxplayer.sh`
+
 ### Raspberry Pi OS
 The recommended Raspberry Pi OS version is:
 
@@ -54,44 +55,45 @@ To install this to your Raspberry Pi, you need the following things:
   + After the writing process is finished, insert the SD card with the new OS version into your Raspberry Pi and turn it on.
   + Done.
 
-
 ### Set up environment
-Clone or download this repo
 
-Navigate with the terminal to where it is
+```bash
+# Clone the repo
+git clone https://github.com/omarcostahamido/PVM.git
 
-Create a virtual environment
+cd PVM
 
-`python3 -m venv PVM`
+# Create a virtual environment
+python3 -m venv PVM
 
-Open your venv
+# Activate venv
+source PVM/bin/activate
 
-`source PVM/bin/activate`
+# Install dependencies
+pip install -r requirements.txt
 
-(optional) update pip and setuptools
+# (Optional) Download a sample video
+curl "https://test-videos.co.uk/vids/jellyfish/mp4/h264/720/Jellyfish_720_10s_5MB.mp4" --output jellyfish720p.mp4
+```
 
-`pip install --upgrade pip setuptools`
+## Videos
 
-install dependencies
-
-`pip install -r requirements.txt`
-
-(optional) download a sample video
-
-`curl "https://test-videos.co.uk/vids/jellyfish/mp4/h264/720/Jellyfish_720_10s_5MB.mp4" --output jellyfish720p.mp4`
-
+Please save all the videos in the `/home/pi/Videos/` folder for autostart.
 
 ## Running
 
 On each Pi device, start the script
 
-`python pvm.py`
+```bash
+cd PVM
+python pvm.py
+```
 
 Read the help
 
 `python pvm.py --help`
 
-```
+```bash
 usage: pvm.py [-h] [--port [PORT]]
 
 optional arguments:
@@ -100,14 +102,13 @@ optional arguments:
                  Default port is 8001
 ```
 
-On the control machine first edit the `max-init.txt` file. For each Pi device add a numbered line with the video filename, ip, and port. As in:
+On the control machine first edit the [max-init.txt](https://github.com/omarcostahamido/PVM/blob/main/max-init.txt) file. For each Pi device add a numbered line with the video filename, ip, and port. As in:
 
 ```
 1, jellyfish720.mp4 192.168.1.108 8001;
 ```
 
 Then proceed to launch the main control interface: `pvm.maxproj`. The `pvm.maxpat` patch should automatically open. 
-
 
 ## Autostart
 
@@ -145,15 +146,18 @@ But there are two prerequisites:
 One is the need to set up passwordless ssh access.
 For the passwordless ssh access please follow [here](https://danidudas.medium.com/how-to-connect-to-raspberry-pi-via-ssh-without-password-using-ssh-keys-3abd782688a).
 
-Second is the need to set the autostart.
+Second is the need to set the [autostart](https://github.com/omarcostahamido/PVM#autostart).
 
-Once you're done, run the command on your computer.
+Once you're done, run the command on the control pc.
 
-`bash deploy_code_to_rpi.sh`
+```bash
+bash deploy_code_to_rpi.sh
 
-`cd PVM && git pull`
+# Download the latest code on RPIs with the IP address in host_ip.txt.
+cd PVM && git pull
 
-`sudo reboot`
+sudo reboot
+```
 
 ## Examples
 
@@ -163,18 +167,26 @@ A series of quick examples appears listed on the Max project window.
 
 Patch `#00.maxpat` serves as an index of the examples provided.
 
-Given the objective of making this project available to creative artists, the control interface was created as a Max project. The patch `pvm.maxpat` that opens automatically contains several objects and different abstractions that work together to generate/format and send the control messages to the PVM devices. The `pvm_init` patcher should automatically open and parse the `max-init.txt` file, and configure the multiple `pvm_send` patchers. If some changes were made or reloading is required, simply click the `reset` message box to retrigger this. At this point, the `pvm_control` bpatcher, on the top left portion, should be able to control all devices at the same time. The available controls should be mostly self explanatory: i) the toggle at top left works like a start/stop button; ii) the `next_frame` message box triggers the next frame of the video when it is paused; iii) the `fullscreen` message box toggles the fullscreen display; and iv) the two number boxes below change (and trigger) the `set_position` and `set_rate` commands. Should you want to control just one of the devices or a sub-selection, feel free to delete patch chords accordingly. To operate the warmup system at the bottom right, consisting of the `pvm_warmup` bpatcher, first dial some value in all the four number boxes and then press the toggle to activate it. The (proof of concept) resync system, on the top right portion of the patch, includes a toggle that enables a metro object to force the devices to go to position 0. (i.e. start of the clip) every `n` seconds, where `n` is determined by the number box just above.
+Given the objective of making this project available to creative artists, the control interface was created as a Max project. The patch `pvm.maxpat` that opens automatically contains several objects and different abstractions that work together to generate/format and send the control messages to the PVM devices. The `pvm_init` patcher should automatically open and parse the `max-init.txt` file, and configure the multiple `pvm_send` patchers. If some changes were made or reloading is required, simply click the `reset` message box to retrigger this. 
 
-Given the objective of making this project available to creative artists, the control interface was created as a Max project. The patch `pvm.maxpat` that opens automatically contains several objects and different abstractions that work together to generate/format and send the control messages to the PVM devices. The `pvm_init` patcher should automatically open and parse the `max-init.txt` file, and configure the multiple `pvm_send` patchers. If some changes were made or reloading is required, simply click the `reset` message box to retrigger this. At this point, the `pvm_control` bpatcher, on the top left portion, should be able to control all devices at the same time. The available controls should be mostly self explanatory: i) the toggle at top left works like a start/stop button; ii) the `next_frame` message box triggers the next frame of the video when it is paused; iii) the `fullscreen` message box toggles the fullscreen display; and iv) the two number boxes below change (and trigger) the `set_position` and `set_rate` commands. Should you want to control just one of the devices or a sub-selection, feel free to delete patch chords accordingly. To operate the warmup system at the bottom right, consisting of the `pvm_warmup` bpatcher, first dial some value in all the four number boxes and then press the toggle to activate it. The (proof of concept) resync system, on the top right portion of the patch, includes a toggle that enables a metro object to force the devices to go to position 0. (i.e. start of the clip) every `n` seconds, where `n` is determined by the number box just above.
+At this point, the `pvm_control` bpatcher, on the top left portion, should be able to control all devices at the same time. The available controls should be mostly self explanatory: 
+
+i) the toggle at top left works like a start/stop button; 
+
+ii) the `next_frame` message box triggers the next frame of the video when it is paused; 
+
+iii) the `fullscreen` message box toggles the fullscreen display;
+
+iv) the two number boxes below change (and trigger) the `set_position` and `set_rate` commands. 
+
+Should you want to control just one of the devices or a sub-selection, feel free to delete patch chords accordingly. To operate the warmup system at the bottom right, consisting of the `pvm_warmup` bpatcher, first dial some value in all the four number boxes and then press the toggle to activate it. 
+
+The (proof of concept) resync system, on the top right portion of the patch, includes a toggle that enables a metro object to force the devices to go to position 0. (i.e. start of the clip) every `n` seconds, where `n` is determined by the number box just above.
 
 ## Helpful links
 - https://www.raspberrypi.com/documentation/computers/remote-access.html#vnc
-- https://wiki.videolan.org/VLC_command-line_help/
-- https://www.videolan.org/vlc/download-windows.html
-  - Already comes pre-installed with rpi4
-- https://www.olivieraubert.net/vlc/python-ctypes/doc/
-- https://www.geeksforgeeks.org/vlc-module-in-python-an-introduction/
 - [forum thread: Rpi4: YouTube Full HD 1080p is slow! How to fix?](https://forums.raspberrypi.com/viewtopic.php?t=302787)
+- https://python-omxplayer-wrapper.readthedocs.io/en/latest/
 
 
 ## Known limitations
