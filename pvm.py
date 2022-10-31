@@ -1,17 +1,23 @@
+from datetime import datetime
 import os
 from pythonosc import dispatcher, osc_server
 import argparse
 from omxplayer.player import OMXPlayer
 import logging
+from logging.handlers import TimedRotatingFileHandler
 import sys
 
 def _init_logger():
 	logger = logging.getLogger("PVM")
 	logger.setLevel(logging.INFO)
 	handler = logging.StreamHandler(sys.stderr)
+	fileHandler = TimedRotatingFileHandler('./log/{:%Y-%m-%d %H:%M:%S}.log'.format(datetime.now()),  when='midnight')
 	handler.setLevel(logging.INFO)
 	formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s",
                               "%Y-%m-%d %H:%M:%S")
+	fileHandler.setFormatter(formatter)
+	fileHandler.suffix = '%Y_%m_%d.log'
+	logger.addHandler(fileHandler)
 	handler.setFormatter(formatter)
 	logger.addHandler(handler)
 
