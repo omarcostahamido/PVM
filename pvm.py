@@ -23,12 +23,13 @@ _logger.info("Logging system initilized in %s", os.getcwd())
 PEFIX_PATH = "/home/pi/Videos/"
 VIDEO_PATH = "jellyfish720p.mp4"
 media = ""
+IS_FILE_SET = False
 
 def parse_commands(*args):
 	global media
 	global VIDEO_PATH
+	global IS_FILE_SET
 	command = args[1]
-	is_file_set = False
 	_logger.info("Command: %s", command)
 	if len(args)>2:
 		value = args[2]
@@ -37,12 +38,13 @@ def parse_commands(*args):
 	# TODO: Create another python file to control two display
 	if command=="file":
 		_logger.info("File set: %s", PEFIX_PATH + value)
-		is_file_set = True
+		IS_FILE_SET = True
 		media = OMXPlayer(PEFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
 		media.pause()
 		VIDEO_PATH = value
+		return
 
-	if not is_file_set:
+	if not IS_FILE_SET:
 		_logger.info("Command %s failed because of the file is unset.", command)
 		return
 
