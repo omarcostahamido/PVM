@@ -1,68 +1,88 @@
+from datetime import datetime
+import os
 from pythonosc import dispatcher, osc_server
 import argparse
 from omxplayer.player import OMXPlayer
 import logging
+from logging.handlers import TimedRotatingFileHandler
 import sys
 
 def _init_logger():
-	logger = logging.getLogger('PVM')
+	logger = logging.getLogger("PVM")
 	logger.setLevel(logging.INFO)
 	handler = logging.StreamHandler(sys.stderr)
+	fileHandler = TimedRotatingFileHandler('./log/{:%Y-%m-%d %H:%M:%S}.log'.format(datetime.now()),  when='midnight')
 	handler.setLevel(logging.INFO)
 	formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s",
                               "%Y-%m-%d %H:%M:%S")
+	fileHandler.setFormatter(formatter)
+	fileHandler.suffix = '%Y_%m_%d.log'
+	logger.addHandler(fileHandler)
 	handler.setFormatter(formatter)
 	logger.addHandler(handler)
 
 _init_logger()
-_logger = logging.getLogger('PVM')
-_logger.info("Logging system initilized!")
-# logging example:
-# _logger.info('App started in %s', os.getcwd())
-# _logger.debug('App started in %s', os.getcwd())
+_logger = logging.getLogger("PVM")
+_logger.info("Logging system initilized in %s", os.getcwd())
 
 # Place your videos in this folder for autostart
 PEFIX_PATH = "/home/pi/Videos/"
 VIDEO_PATH = "jellyfish720p.mp4"
-# TODO: rename the variable
 media = ""
+IS_FILE_SET = False
 
-# TODO: rewrite logging
-# TODO: rewrite logic between commands
 def parse_commands(*args):
 	global media
 	global VIDEO_PATH
+	global IS_FILE_SET
 	command = args[1]
-	_logger.info("Command: %s", command)
+	_logger.info("Received command: %s", command)
 	if len(args)>2:
 		value = args[2]
-		_logger.info("Value: %s", str(value))
+		_logger.info("Received command: %s", str(value))
 		pass
 	# TODO: Create another python file to control two display
 	if command=="file":
-		# TODO: create a isFileSet flag
+		_logger.info("File set: %s", PEFIX_PATH + value)
+		IS_FILE_SET = True
 		media = OMXPlayer(PEFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
 		media.pause()
 		VIDEO_PATH = value
-	elif command=="start":
-		# TODO: if media.can_play()
-		media.play()
+		return
+
+	if not IS_FILE_SET:
+		_logger.info("Command %s failed because of the file is unset.", command)
+		return
+
+	if command=="start":
+		if media.can_play():
+			media.play()
+			_logger.info("%s command success.", command)
+		else:
+			_logger.info("%s command failed.", command)
 	elif command=="stop":
-		# TODO: if media.can_stop()
-		media.stop()
+		if media.can_quit():
+			media.stop()
+			IS_FILE_SET = False
+			_logger.info("%s command success and file has been unset.", command)
+		else:
+			_logger.info("%s command failed.", command)
 	elif command=="set_position":
 		media.set_position(float(value))
+		_logger.info("%s command success.", command)
 	elif command=="set_rate":
-		# TODO: check isFileSet flag
 		fps = str(30 * float(value))
 		media = OMXPlayer(PEFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
 		media.pause()
+		_logger.info("%s command success.", command)
 	elif command=="pause":
-		# TODO: if media.can_pause()
-		media.pause()
+		if media.can_pause():
+			media.pause()
+			_logger.info("%s command success.", command)
+		else:
+			_logger.info("%s command failed.", command)
 	else:
-		# TODO: change loggind
-		print("I received command \"%s\" but I don't know what to do with it, yet." % command)
+		_logger.info("%s unknown.", command)
 
 
 def main(RECEIVE_PORT):
