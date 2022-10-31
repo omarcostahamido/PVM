@@ -36,10 +36,10 @@ def parse_commands(*args):
 	global VIDEO_PATH
 	global IS_FILE_SET
 	command = args[1]
-	_logger.info("Recive command: %s", command)
+	_logger.info("Received command: %s", command)
 	if len(args)>2:
 		value = args[2]
-		_logger.info("Recive value: %s", str(value))
+		_logger.info("Received command: %s", str(value))
 		pass
 	# TODO: Create another python file to control two display
 	if command=="file":

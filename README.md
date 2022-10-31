@@ -156,6 +156,22 @@ cd PVM && git pull
 sudo reboot
 ```
 
+## Logs
+
+All logs for each time each RPI is stored in the log folder.
+
+Name convention for each file is `{:%Y-%m-%d %H:%M:%S}.log`
+
+All output from the console is synchronized to the file in real-time.
+
+```bash
+2022-10-31 13:34:21;INFO;Received command: file
+2022-10-31 13:34:21;INFO;Received value: jellyfish720p.mp4
+2022-10-31 13:34:21;INFO;File set: /home/pi/Videos/jellyfish720p.mp4
+```
+
+If you close the program and then reopen it, a new log file will be created.
+
 ## Examples
 
 Navigate to the `examples` folder and open the `examples.maxproj` file.
