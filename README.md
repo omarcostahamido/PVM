@@ -6,12 +6,15 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 - TODO: Create another python file to control two display
 
+
 ## Requirements
 
 - [Python3](https://www.python.org/downloads/)
 - [Max/MSP](https://cycling74.com/)
 
+
 ## Installation
+
 ### Raspberry Pi OS
 The recommended Raspberry Pi OS version is:
 
@@ -43,11 +46,18 @@ To install this to your Raspberry Pi, you need the following things:
   + After the writing process is finished, insert the SD card with the new OS version into your Raspberry Pi and turn it on.
   + Done.
 
+
+### Connect to a Raspberry Pi
+
+During the first boot, there are some initial configurations necessary, which will be easier to do if you connect the Raspberry Pi device to a physical screen, mouse, and keyboard. Please checkout [this official guide](https://www.raspberrypi.com/documentation/computers/getting-started.html#configuration-on-first-boot) for more details. After that you will be able to connect to it remotely (preferably under the same local network). Please check out "[_How to connect to a Raspberry Pi remotely_](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely)" our wiki to learn how to do this!
+
+
 ### OMXPlayer
 
 To build the customized OMXPlayer, run the command below:
 
 `./build_omxplayer.sh`
+
 
 ### Set up environment
 
@@ -73,9 +83,11 @@ pip install -r requirements.txt
 curl "https://test-videos.co.uk/vids/jellyfish/mp4/h264/720/Jellyfish_720_10s_5MB.mp4" --output jellyfish720p.mp4
 ```
 
+
 ## Videos
 
 Please save all the videos in the `/home/pi/Videos/` folder for autostart.
+
 
 ## Running
 
@@ -107,6 +119,7 @@ On the control machine first edit the [max-init.txt](https://github.com/omarcost
 
 Then proceed to launch the main control interface: `pvm.maxproj`. The `pvm.maxpat` patch should automatically open. 
 
+
 ## Autostart
 
 on the terminal run
@@ -135,6 +148,7 @@ _           | `pvm.maxproj`               | Max project file. Openning this file
 _           | `host.py`                   | (to be removed) control a remote device using a python script instead
 **others**  | `launch.sh`                 | shell script to start `pvm.py` with one _click_
 _           | `build_omxplayer.sh`                 | shell script to build `omxplayer` with one _click_
+
 
 ## How to deploy your code when you testing in multiple rpis?
 Use the [deploy_code_to_rpi.sh](https://github.com/omarcostahamido/PVM/blob/AddCDscript/deploy_code_to_rpi.sh) script.
@@ -196,12 +210,13 @@ Should you want to control just one of the devices or a sub-selection, feel free
 
 The (proof of concept) resync system, on the top right portion of the patch, includes a toggle that enables a metro object to force the devices to go to position 0. (i.e. start of the clip) every `n` seconds, where `n` is determined by the number box just above.
 
+
 ## Helpful links
 - https://www.raspberrypi.com/documentation/computers/remote-access.html#vnc
 - [forum thread: Rpi4: YouTube Full HD 1080p is slow! How to fix?](https://forums.raspberrypi.com/viewtopic.php?t=302787)
 - https://python-omxplayer-wrapper.readthedocs.io/en/latest/
 
+Also don't forget to checkout our [wiki](https://github.com/omarcostahamido/PVM/wiki)! It contains instructions on various topics like [_setting up remote access to the Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely) and how to run the examples.
+
 
 ## Known limitations
-- as of [v0.2.1](https://github.com/omarcostahamido/PVM/releases) videos only repeat 65535 times (see [here](https://omarcostahamido.com/pvm) helper tool)
-  - this is no longer the case with the current experimental version `pvm_alt.py`
