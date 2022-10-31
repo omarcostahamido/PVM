@@ -30,10 +30,10 @@ def parse_commands(*args):
 	global VIDEO_PATH
 	global IS_FILE_SET
 	command = args[1]
-	_logger.info("Command: %s", command)
+	_logger.info("Recive command: %s", command)
 	if len(args)>2:
 		value = args[2]
-		_logger.info("Value: %s", str(value))
+		_logger.info("Recive value: %s", str(value))
 		pass
 	# TODO: Create another python file to control two display
 	if command=="file":
@@ -51,22 +51,28 @@ def parse_commands(*args):
 	if command=="start":
 		if media.can_play():
 			media.play()
+			_logger.info("%s command success.", command)
 		else:
 			_logger.info("%s command failed.", command)
 	elif command=="stop":
-		if media.can_stop():
+		if media.can_quit():
 			media.stop()
+			IS_FILE_SET = False
+			_logger.info("%s command success and file has been unset.", command)
 		else:
 			_logger.info("%s command failed.", command)
 	elif command=="set_position":
 		media.set_position(float(value))
+		_logger.info("%s command success.", command)
 	elif command=="set_rate":
 		fps = str(30 * float(value))
 		media = OMXPlayer(PEFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
 		media.pause()
+		_logger.info("%s command success.", command)
 	elif command=="pause":
 		if media.can_pause():
 			media.pause()
+			_logger.info("%s command success.", command)
 		else:
 			_logger.info("%s command failed.", command)
 	else:
