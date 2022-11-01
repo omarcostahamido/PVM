@@ -88,6 +88,16 @@ curl "https://test-videos.co.uk/vids/jellyfish/mp4/h264/720/Jellyfish_720_10s_5M
 
 Please save all the videos in the `/home/pi/Videos/` folder for autostart.
 
+### How to set up two videos in two displays?
+
+Change the filename in the max-init.txt file to set up.
+
+```
+1, example.mp4 192.168.1.108 8001;
+		||
+		\/
+	 example1.mp4|example2.mp4
+```
 
 ## Running
 
