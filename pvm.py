@@ -26,7 +26,7 @@ _logger = logging.getLogger("PVM")
 _logger.info("Logging system initilized in %s", os.getcwd())
 
 # Place your videos in this folder for autostart
-PEFIX_PATH = "/home/pi/Videos/"
+PREFIX_PATH = "/home/pi/Videos/"
 VIDEO_PATH = "jellyfish720p.mp4"
 media = ""
 IS_FILE_SET = False
@@ -43,9 +43,13 @@ def parse_commands(*args):
 		pass
 	# TODO: Create another python file to control two display
 	if command=="file":
-		_logger.info("File set: %s", PEFIX_PATH + value)
+		_logger.info("File set: %s", PREFIX_PATH + value)
+		if IS_FILE_SET:
+			_logger.info("The file has already been set!")
+			if media is not None:
+					media.stop()
 		IS_FILE_SET = True
-		media = OMXPlayer(PEFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
+		media = OMXPlayer(PREFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--win', "50,50,1390,1030"])
 		media.pause()
 		VIDEO_PATH = value
 		return
@@ -55,7 +59,9 @@ def parse_commands(*args):
 		return
 
 	if command=="start":
-		if media.can_play():
+		if media.is_playing():
+			_logger.info("The video is playing now!")            
+		elif media.can_play():
 			media.play()
 			_logger.info("%s command success.", command)
 		else:
