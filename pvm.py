@@ -13,10 +13,9 @@ def _init_logger():
 	handler = logging.StreamHandler(sys.stderr)
 	fileHandler = TimedRotatingFileHandler('./log/{:%Y-%m-%d %H:%M:%S}.log'.format(datetime.now()),  when='midnight')
 	handler.setLevel(logging.INFO)
-	formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s",
+	formatter = logging.Formatter("%(asctime)s.%(msecs)03d;%(levelname)s;%(message)s",
                               "%Y-%m-%d %H:%M:%S")
 	fileHandler.setFormatter(formatter)
-	fileHandler.suffix = '%Y_%m_%d.log'
 	logger.addHandler(fileHandler)
 	handler.setFormatter(formatter)
 	logger.addHandler(handler)
