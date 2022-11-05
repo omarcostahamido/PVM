@@ -11,7 +11,11 @@ def _init_logger():
 	logger = logging.getLogger("PVM")
 	logger.setLevel(logging.INFO)
 	handler = logging.StreamHandler(sys.stderr)
-	fileHandler = TimedRotatingFileHandler('./log/{:%Y-%m-%d %H:%M:%S}.log'.format(datetime.now()),  when='midnight')
+	# Check if the `log` directory exists, create one if not.
+	log_path = "./log/{:%Y-%m-%d %H:%M:%S}.log"
+	if not os.path.exists(log_path):
+		os.makedirs(log_path)
+	fileHandler = TimedRotatingFileHandler(log_path.format(datetime.now()),  when='midnight')
 	handler.setLevel(logging.INFO)
 	formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s",
                               "%Y-%m-%d %H:%M:%S")
