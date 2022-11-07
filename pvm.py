@@ -1,5 +1,6 @@
 from datetime import datetime
 import os
+from time import sleep
 from pythonosc import dispatcher, osc_server
 import argparse
 from omxplayer.player import OMXPlayer
@@ -13,7 +14,7 @@ def _init_logger():
 	handler = logging.StreamHandler(sys.stderr)
 	fileHandler = TimedRotatingFileHandler('./log/{:%Y-%m-%d %H:%M:%S}.log'.format(datetime.now()),  when='midnight')
 	handler.setLevel(logging.INFO)
-	formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s",
+	formatter = logging.Formatter("%(asctime)s.%(msecs)03d;%(levelname)s;%(message)s",
                               "%Y-%m-%d %H:%M:%S")
 	fileHandler.setFormatter(formatter)
 	fileHandler.suffix = '%Y_%m_%d.log'
@@ -30,18 +31,40 @@ PEFIX_PATH = "/home/pi/Videos/"
 VIDEO_PATH = "jellyfish720p.mp4"
 media = ""
 IS_FILE_SET = False
+NEXT_TIME = None
 
 def parse_commands(*args):
 	global media
 	global VIDEO_PATH
 	global IS_FILE_SET
+	global NEXT_TIME
+	if len(args) == 4:
+		seconds = int(args[3]) + 3
+		mintues = int(args[2])
+		hours = int(args[1])
+		if seconds >= 60:
+			seconds -= 60
+			mintues += 1
+		if mintues == 60:
+			mintues = 0
+			hours += 1
+		time_data = str(hours) + ":" + str(mintues) + ":" + str(seconds)
+		NEXT_TIME = datetime.strptime(time_data, "%H:%M:%S")
+		_logger.info("Next action will be done in %s", time_data)
+		return
 	command = args[1]
 	_logger.info("Received command: %s", command)
 	if len(args)>2:
 		value = args[2]
-		_logger.info("Received command: %s", str(value))
+		_logger.info("Received value: %s", str(value))
 		pass
 	# TODO: Create another python file to control two display
+	while True:
+		now = datetime.now()
+		now = now.replace(microsecond=0)
+		if now.time() == NEXT_TIME.time():
+			break
+		sleep(0.01)
 	if command=="file":
 		_logger.info("File set: %s", PEFIX_PATH + value)
 		IS_FILE_SET = True
