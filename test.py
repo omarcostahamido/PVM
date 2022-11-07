@@ -38,5 +38,6 @@ def test():
     print("***out", out)
     if "error" in err.lower() or "exception" in err.lower():
         print("Exceptions or errors detected, test failed.")
-
+    else:
+        print("Test finished successfully.")
 test()
