@@ -12,7 +12,7 @@ def _init_logger():
 	logger.setLevel(logging.INFO)
 	handler = logging.StreamHandler(sys.stderr)
 	# Check if the `log` directory exists, create one if not.
-	log_path = "./log/{:%Y-%m-%d %H:%M:%S}.log"
+	log_path = "/home/pi/PVM/log/{:%Y-%m-%d %H:%M:%S}.log"
 	if not os.path.exists(log_path):
 		os.makedirs(log_path)
 	fileHandler = TimedRotatingFileHandler(log_path.format(datetime.now()),  when='midnight')
