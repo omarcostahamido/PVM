@@ -1,5 +1,6 @@
 from datetime import datetime
 import os
+import subprocess
 from pythonosc import dispatcher, osc_server
 import argparse
 from omxplayer.player import OMXPlayer
@@ -76,6 +77,13 @@ def parse_commands(*args):
 			media.set_position(float(value))
 			_logger.info("%s command success.", command)
 		elif command=="set_rate":
+			fps = 30
+			video_info = subprocess.run("omxplayer -i " + PEFIX_PATH + VIDEO_PATH)
+			info = video_info.split(", ")
+			for i, a in enumerate(info):
+				if 'fps' in a:
+					fps_info = a.split(' ')
+					fps = fps_info[0]
 			fps = str(30 * float(value))
 			media = OMXPlayer(PEFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
 			media.pause()
