@@ -11,7 +11,11 @@ def _init_logger():
 	logger = logging.getLogger("PVM")
 	logger.setLevel(logging.INFO)
 	handler = logging.StreamHandler(sys.stderr)
-	fileHandler = TimedRotatingFileHandler('./log/{:%Y-%m-%d %H:%M:%S}.log'.format(datetime.now()),  when='midnight')
+	# Check if the `log` directory exists, create one if not.
+	log_path = "./log/{:%Y-%m-%d %H:%M:%S}.log"
+	if not os.path.exists(log_path):
+		os.makedirs(log_path)
+	fileHandler = TimedRotatingFileHandler(log_path.format(datetime.now()),  when='midnight')
 	handler.setLevel(logging.INFO)
 	formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s",
                               "%Y-%m-%d %H:%M:%S")
@@ -42,48 +46,51 @@ def parse_commands(*args):
 		_logger.info("Received command: %s", str(value))
 		pass
 	# TODO: Create another python file to control two display
-	if command=="file":
-		_logger.info("File set: %s", PEFIX_PATH + value)
-		IS_FILE_SET = True
-		media = OMXPlayer(PEFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
-		media.pause()
-		VIDEO_PATH = value
-		return
+	try:
+		if command=="file":
+			_logger.info("File set: %s", PEFIX_PATH + value)
+			IS_FILE_SET = True
+			media = OMXPlayer(PEFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
+			media.pause()
+			VIDEO_PATH = value
+			return
 
-	if not IS_FILE_SET:
-		_logger.info("Command %s failed because of the file is unset.", command)
-		return
+		if not IS_FILE_SET:
+			_logger.info("Command %s failed because of the file is unset.", command)
+			return
 
-	if command=="start":
-		if media.can_play():
-			media.play()
+		if command=="start":
+			if media.can_play():
+				media.play()
+				_logger.info("%s command success.", command)
+			else:
+				_logger.info("%s command failed.", command)
+		elif command=="stop":
+			if media.can_quit():
+				media.stop()
+				IS_FILE_SET = False
+				_logger.info("%s command success and file has been unset.", command)
+			else:
+				_logger.info("%s command failed.", command)
+		elif command=="set_position":
+			media.set_position(float(value))
 			_logger.info("%s command success.", command)
-		else:
-			_logger.info("%s command failed.", command)
-	elif command=="stop":
-		if media.can_quit():
-			media.stop()
-			IS_FILE_SET = False
-			_logger.info("%s command success and file has been unset.", command)
-		else:
-			_logger.info("%s command failed.", command)
-	elif command=="set_position":
-		media.set_position(float(value))
-		_logger.info("%s command success.", command)
-	elif command=="set_rate":
-		fps = str(30 * float(value))
-		media = OMXPlayer(PEFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
-		media.pause()
-		_logger.info("%s command success.", command)
-	elif command=="pause":
-		if media.can_pause():
+		elif command=="set_rate":
+			fps = str(30 * float(value))
+			media = OMXPlayer(PEFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
 			media.pause()
 			_logger.info("%s command success.", command)
+		elif command=="pause":
+			if media.can_pause():
+				media.pause()
+				_logger.info("%s command success.", command)
+			else:
+				_logger.info("%s command failed.", command)
 		else:
-			_logger.info("%s command failed.", command)
-	else:
-		_logger.info("%s unknown.", command)
-
+			_logger.info("%s unknown.", command)
+	except Exception as e:
+		# `logger#exception method prints the stack trace`
+		_logger.exception("Function: parse_commands failed! %s" % (e))
 
 def main(RECEIVE_PORT):
 	#OSC server
