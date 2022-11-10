@@ -29,7 +29,7 @@ def _init_logger():
 
 _init_logger()
 _logger = logging.getLogger("PVM")
-_logger.info("Logging system initilized in %s", LOG_PATH)
+_logger.info("Logging system initiated in %s", LOG_PATH)
 
 # Place your videos in this folder for autostart
 LOG_PATH = "/home/pi/PVM/log/"
