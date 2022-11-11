@@ -7,13 +7,14 @@ import logging
 from logging.handlers import TimedRotatingFileHandler
 import sys
 
+
 def _init_logger():
 	logger = logging.getLogger("PVM")
 	logger.setLevel(logging.INFO)
 	handler = logging.StreamHandler(sys.stderr)
 	fileHandler = TimedRotatingFileHandler('./log/{:%Y-%m-%d %H:%M:%S}.log'.format(datetime.now()),  when='midnight')
 	handler.setLevel(logging.INFO)
-	formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s",
+	formatter = logging.Formatter("%(asctime)s.%(msecs)03d;%(levelname)s;%(message)s",
                               "%Y-%m-%d %H:%M:%S")
 	fileHandler.setFormatter(formatter)
 	fileHandler.suffix = '%Y_%m_%d.log'
@@ -39,6 +40,8 @@ def parse_commands(*args):
 	global VIDEO_PATH_ONE
 	global VIDEO_PATH_TWO
 	global IS_FILE_SET
+	global canPause
+	global canStart
 	command = args[1]
 	_logger.info("Received command: %s", command)
 	if len(args)>2:
@@ -47,16 +50,23 @@ def parse_commands(*args):
 		pass
 	# TODO: Create another python file to control two display
 	if command=="file":
+		canPause = False
 		if "|" not in value:
 			_logger.info("Please pass two video name like 1.mp4,2.mp4.")
 			return
 		VIDEO_PATH_ONE, VIDEO_PATH_TWO = value.split("|")
 		_logger.info("File set: %s, %s", PEFIX_PATH + VIDEO_PATH_ONE, PEFIX_PATH + VIDEO_PATH_TWO)
+		if IS_FILE_SET:
+			_logger.info("The file has already been set!")
+			if media1 is not None and media2 is not None:
+					media1.stop()
+					media2.stop()
 		IS_FILE_SET = True
 		media1 = OMXPlayer(PEFIX_PATH + VIDEO_PATH_ONE, dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=['--loop', '--display', '2'])
 		media1.pause()
 		media2 = OMXPlayer(PEFIX_PATH + VIDEO_PATH_TWO, dbus_name='org.mpris.MediaPlayer2.omxplayer2', args=['--loop', '--display', '7'])
 		media2.pause()
+		canStart = True
 		return
 
 	if not IS_FILE_SET:
@@ -64,17 +74,29 @@ def parse_commands(*args):
 		return
 
 	if command=="start":
-		if media1.can_play():
-			# check two videos' position
-			pos1=media1.position()
-			pos2=media2.position()
-			offset =abs(pos1-pos2)
-			if(offset>1): #more than 1 second offset, direct jump to correct position
-				media2.set_position(pos1)
-			
-			media1.play()
-			media2.play()
-			_logger.info("%s command success.", command)
+		
+		if media1.is_playing() or media2.is_playing():
+			_logger.info("The videos are playing now!") 
+		elif canStart:
+				# start1 = time.time()
+				pos1 = media1.position()
+				pos2 = media2.position()
+				if pos1 > pos2:
+					media1.set_position(pos2)
+				elif pos1 < pos2:
+					media2.set_position(pos1)
+				
+				pos1 = media1.position()
+				pos2 = media2.position()
+				_logger.info("media 1 start position: %s", pos1)
+				_logger.info("media 2 start position: %s", pos2)
+									
+				media1.play()
+				media2.play()
+
+				canPause = True
+				canStart = False
+				_logger.info("%s command success.", command)
 		else:
 			_logger.info("%s command failed.", command)
 	elif command=="stop":
@@ -97,10 +119,26 @@ def parse_commands(*args):
 		media2.pause()
 		_logger.info("%s command success.", command)
 	elif command=="pause":
-		if media1.can_pause():
-			media1.pause()
-			media2.pause()
-			_logger.info("%s command success.", command)
+		if canPause:
+				media1.pause()
+				media2.pause()
+				_logger.info("%s command success.", command)
+				pos1 = media1.position()
+				pos2 = media2.position()
+				_logger.info("media 1 position: %s", pos1)
+				_logger.info("media 2 position: %s", pos2)
+				
+				if pos1 > pos2:
+					media1.set_position(pos2)
+				elif pos1 < pos2:
+					media2.set_position(pos1)
+				pos1 = media1.position()
+				pos2 = media2.position()
+				_logger.info("media 1 reset position: %s", pos1)
+				_logger.info("media 2 reset position: %s", pos2)
+				
+				canPause = False
+				canStart = True	
 		else:
 			_logger.info("%s command failed.", command)
 	else:

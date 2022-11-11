@@ -44,6 +44,11 @@ def parse_commands(*args):
 	# TODO: Create another python file to control two display
 	if command=="file":
 		_logger.info("File set: %s", PEFIX_PATH + value)
+		if IS_FILE_SET:
+			_logger.info("The file has already been set!")
+			if media is not None:
+					media.stop()
+
 		IS_FILE_SET = True
 		media = OMXPlayer(PEFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
 		media.pause()
@@ -55,7 +60,9 @@ def parse_commands(*args):
 		return
 
 	if command=="start":
-		if media.can_play():
+		if media.is_playing():
+			_logger.info("The video is playing now!")            
+		elif media.can_play():
 			media.play()
 			_logger.info("%s command success.", command)
 		else:
