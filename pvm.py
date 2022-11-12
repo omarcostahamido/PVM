@@ -46,10 +46,12 @@ def parse_commands(*args):
 			seconds -= 60
 			minutes += 1
 		if minutes == 60:
-			mintues = 0
+			minutes = 0
 			hours += 1
 		time_data = str(hours) + ":" + str(minutes) + ":" + str(seconds)
 		NEXT_TIME = datetime.strptime(time_data, "%H:%M:%S")
+		if NEXT_TIME.time <= datetime.now().time():
+			_logger.info("Timestamp set failed.")
 		_logger.info("Next action will be done in %s", time_data)
 		return
 	command = args[1]
