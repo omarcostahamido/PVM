@@ -85,11 +85,9 @@ curl "https://test-videos.co.uk/vids/jellyfish/mp4/h264/720/Jellyfish_720_10s_5M
 
 ### [Optional]Network Time Protocol(NTP)
 
-Since our current command system design is based on the Raspberry Pi timestamp, synchronizing the system time of these Raspberry Pi's in a local network of multiple Raspberry Pi's is a prerequisite.
-
 NTP is intended to [synchronize](https://en.wikipedia.org/wiki/Synchronize) all participating computers to within a few [milliseconds](https://en.wikipedia.org/wiki/Millisecond). The system time may not be so precisely synchronized between different Raspberry Pi's, which may have an impact on the playback of high frame rate videos.
 
-To use NTP to sync all Raspberry Pis' time in local network, please follow section [Configure NTP Client to be Time Synced with the NTP Server](https://rishabhdevyadav.medium.com/how-to-install-ntp-server-and-client-s-on-ubuntu-18-04-lts-f0562e41d0e1).
+To use NTP to sync all Raspberry Pis' time in local network, please follow section [Configure NTP Client to be Time Synced with the NTP Server](https://web.archive.org/web/20221112203702/https://rishabhdevyadav.medium.com/how-to-install-ntp-server-and-client-s-on-ubuntu-18-04-lts-f0562e41d0e1).
 
 ## Videos
 
