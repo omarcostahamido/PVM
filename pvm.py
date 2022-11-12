@@ -19,10 +19,9 @@ def _init_logger():
 	global LOG_PATH
 	LOG_PATH = log_path.format(datetime.now())
 	handler.setLevel(logging.INFO)
-	formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s",
+	formatter = logging.Formatter("%(asctime)s.%(msecs)03d;%(levelname)s;%(message)s",
                               "%Y-%m-%d %H:%M:%S")
 	fileHandler.setFormatter(formatter)
-	fileHandler.suffix = '%Y_%m_%d.log'
 	logger.addHandler(fileHandler)
 	handler.setFormatter(formatter)
 	logger.addHandler(handler)
