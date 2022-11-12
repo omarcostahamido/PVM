@@ -40,15 +40,15 @@ def parse_commands(*args):
 	global NEXT_TIME
 	if len(args) == 4:
 		seconds = int(args[3]) + 3
-		mintues = int(args[2])
+		minutes = int(args[2])
 		hours = int(args[1])
 		if seconds >= 60:
 			seconds -= 60
-			mintues += 1
-		if mintues == 60:
+			minutes += 1
+		if minutes == 60:
 			mintues = 0
 			hours += 1
-		time_data = str(hours) + ":" + str(mintues) + ":" + str(seconds)
+		time_data = str(hours) + ":" + str(minutes) + ":" + str(seconds)
 		NEXT_TIME = datetime.strptime(time_data, "%H:%M:%S")
 		_logger.info("Next action will be done in %s", time_data)
 		return
@@ -62,7 +62,7 @@ def parse_commands(*args):
 	while True:
 		now = datetime.now()
 		now = now.replace(microsecond=0)
-		if now.time() == NEXT_TIME.time():
+		if now.time() >= NEXT_TIME.time():
 			break
 		sleep(0.01)
 	if command=="file":
