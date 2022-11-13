@@ -33,11 +33,29 @@ media = ""
 IS_FILE_SET = False
 NEXT_TIME = None
 
+'''
+UDP command example:
+/PVM 12:13:14
+/PVM <action_name> <action_value>
+
+The normal workflow is below,
+1. Receive the first command: /PVM 12:13:14
+	- parse the time
+	- plus 3s
+	- save the time into NEXT_TIME
+2. Receive the second command: /PVM file jellyfish.mp4
+	- Wait until the NEXT_TIME
+	- Execute the command
+	- Set NEXT_TIME = None
+'''
+
 def parse_commands(*args):
 	global media
 	global VIDEO_PATH
 	global IS_FILE_SET
 	global NEXT_TIME
+	# Parse the time send in UDP, 
+	# From /PVM 12 13 14 to 12:13:14
 	if len(args) == 4:
 		seconds = int(args[3]) + 3
 		minutes = int(args[2])
@@ -49,34 +67,53 @@ def parse_commands(*args):
 			minutes = 0
 			hours += 1
 		time_data = str(hours) + ":" + str(minutes) + ":" + str(seconds)
+		# Set NEXT_TIME for next UDP command
 		NEXT_TIME = datetime.strptime(time_data, "%H:%M:%S")
+		# If scheduled time is behind current time, we set NEXT_TIME = None
 		if NEXT_TIME.time <= datetime.now().time():
 			_logger.info("Timestamp set failed.")
+			NEXT_TIME = None
+			return
 		_logger.info("Next action will be done in %s", time_data)
 		return
+	
+	# UDP Command example: /PVM <action_name> <action_value>
 	command = args[1]
+	# If NEXT_TIME is None, we log failed and return.
+	if not NEXT_TIME:
+		_logger.info("Action: %s failed because scheduled time is behind current time.", command)
+		return
+	
+	# Received command here and will try to execute.
 	_logger.info("Received command: %s", command)
 	if len(args)>2:
 		value = args[2]
 		_logger.info("Received value: %s", str(value))
 		pass
-	# TODO: Create another python file to control two display
+	
+	# Loop until now.time() >= NEXT_TIME.time()
+	# Here is the logic of our delay
 	while True:
 		now = datetime.now()
 		now = now.replace(microsecond=0)
 		if now.time() >= NEXT_TIME.time():
 			break
 		sleep(0.01)
+	
+	# File command
 	if command=="file":
 		_logger.info("File set: %s", PEFIX_PATH + value)
 		IS_FILE_SET = True
 		media = OMXPlayer(PEFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
 		media.pause()
 		VIDEO_PATH = value
+		NEXT_TIME = None
 		return
 
+	# If file is unset, then we should not execute any command below.
 	if not IS_FILE_SET:
 		_logger.info("Command %s failed because of the file is unset.", command)
+		NEXT_TIME = None
 		return
 
 	if command=="start":
@@ -108,6 +145,9 @@ def parse_commands(*args):
 			_logger.info("%s command failed.", command)
 	else:
 		_logger.info("%s unknown.", command)
+	
+	# To set NEXT_TIME = None, so that it will not confuse next command.
+	NEXT_TIME = None
 
 
 def main(RECEIVE_PORT):
