@@ -12,21 +12,27 @@ def _init_logger():
 	logger = logging.getLogger("PVM")
 	logger.setLevel(logging.INFO)
 	handler = logging.StreamHandler(sys.stderr)
-	fileHandler = TimedRotatingFileHandler('./log/{:%Y-%m-%d %H:%M:%S}.log'.format(datetime.now()),  when='midnight')
+	# Check if the `log` directory exists, create one if not.
+	log_path = "/home/pi/PVM/log/{:%Y-%m-%d %H:%M:%S}.log"
+	if not os.path.exists(log_path):
+		os.makedirs(log_path)
+	fileHandler = TimedRotatingFileHandler(log_path.format(datetime.now()),  when='midnight')
+	global LOG_PATH
+	LOG_PATH = log_path.format(datetime.now())
 	handler.setLevel(logging.INFO)
-	formatter = logging.Formatter("%(asctime)s.%(msecs)03d;%(levelname)s;%(message)s",
+	formatter = logging.Formatter("%(asctime)s.%(msecs)03d.%(msecs)03d;%(levelname)s;%(message)s",
                               "%Y-%m-%d %H:%M:%S")
 	fileHandler.setFormatter(formatter)
-	fileHandler.suffix = '%Y_%m_%d.log'
 	logger.addHandler(fileHandler)
 	handler.setFormatter(formatter)
 	logger.addHandler(handler)
 
 _init_logger()
 _logger = logging.getLogger("PVM")
-_logger.info("Logging system initilized in %s", os.getcwd())
+_logger.info("Logging system initiated in %s", LOG_PATH)
 
 # Place your videos in this folder for autostart
+LOG_PATH = "/home/pi/PVM/log/"
 PEFIX_PATH = "/home/pi/Videos/"
 VIDEO_PATH = "jellyfish720p.mp4"
 media = ""
@@ -100,55 +106,57 @@ def parse_commands(*args):
 			break
 		sleep(0.01)
 	
-	# File command
-	if command=="file":
-		_logger.info("File set: %s", PEFIX_PATH + value)
-		IS_FILE_SET = True
-		media = OMXPlayer(PEFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
-		media.pause()
-		VIDEO_PATH = value
-		NEXT_TIME = None
-		return
+	try:
+		# File command
+		if command=="file":
+			_logger.info("File set: %s", PEFIX_PATH + value)
+			IS_FILE_SET = True
+			media = OMXPlayer(PEFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
+			media.pause()
+			VIDEO_PATH = value
+			NEXT_TIME = None
+			return
 
-	# If file is unset, then we should not execute any command below.
-	if not IS_FILE_SET:
-		_logger.info("Command %s failed because of the file is unset.", command)
-		NEXT_TIME = None
-		return
+		# If file is unset, then we should not execute any command below.
+		if not IS_FILE_SET:
+			_logger.info("Command %s failed because of the file is unset.", command)
+			NEXT_TIME = None
+			return
 
-	if command=="start":
-		if media.can_play():
-			media.play()
+		if command=="start":
+			if media.can_play():
+				media.play()
+				_logger.info("%s command success.", command)
+			else:
+				_logger.info("%s command failed.", command)
+		elif command=="stop":
+			if media.can_quit():
+				media.stop()
+				IS_FILE_SET = False
+				_logger.info("%s command success and file has been unset.", command)
+			else:
+				_logger.info("%s command failed.", command)
+		elif command=="set_position":
+			media.set_position(float(value))
 			_logger.info("%s command success.", command)
-		else:
-			_logger.info("%s command failed.", command)
-	elif command=="stop":
-		if media.can_quit():
-			media.stop()
-			IS_FILE_SET = False
-			_logger.info("%s command success and file has been unset.", command)
-		else:
-			_logger.info("%s command failed.", command)
-	elif command=="set_position":
-		media.set_position(float(value))
-		_logger.info("%s command success.", command)
-	elif command=="set_rate":
-		fps = str(30 * float(value))
-		media = OMXPlayer(PEFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
-		media.pause()
-		_logger.info("%s command success.", command)
-	elif command=="pause":
-		if media.can_pause():
+		elif command=="set_rate":
+			fps = str(30 * float(value))
+			media = OMXPlayer(PEFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
 			media.pause()
 			_logger.info("%s command success.", command)
+		elif command=="pause":
+			if media.can_pause():
+				media.pause()
+				_logger.info("%s command success.", command)
+			else:
+				_logger.info("%s command failed.", command)
 		else:
-			_logger.info("%s command failed.", command)
-	else:
-		_logger.info("%s unknown.", command)
-	
-	# To set NEXT_TIME = None, so that it will not confuse next command.
-	NEXT_TIME = None
-
+			_logger.info("%s unknown.", command)
+			# To set NEXT_TIME = None, so that it will not confuse next command.
+		NEXT_TIME = None
+	except Exception as e:
+		# `logger#exception method prints the stack trace`
+		_logger.exception("Function: parse_commands failed! %s" % (e))
 
 def main(RECEIVE_PORT):
 	#OSC server

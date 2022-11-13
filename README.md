@@ -49,7 +49,7 @@ To install this to your Raspberry Pi, you need the following things:
 
 ### Connect to a Raspberry Pi
 
-During the first boot, there are some initial configurations necessary, which will be easier to do if you connect the Raspberry Pi device to a physical screen, mouse, and keyboard. Please checkout [this official guide](https://www.raspberrypi.com/documentation/computers/getting-started.html#configuration-on-first-boot) for more details. After that you will be able to connect to it remotely (preferably under the same local network). Please check out "[_How to connect to a Raspberry Pi remotely_](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely)" our wiki to learn how to do this!
+During the first boot, there are some initial configurations necessary, which will be easier to do if you connect the Raspberry Pi device to a physical screen, mouse, and keyboard. Please checkout [this official guide](https://www.raspberrypi.com/documentation/computers/getting-started.html#configuration-on-first-boot) for more details. After that you will be able to connect to it remotely (preferably under the same local network). Please check out "[_How to connect to a Raspberry Pi remotely_](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely)" and "[VS Code ssh to Raspberry Pi](https://github.com/omarcostahamido/PVM/wiki/VS-Code-ssh-to-Raspberry-Pi)" in our wiki to learn how to do this!
 
 
 ### OMXPlayer
@@ -83,6 +83,11 @@ pip install -r requirements.txt
 curl "https://test-videos.co.uk/vids/jellyfish/mp4/h264/720/Jellyfish_720_10s_5MB.mp4" --output jellyfish720p.mp4
 ```
 
+### [Optional]Network Time Protocol(NTP)
+
+NTP is intended to [synchronize](https://en.wikipedia.org/wiki/Synchronize) all participating computers to within a few [milliseconds](https://en.wikipedia.org/wiki/Millisecond). The system time may not be so precisely synchronized between different Raspberry Pi's, which may have an impact on the playback of high frame rate videos.
+
+To use NTP to sync all Raspberry Pis' time in local network, please follow section [Configure NTP Client to be Time Synced with the NTP Server](https://web.archive.org/web/20221112203702/https://rishabhdevyadav.medium.com/how-to-install-ntp-server-and-client-s-on-ubuntu-18-04-lts-f0562e41d0e1).
 
 ## Videos
 
@@ -170,22 +175,6 @@ cd PVM && git pull
 sudo reboot
 ```
 
-## Logs
-
-All logs for each time each RPI is stored in the log folder.
-
-Name convention for each file is `{:%Y-%m-%d %H:%M:%S}.log`
-
-All output from the console is synchronized to the file in real-time.
-
-```bash
-2022-10-31 13:34:21;INFO;Received command: file
-2022-10-31 13:34:21;INFO;Received value: jellyfish720p.mp4
-2022-10-31 13:34:21;INFO;File set: /home/pi/Videos/jellyfish720p.mp4
-```
-
-If you close the program and then reopen it, a new log file will be created.
-
 ## Examples
 
 Navigate to the `examples` folder and open the `examples.maxproj` file.
@@ -218,5 +207,26 @@ The (proof of concept) resync system, on the top right portion of the patch, inc
 
 Also don't forget to checkout our [wiki](https://github.com/omarcostahamido/PVM/wiki)! It contains instructions on various topics like [_setting up remote access to the Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely) and how to run the examples.
 
+## Development
+
+### Logs
+
+All logs for each time each RPI is stored in the `log` folder in the current directory. If it doesn't exist yet, a new directory named `log` would be created.
+
+Name convention for each file is `{:%Y-%m-%d %H:%M:%S}.log`
+
+All output from the console is synchronized to the file in real-time.
+
+```bash
+2022-10-31 13:34:21;INFO;Received command: file
+2022-10-31 13:34:21;INFO;Received value: jellyfish720p.mp4
+2022-10-31 13:34:21;INFO;File set: /home/pi/Videos/jellyfish720p.mp4
+```
+
+If you close the program and then reopen it, a new log file will be created.
+
+## Run the test
+
+You could write tests for your combination of commands in the `test.py` file. Simply run `python3 test.py` from the console will run it. When the test script is started, it will first **kill any existing `pvm.py` processes**, and then spawn a new one to test the commands, and end it again after test is finished.
 
 ## Known limitations
