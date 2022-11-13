@@ -1,5 +1,6 @@
 from datetime import datetime
 import os
+from pathlib import Path
 from pythonosc import dispatcher, osc_server
 import argparse
 from omxplayer.player import OMXPlayer
@@ -7,12 +8,19 @@ import logging
 from logging.handlers import TimedRotatingFileHandler
 import sys
 
+# Place your videos in this folder for autostart
+HOME = str(Path.home()) + "/"  # The home directory, e.g. /home/pi/
+LOG_PATH = HOME + "PVM/log/"
+PEFIX_PATH = HOME + "Videos/"
+VIDEO_PATH = "jellyfish720p.mp4"
+IS_FILE_SET = False
+
 def _init_logger():
 	logger = logging.getLogger("PVM")
 	logger.setLevel(logging.INFO)
 	handler = logging.StreamHandler(sys.stderr)
 	# Check if the `log` directory exists, create one if not.
-	log_path = "/home/pi/PVM/log/{:%Y-%m-%d %H:%M:%S}.log"
+	log_path = LOG_PATH + "{:%Y-%m-%d %H:%M:%S}.log"
 	if not os.path.exists(log_path):
 		os.makedirs(log_path)
 	fileHandler = TimedRotatingFileHandler(log_path.format(datetime.now()),  when='midnight')
@@ -30,12 +38,7 @@ _init_logger()
 _logger = logging.getLogger("PVM")
 _logger.info("Logging system initiated in %s", LOG_PATH)
 
-# Place your videos in this folder for autostart
-LOG_PATH = "/home/pi/PVM/log/"
-PEFIX_PATH = "/home/pi/Videos/"
-VIDEO_PATH = "jellyfish720p.mp4"
 media = ""
-IS_FILE_SET = False
 
 def parse_commands(*args):
 	global media
