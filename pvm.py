@@ -11,7 +11,7 @@ import sys
 # Place your videos in this folder for autostart
 HOME = str(Path.home()) + "/"  # The home directory, e.g. /home/pi/
 LOG_PATH = HOME + "PVM/log/"
-PEFIX_PATH = HOME + "Videos/"
+PREFIX_PATH = HOME + "Videos/"
 VIDEO_PATH = "jellyfish720p.mp4"
 IS_FILE_SET = False
 
@@ -53,9 +53,9 @@ def parse_commands(*args):
 	# TODO: Create another python file to control two display
 	try:
 		if command=="file":
-			_logger.info("File set: %s", PEFIX_PATH + value)
+			_logger.info("File set: %s", PREFIX_PATH + value)
 			IS_FILE_SET = True
-			media = OMXPlayer(PEFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
+			media = OMXPlayer(PREFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
 			media.pause()
 			VIDEO_PATH = value
 			return
@@ -82,7 +82,7 @@ def parse_commands(*args):
 			_logger.info("%s command success.", command)
 		elif command=="set_rate":
 			fps = str(30 * float(value))
-			media = OMXPlayer(PEFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
+			media = OMXPlayer(PREFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
 			media.pause()
 			_logger.info("%s command success.", command)
 		elif command=="pause":
