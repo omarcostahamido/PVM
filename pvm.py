@@ -9,28 +9,30 @@ from logging.handlers import TimedRotatingFileHandler
 import sys
 
 def _init_logger():
-    logger = logging.getLogger("PVM")
-    logger.setLevel(logging.INFO)
-    handler = logging.StreamHandler(sys.stderr)
-    # Check if the `log` directory exists, create one if not.
-    log_path = "./log/{:%Y-%m-%d %H:%M:%S}.log"
-    if not os.path.exists(log_path):
-        os.makedirs(log_path)
-    fileHandler = TimedRotatingFileHandler(log_path.format(datetime.now()),  when='midnight')
-    handler.setLevel(logging.INFO)
-    formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s",
+	logger = logging.getLogger("PVM")
+	logger.setLevel(logging.INFO)
+	handler = logging.StreamHandler(sys.stderr)
+	# Check if the `log` directory exists, create one if not.
+	log_path = "/home/pi/PVM/log/{:%Y-%m-%d %H:%M:%S}.log"
+	if not os.path.exists(log_path):
+		os.makedirs(log_path)
+	fileHandler = TimedRotatingFileHandler(log_path.format(datetime.now()),  when='midnight')
+	global LOG_PATH
+	LOG_PATH = log_path.format(datetime.now())
+	handler.setLevel(logging.INFO)
+	formatter = logging.Formatter("%(asctime)s.%(msecs)03d;%(levelname)s;%(message)s",
                               "%Y-%m-%d %H:%M:%S")
-    fileHandler.setFormatter(formatter)
-    fileHandler.suffix = '%Y_%m_%d.log'
-    logger.addHandler(fileHandler)
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
+	fileHandler.setFormatter(formatter)
+	logger.addHandler(fileHandler)
+	handler.setFormatter(formatter)
+	logger.addHandler(handler)
 
 _init_logger()
 _logger = logging.getLogger("PVM")
-_logger.info("Logging system initilized in %s", os.getcwd())
+_logger.info("Logging system initiated in %s", LOG_PATH)
 
 # Place your videos in this folder for autostart
+LOG_PATH = "/home/pi/PVM/log/"
 PEFIX_PATH = "/home/pi/Videos/"
 VIDEO_PATH = "jellyfish720p.mp4"
 media = ""
