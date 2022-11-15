@@ -210,7 +210,7 @@ Also don't forget to checkout our [wiki](https://github.com/omarcostahamido/PVM/
 ## Development
 
 ### Logs
-`pvm.py` would generate logs during execution, which will be stored in the `log/` directory under the working directory of PVM. It would be created if it doesn't exist yet.
+Logs will be recorded by `pvm.py` during execution. These will be stored in the `log/` folder, within the install directory of `PVM` on the Raspberry Pi device. This folder will be created if it doesn't exist yet.
 
 Name convention for each log file is `{:%Y-%m-%d %H:%M:%S}.log`
 
