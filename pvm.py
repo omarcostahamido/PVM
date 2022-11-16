@@ -35,6 +35,8 @@ def parse_commands(*args):
 	global media
 	global VIDEO_PATH
 	global IS_FILE_SET
+	global canPause
+	global canStart
 	command = args[1]
 	_logger.info("Received command: %s", command)
 	if len(args)>2:
@@ -43,15 +45,17 @@ def parse_commands(*args):
 		pass
 	# TODO: Create another python file to control two display
 	if command=="file":
-		_logger.info("File set: %s", PREFIX_PATH + value)
+		canPause = False
 		if IS_FILE_SET:
-			_logger.info("The file has already been set!")
+			_logger.info("Stopping media and replacing video file.")
 			if media is not None:
 					media.stop()
 		IS_FILE_SET = True
-		media = OMXPlayer(PREFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--win', "50,50,1390,1030"])
+		VIDEO_PATH = PREFIX_PATH + value
+		media = OMXPlayer(VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--win', "50,50,1390,1030"])
 		media.pause()
-		VIDEO_PATH = value
+		_logger.info("File set: %s", PREFIX_PATH + value)
+		canStart = True
 		return
 
 	if not IS_FILE_SET:
@@ -61,8 +65,10 @@ def parse_commands(*args):
 	if command=="start":
 		if media.is_playing():
 			_logger.info("The video is playing now!")            
-		elif media.can_play():
+		elif canStart:
 			media.play()
+			canPause = True
+			canStart = False
 			_logger.info("%s command success.", command)
 		else:
 			_logger.info("%s command failed.", command)
@@ -78,12 +84,14 @@ def parse_commands(*args):
 		_logger.info("%s command success.", command)
 	elif command=="set_rate":
 		fps = str(30 * float(value))
-		media = OMXPlayer(PEFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
+		media = OMXPlayer(VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
 		media.pause()
 		_logger.info("%s command success.", command)
 	elif command=="pause":
-		if media.can_pause():
+		if canPause:
 			media.pause()
+			canPause = False
+			canStart = True
 			_logger.info("%s command success.", command)
 		else:
 			_logger.info("%s command failed.", command)
