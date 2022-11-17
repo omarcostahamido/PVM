@@ -1,5 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
+from time import sleep
 from pythonosc import dispatcher, osc_server
 import argparse
 from omxplayer.player import OMXPlayer
@@ -37,18 +38,46 @@ VIDEO_PATH = "jellyfish720p.mp4"
 media = ""
 IS_FILE_SET = False
 
+'''
+UDP command example:
+/PVM HH MM SS <command> <value>
+'''
+
 def parse_commands(*args):
 	global media
 	global VIDEO_PATH
 	global IS_FILE_SET
-	command = args[1]
-	_logger.info("Received command: %s", command)
-	if len(args)>2:
-		value = args[2]
-		_logger.info("Received command: %s", str(value))
-		pass
-	# TODO: Create another python file to control two display
+	
+	# Parse time and add 3 seconds
+	hh, mm, ss = args[1], args[2], args[3]
+	time_str = str(hh) + ":" + str(mm) + ":" + str(ss)
+	next_time = datetime.strptime(time_str, "%H:%M:%S") + timedelta(seconds=3)
+
+	# Get command
+	command = args[4]
+
+	# If scheduled time is behind current time, return.
+	if next_time.time() <= datetime.now().time():
+		_logger.info("Command: %s failed because scheduled time(%s) is behind current time.", command, time_str)
+		return
+
+	# Log command and execute time.
+	_logger.info("Command: %s, execute time: %s.", command, next_time.time())
+	
+	# Wait until current time is equal to next_time
+	while True:
+		now = datetime.now()
+		now = now.replace(microsecond=0)
+		if now.time() >= next_time.time():
+			break
+		sleep(0.005)
+	
+    # Get value
+	if len(args) == 6:
+		value = args[5]
+
 	try:
+		# File command
 		if command=="file":
 			_logger.info("File set: %s", PEFIX_PATH + value)
 			IS_FILE_SET = True
@@ -57,6 +86,7 @@ def parse_commands(*args):
 			VIDEO_PATH = value
 			return
 
+		# If file is unset, then we should not execute any command below.
 		if not IS_FILE_SET:
 			_logger.info("Command %s failed because of the file is unset.", command)
 			return
