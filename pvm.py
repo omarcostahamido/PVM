@@ -28,7 +28,7 @@ _logger.info("Logging system initilized in %s", os.getcwd())
 # Place your videos in this folder for autostart
 PREFIX_PATH = "/home/pi/Videos/"
 VIDEO_PATH = "jellyfish720p.mp4"
-media = ""
+media = None
 IS_FILE_SET = False
 
 def parse_commands(*args):
