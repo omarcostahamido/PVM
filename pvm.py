@@ -20,7 +20,7 @@ def _init_logger():
 	LOG_PATH = log_path.format(datetime.now())
 	handler.setLevel(logging.INFO)
 	formatter = logging.Formatter("%(asctime)s.%(msecs)03d;%(levelname)s;%(message)s",
-                              "%Y-%m-%d %H:%M:%S")
+							  "%Y-%m-%d %H:%M:%S")
 	fileHandler.setFormatter(formatter)
 	logger.addHandler(fileHandler)
 	handler.setFormatter(formatter)
@@ -78,8 +78,24 @@ def parse_commands(*args):
 			media.set_position(float(value))
 			_logger.info("%s command success.", command)
 		elif command=="set_rate":
-			fps = str(30 * float(value))
-			media = OMXPlayer(PEFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
+			if media != "":
+				media.quit()
+				print("media quit")
+			original_fps = 30
+			video_info = subprocess.Popen(["omxplayer", "-i", PEFIX_PATH + VIDEO_PATH], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+			print("The command", ["omxplayer", "-i", PEFIX_PATH + VIDEO_PATH])
+			# info = video_info.stdout.decode().split(", ")
+			out, err = video_info.communicate()
+			out = out.decode(encoding='utf-8')
+			splist = out.split(", ")
+			for s in splist:
+				if 'fps' in s:
+					print("current ele:", s)
+					fps_info = s.split(' ')
+					original_fps = float(fps_info[0])
+			fps = str(original_fps * float(value))
+			print("computed fps", fps)
+			media = OMXPlayer(PEFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=['--loop','--force-fps', fps])
 			media.pause()
 			_logger.info("%s command success.", command)
 		elif command=="pause":
