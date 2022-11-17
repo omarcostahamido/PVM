@@ -54,7 +54,7 @@ def parse_commands(*args):
 	next_time = datetime.strptime(time_str, "%H:%M:%S") + timedelta(seconds=3)
 
 	# Get command
-	command= args[4]
+	command = args[4]
 
 	# If scheduled time is behind current time, return.
 	if next_time.time() <= datetime.now().time():
@@ -72,11 +72,9 @@ def parse_commands(*args):
 			break
 		sleep(0.005)
 	
-	message = "command: " + command
+    # Get value
 	if len(args) == 6:
 		value = args[5]
-		message += ", value: " + value
-	_logger.info("Start execute %s", message)
 
 	try:
 		# File command
