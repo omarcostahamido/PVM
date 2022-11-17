@@ -91,7 +91,7 @@ To use NTP to sync all Raspberry Pis' time in local network, please follow secti
 
 ## Videos
 
-Please save all the videos in the `/home/pi/Videos/` folder for autostart.
+Please save all the videos in the `/home/{your_user_name}/Videos/` folder for autostart. On Rapsberry Pi, your default directory should be `/home/pi/Videos/`.
 
 
 ## Running
@@ -133,7 +133,7 @@ on the terminal run
 
 after the last line add
 
-`@lxterminal -e sh /home/pi/PVM/launch.sh`
+`@lxterminal -e sh $HOME/PVM/launch.sh`
 
 Note: this is assuming that you clone this repo on your raspberry pi in the main /home/pi folder and followed the steps in the <a target="_self" href="#installation">Installation</a> section above.
 
@@ -210,10 +210,9 @@ Also don't forget to checkout our [wiki](https://github.com/omarcostahamido/PVM/
 ## Development
 
 ### Logs
+Logs will be recorded by `pvm.py` during execution. These will be stored in the `log/` folder, within the install directory of `PVM` on the Raspberry Pi device. This folder will be created if it doesn't exist yet.
 
-All logs for each time each RPI is stored in the `log` folder in the current directory. If it doesn't exist yet, a new directory named `log` would be created.
-
-Name convention for each file is `{:%Y-%m-%d %H:%M:%S}.log`
+Name convention for each log file is `{:%Y-%m-%d %H:%M:%S}.log`
 
 All output from the console is synchronized to the file in real-time.
 
@@ -227,6 +226,6 @@ If you close the program and then reopen it, a new log file will be created.
 
 ## Run the test
 
-You could write tests for your combination of commands in the `test.py` file. Simply run `python3 test.py` from the console will run it. When the test script is started, it will first **kill any existing `pvm.py` processes**, and then spawn a new one to test the commands, and end it again after test is finished.
+You could write tests for your combination of commands in the `test.py` file. Simply run `python3 test.py` on the console to perform the tests. When the test script is started, it will first **kill any existing `pvm.py` processes**, and then spawn a new one to test the commands, and end it again after test is finished.
 
 ## Known limitations
