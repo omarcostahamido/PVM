@@ -1,6 +1,7 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 from pathlib import Path
+from time import sleep
 from pythonosc import dispatcher, osc_server
 import argparse
 from omxplayer.player import OMXPlayer
@@ -28,7 +29,7 @@ def _init_logger():
 	LOG_PATH = log_path.format(datetime.now())
 	handler.setLevel(logging.INFO)
 	formatter = logging.Formatter("%(asctime)s.%(msecs)03d;%(levelname)s;%(message)s",
-                              "%Y-%m-%d %H:%M:%S")
+							  "%Y-%m-%d %H:%M:%S")
 	fileHandler.setFormatter(formatter)
 	logger.addHandler(fileHandler)
 	handler.setFormatter(formatter)
@@ -40,18 +41,46 @@ _logger.info("Logging system initiated in %s", LOG_PATH)
 
 media = ""
 
+'''
+UDP command example:
+/PVM HH MM SS <command> <value>
+'''
+
 def parse_commands(*args):
 	global media
 	global VIDEO_PATH
 	global IS_FILE_SET
-	command = args[1]
-	_logger.info("Received command: %s", command)
-	if len(args)>2:
-		value = args[2]
-		_logger.info("Received command: %s", str(value))
-		pass
-	# TODO: Create another python file to control two display
+	
+	# Parse time and add 3 seconds
+	hh, mm, ss = args[1], args[2], args[3]
+	time_str = str(hh) + ":" + str(mm) + ":" + str(ss)
+	next_time = datetime.strptime(time_str, "%H:%M:%S") + timedelta(seconds=3)
+
+	# Get command
+	command = args[4]
+
+	# If scheduled time is behind current time, return.
+	if next_time.time() <= datetime.now().time():
+		_logger.info("Command: %s failed because scheduled time(%s) is behind current time.", command, time_str)
+		return
+
+	# Log command and execute time.
+	_logger.info("Command: %s, execute time: %s.", command, next_time.time())
+	
+	# Wait until current time is equal to next_time
+	while True:
+		now = datetime.now()
+		now = now.replace(microsecond=0)
+		if now.time() >= next_time.time():
+			break
+		sleep(0.005)
+	
+    # Get value
+	if len(args) == 6:
+		value = args[5]
+
 	try:
+		# File command
 		if command=="file":
 			_logger.info("File set: %s", PREFIX_PATH + value)
 			IS_FILE_SET = True
@@ -60,6 +89,7 @@ def parse_commands(*args):
 			VIDEO_PATH = value
 			return
 
+		# If file is unset, then we should not execute any command below.
 		if not IS_FILE_SET:
 			_logger.info("Command %s failed because of the file is unset.", command)
 			return
@@ -83,6 +113,24 @@ def parse_commands(*args):
 		elif command=="set_rate":
 			fps = str(30 * float(value))
 			media = OMXPlayer(PREFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
+			if media != "":
+				media.quit()
+				print("media quit")
+			original_fps = 30
+			video_info = subprocess.Popen(["omxplayer", "-i", PEFIX_PATH + VIDEO_PATH], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+			print("The command", ["omxplayer", "-i", PEFIX_PATH + VIDEO_PATH])
+			# info = video_info.stdout.decode().split(", ")
+			out, err = video_info.communicate()
+			out = out.decode(encoding='utf-8')
+			splist = out.split(", ")
+			for s in splist:
+				if 'fps' in s:
+					print("current ele:", s)
+					fps_info = s.split(' ')
+					original_fps = float(fps_info[0])
+			fps = str(original_fps * float(value))
+			print("computed fps", fps)
+			media = OMXPlayer(PREFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=['--loop','--force-fps', fps])
 			media.pause()
 			_logger.info("%s command success.", command)
 		elif command=="pause":
