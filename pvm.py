@@ -39,7 +39,9 @@ _logger = logging.getLogger("PVM")
 _logger.info("Logging system initiated in %s", LOG_PATH)
 
 # Initialize global variables
-PEFIX_PATH = "/home/pi/Videos/" # Place your videos in this folder for autostart
+HOME = str(Path.home()) + "/"  # The home directory, e.g. /home/pi/
+LOG_PATH = HOME + "PVM/log/"
+PEFIX_PATH = HOME + "Videos/" # Place your videos in this folder for autostart
 VIDEO_PATH_ONE = "jellyfish720p.mp4"
 VIDEO_PATH_TWO = "jellyfish720p.mp4"
 media1 = None
