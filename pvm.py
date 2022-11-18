@@ -64,29 +64,31 @@ def parse_commands(*args):
 	global canStart
 	global displayNum
 
-	# Parse time and add 3 seconds
-	hh, mm, ss = args[1], args[2], args[3]
-	time_str = str(hh) + ":" + str(mm) + ":" + str(ss)
-	next_time = datetime.strptime(time_str, "%H:%M:%S") + timedelta(seconds=3)
-
 	# Get command
 	command = args[4]
 
-	# If scheduled time is behind current time, return.
-	if next_time.time() <= datetime.now().time():
-		_logger.info("Command: %s failed because scheduled time(%s) is behind current time.", command, time_str)
-		return
+	# Only start command need to delay 3s
+	if command == "start":
+    	# Parse time and add 3 seconds
+		hh, mm, ss = args[1], args[2], args[3]
+		time_str = str(hh) + ":" + str(mm) + ":" + str(ss)
+		next_time = datetime.strptime(time_str, "%H:%M:%S") + timedelta(seconds=3)
 
-	# Log command and execute time.
-	_logger.info("Command: %s, execute time: %s.", command, next_time.time())
-	
-	# Wait until current time is equal to next_time
-	while True:
-		now = datetime.now()
-		now = now.replace(microsecond=0)
-		if now.time() >= next_time.time():
-			break
-		sleep(0.005)
+    	# If scheduled time is behind current time, return.
+		if next_time.time() <= datetime.now().time():
+			_logger.info("Command: %s failed because scheduled time(%s) is behind current time.", command, time_str)
+			return
+
+		# Log command and execute time.
+		_logger.info("Command: %s, execute time: %s.", command, next_time.time())
+		
+		# Wait until current time is equal to next_time
+		while True:
+			now = datetime.now()
+			now = now.replace(microsecond=0)
+			if now.time() >= next_time.time():
+				break
+			sleep(0.005)
 	
     # Get value
 	if len(args) == 6:
