@@ -7,13 +7,14 @@ import logging
 from logging.handlers import TimedRotatingFileHandler
 import sys
 
+
 def _init_logger():
 	logger = logging.getLogger("PVM")
 	logger.setLevel(logging.INFO)
 	handler = logging.StreamHandler(sys.stderr)
 	fileHandler = TimedRotatingFileHandler('./log/{:%Y-%m-%d %H:%M:%S}.log'.format(datetime.now()),  when='midnight')
 	handler.setLevel(logging.INFO)
-	formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s",
+	formatter = logging.Formatter("%(asctime)s.%(msecs)03d;%(levelname)s;%(message)s",
                               "%Y-%m-%d %H:%M:%S")
 	fileHandler.setFormatter(formatter)
 	fileHandler.suffix = '%Y_%m_%d.log'
@@ -27,14 +28,21 @@ _logger.info("Logging system initilized in %s", os.getcwd())
 
 # Place your videos in this folder for autostart
 PEFIX_PATH = "/home/pi/Videos/"
-VIDEO_PATH = "jellyfish720p.mp4"
-media = ""
+VIDEO_PATH_ONE = "jellyfish720p.mp4"
+VIDEO_PATH_TWO = "jellyfish720p.mp4"
+media1 = None
+media2 = None
 IS_FILE_SET = False
 
 def parse_commands(*args):
-	global media
-	global VIDEO_PATH
+	global media1
+	global media2
+	global VIDEO_PATH_ONE
+	global VIDEO_PATH_TWO
 	global IS_FILE_SET
+	global canPause
+	global canStart
+	global displayNum
 	command = args[1]
 	_logger.info("Received command: %s", command)
 	if len(args)>2:
@@ -43,53 +51,153 @@ def parse_commands(*args):
 		pass
 	# TODO: Create another python file to control two display
 	if command=="file":
-		_logger.info("File set: %s", PEFIX_PATH + value)
-		if IS_FILE_SET:
-			_logger.info("The file has already been set!")
-			if media is not None:
-					media.stop()
-
-		IS_FILE_SET = True
-		media = OMXPlayer(PEFIX_PATH + value, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop'])
-		media.pause()
-		VIDEO_PATH = value
+		canPause = False
+		if "|" not in value:
+			displayNum = 1
+		else:
+			displayNum = 2
+			
+		if displayNum == 1:
+			VIDEO_PATH_ONE = value
+			VIDEO_PATH_ONE = PEFIX_PATH + VIDEO_PATH_ONE
+			_logger.info("File set: %s with 1 video output.", VIDEO_PATH_ONE)
+			if IS_FILE_SET:
+				_logger.info("The file has already been set!")
+			if media1 is not None:
+					media1.quit()
+			IS_FILE_SET = True
+			media1 = OMXPlayer(VIDEO_PATH_ONE, dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=['--loop'])
+			media1.pause()
+			canStart = True
+		else:
+			VIDEO_PATH_ONE, VIDEO_PATH_TWO = value.split("|")
+			if VIDEO_PATH_TWO is None or VIDEO_PATH_TWO == '':
+				VIDEO_PATH_TWO = VIDEO_PATH_ONE
+			VIDEO_PATH_ONE = PEFIX_PATH + VIDEO_PATH_ONE
+			VIDEO_PATH_TWO = PEFIX_PATH + VIDEO_PATH_TWO
+			_logger.info("File set: %s, %s with 2 video outputs.", VIDEO_PATH_ONE, VIDEO_PATH_TWO)
+			if IS_FILE_SET:
+				_logger.info("The file has already been set!")
+			if media1 is not None and media2 is not None:
+					media1.quit()
+					media2.quit()
+			IS_FILE_SET = True
+			media1 = OMXPlayer(VIDEO_PATH_ONE, dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=['--loop', '--display', '2'])
+			media1.pause()
+			media2 = OMXPlayer(VIDEO_PATH_TWO, dbus_name='org.mpris.MediaPlayer2.omxplayer2', args=['--loop', '--display', '7'])
+			media2.pause()
+			canStart = True
 		return
 
 	if not IS_FILE_SET:
 		_logger.info("Command %s failed because of the file is unset.", command)
 		return
+	
+	if displayNum == 2:
+		if command=="start":
+			if media1.is_playing() or media2.is_playing():
+				_logger.info("The videos are playing now!") 
+			elif canStart:
+					# start1 = time.time()
+					pos1 = media1.position()
+					pos2 = media2.position()
+					if pos1 > pos2:
+						media1.set_position(pos2)
+					elif pos1 < pos2:
+						media2.set_position(pos1)
+					
+					pos1 = media1.position()
+					pos2 = media2.position()
+					_logger.info("media 1 start position: %s", pos1)
+					_logger.info("media 2 start position: %s", pos2)
+										
+					media1.play()
+					media2.play()
 
-	if command=="start":
-		if media.is_playing():
-			_logger.info("The video is playing now!")            
-		elif media.can_play():
-			media.play()
+					canPause = True
+					canStart = False
+					_logger.info("%s command success.", command)
+			else:
+				_logger.info("%s command failed.", command)
+		elif command=="stop":
+			if media1.can_quit():
+				media1.quit()
+				media2.quit()
+				IS_FILE_SET = False
+				_logger.info("%s command success and file has been unset.", command)
+			else:
+				_logger.info("%s command failed.", command)
+		elif command=="set_position":
+			media1.set_position(float(value))
+			media2.set_position(float(value))
 			_logger.info("%s command success.", command)
-		else:
-			_logger.info("%s command failed.", command)
-	elif command=="stop":
-		if media.can_quit():
-			media.quit()
-			IS_FILE_SET = False
-			_logger.info("%s command success and file has been unset.", command)
-		else:
-			_logger.info("%s command failed.", command)
-	elif command=="set_position":
-		media.set_position(float(value))
-		_logger.info("%s command success.", command)
-	elif command=="set_rate":
-		fps = str(30 * float(value))
-		media = OMXPlayer(PEFIX_PATH + VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
-		media.pause()
-		_logger.info("%s command success.", command)
-	elif command=="pause":
-		if media.can_pause():
-			media.pause()
+		elif command=="set_rate":
+			fps = str(30 * float(value))
+			media1 = OMXPlayer(VIDEO_PATH_ONE, dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=['--loop', '--display', '2', '--force-fps', fps])
+			media1.pause()
+			media2 = OMXPlayer(VIDEO_PATH_TWO, dbus_name='org.mpris.MediaPlayer2.omxplayer2', args=['--loop', '--display', '7', '--force-fps', fps])
+			media2.pause()
 			_logger.info("%s command success.", command)
+		elif command=="pause":
+			if canPause:
+					media1.pause()
+					media2.pause()
+					_logger.info("%s command success.", command)
+					pos1 = media1.position()
+					pos2 = media2.position()
+					_logger.info("media 1 position: %s", pos1)
+					_logger.info("media 2 position: %s", pos2)
+					
+					if pos1 > pos2:
+						media1.set_position(pos2)
+					elif pos1 < pos2:
+						media2.set_position(pos1)
+					pos1 = media1.position()
+					pos2 = media2.position()
+					_logger.info("media 1 reset position: %s", pos1)
+					_logger.info("media 2 reset position: %s", pos2)
+					
+					canPause = False
+					canStart = True	
+			else:
+				_logger.info("%s command failed.", command)
 		else:
-			_logger.info("%s command failed.", command)
+			_logger.info("%s unknown.", command)
 	else:
-		_logger.info("%s unknown.", command)
+		if command=="start":
+			if media1.is_playing():
+				_logger.info("The videos are playing now!") 
+			elif canStart:							
+					media1.play()
+					canPause = True
+					canStart = False
+					_logger.info("%s command success.", command)
+			else:
+				_logger.info("%s command failed.", command)
+		elif command=="stop":
+			if media1.can_quit():
+				media1.quit()
+				IS_FILE_SET = False
+				_logger.info("%s command success and file has been unset.", command)
+			else:
+				_logger.info("%s command failed.", command)
+		elif command=="set_position":
+			media1.set_position(float(value))
+			_logger.info("%s command success.", command)
+		elif command=="set_rate":
+			fps = str(30 * float(value))
+			media1 = OMXPlayer(VIDEO_PATH_ONE, dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=['--loop', '--force-fps', fps])
+			media1.pause()
+			_logger.info("%s command success.", command)
+		elif command=="pause":
+			if canPause:
+					media1.pause()
+					canPause = False
+					canStart = True	
+			else:
+				_logger.info("%s command failed.", command)
+		else:
+			_logger.info("%s unknown.", command)
 
 
 def main(RECEIVE_PORT):
