@@ -88,6 +88,9 @@ def parse_commands(*args):
 	try:
 		# File command
 		if command=="file":
+			if IS_FILE_SET:
+				_logger.info("Stopping media first and then replacing video file.")
+				return
 			VIDEO_PATH = PREFIX_PATH + value
 			_logger.info("File set: %s", VIDEO_PATH)
 			IS_FILE_SET = True
@@ -126,7 +129,7 @@ def parse_commands(*args):
 		elif command=="set_rate":
 			fps = str(30 * float(value))
 			media = OMXPlayer(VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
-			if media != "":
+			if media is not None:
 				media.quit()
 			original_fps = 30
 			video_info = subprocess.Popen(["omxplayer", "-i", VIDEO_PATH], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
