@@ -96,7 +96,6 @@ def parse_commands(*args):
 	try:
 		# File command
 		if command=="file":
-			canPause = False
 			# define displayNum here
 			if "|" not in value:
 				displayNum = 1
