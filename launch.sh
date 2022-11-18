@@ -1,3 +1,3 @@
 #!/bin/bash
-. /home/pi/PVM/PVM/bin/activate
-python /home/pi/PVM/pvm.py
+. ${HOME}/PVM/PVM/bin/activate
+python ${HOME}/PVM/pvm.py
