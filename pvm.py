@@ -15,6 +15,7 @@ Output the system log to stderr and file at the Info level
 """
 
 def _init_logger():
+	global LOG_PATH
 	logger = logging.getLogger("PVM")
 	logger.setLevel(logging.INFO)
 	handler = logging.StreamHandler(sys.stderr)
@@ -23,7 +24,6 @@ def _init_logger():
 	if not os.path.exists(log_path):
 		os.makedirs(log_path)
 	fileHandler = TimedRotatingFileHandler(log_path.format(datetime.now()),  when='midnight')
-	global LOG_PATH
 	LOG_PATH = log_path.format(datetime.now())
 	handler.setLevel(logging.INFO)
 	formatter = logging.Formatter("%(asctime)s.%(msecs)03d;%(levelname)s;%(message)s",
