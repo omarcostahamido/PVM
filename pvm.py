@@ -67,8 +67,8 @@ def parse_commands(*args):
 	# Get command
 	command = args[4]
 
-	# Only start command need to delay 3s
-	if command == "start":
+	# Only start and pause command need to delay 3s
+	if command == "start" or command == "pause":
     	# Parse time and add 3 seconds
 		hh, mm, ss = args[1], args[2], args[3]
 		time_str = str(hh) + ":" + str(mm) + ":" + str(ss)
