@@ -173,8 +173,9 @@ def parse_commands(*args):
 				else:
 					_logger.info("%s command failed.", command)
 			elif command=="set_position":
-				media1.set_position(float(value))
-				media2.set_position(float(value))
+				p1, p2 = parse_value(value)
+				media1.set_position(float(p1))
+				media2.set_position(float(p2))
 				_logger.info("%s command success.", command)
 			elif command=="set_rate":
 				v1, v2 = parse_value(value)
