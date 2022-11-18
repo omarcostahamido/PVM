@@ -9,6 +9,16 @@ import logging
 from logging.handlers import TimedRotatingFileHandler
 import sys
 
+# Initialize global variables
+HOME = str(Path.home()) + "/"  # The home directory, e.g. /home/pi/
+LOG_PATH = HOME + "PVM/log/"
+PEFIX_PATH = HOME + "Videos/" # Place your videos in this folder for autostart
+VIDEO_PATH_ONE = "jellyfish720p.mp4"
+VIDEO_PATH_TWO = "jellyfish720p.mp4"
+media1 = None
+media2 = None
+IS_FILE_SET = False
+
 """
 Initialize the log object
 Output the system log to stderr and file at the Info level
@@ -37,16 +47,6 @@ def _init_logger():
 _init_logger()
 _logger = logging.getLogger("PVM")
 _logger.info("Logging system initiated in %s", LOG_PATH)
-
-# Initialize global variables
-HOME = str(Path.home()) + "/"  # The home directory, e.g. /home/pi/
-LOG_PATH = HOME + "PVM/log/"
-PEFIX_PATH = HOME + "Videos/" # Place your videos in this folder for autostart
-VIDEO_PATH_ONE = "jellyfish720p.mp4"
-VIDEO_PATH_TWO = "jellyfish720p.mp4"
-media1 = None
-media2 = None
-IS_FILE_SET = False
 
 '''
 UDP command example:
