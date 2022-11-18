@@ -141,9 +141,7 @@ def parse_commands(*args):
 		# If Raspberry Pi has two displays.
 		if displayNum == 2:
 			if command=="start":
-				if media1.is_playing() or media2.is_playing():
-					_logger.info("The videos are playing now!") 
-				elif canStart:
+				if canStart:
 						# Get position for media1 and media2
 						pos1 = media1.position()
 						pos2 = media2.position()
@@ -208,9 +206,7 @@ def parse_commands(*args):
 		else:
 			# If Raspberry Pi only has one display.
 			if command=="start":
-				if media1.is_playing():
-					_logger.info("The videos are playing now!") 
-				elif canStart:							
+				if canStart:							
 						media1.play()
 						canPause = True
 						canStart = False
