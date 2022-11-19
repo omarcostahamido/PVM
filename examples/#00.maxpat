@@ -3,8 +3,8 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
-			"revision" : 3,
+			"minor" : 5,
+			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -40,11 +40,33 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-5",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 187.0, 377.0, 114.0, 20.0 ],
+					"text" : "2 videos in 1 device"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-2",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patching_rect" : [ 85.0, 377.000000000000057, 100.0, 22.0 ],
+					"text" : "#06.maxpat"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-16",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 187.0, 296.704545454545496, 136.0, 20.0 ],
+					"patching_rect" : [ 187.0, 280.704545454545496, 136.0, 20.0 ],
 					"text" : "offset video in 4 devices"
 				}
 
@@ -55,7 +77,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 85.0, 345.000000000000057, 100.0, 22.0 ],
+					"patching_rect" : [ 85.0, 328.963636363636397, 100.0, 22.0 ],
 					"text" : "#05.maxpat"
 				}
 
@@ -66,7 +88,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 85.0, 295.704545454545496, 100.0, 22.0 ],
+					"patching_rect" : [ 85.0, 280.927272727272737, 100.0, 22.0 ],
 					"text" : "#04.maxpat"
 				}
 
@@ -77,7 +99,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 187.0, 246.409090909090935, 136.0, 20.0 ],
+					"patching_rect" : [ 187.0, 232.890909090909076, 136.0, 20.0 ],
 					"text" : "offset video in 2 devices"
 				}
 
@@ -88,7 +110,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 187.0, 197.113636363636374, 132.0, 20.0 ],
+					"patching_rect" : [ 187.0, 184.854545454545445, 132.0, 20.0 ],
 					"text" : "sync video in 4 devices"
 				}
 
@@ -99,7 +121,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 85.0, 246.409090909090935, 100.0, 22.0 ],
+					"patching_rect" : [ 85.0, 232.890909090909076, 100.0, 22.0 ],
 					"text" : "#03.maxpat"
 				}
 
@@ -110,7 +132,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 85.0, 197.113636363636374, 100.0, 22.0 ],
+					"patching_rect" : [ 85.0, 184.854545454545445, 100.0, 22.0 ],
 					"text" : "#02.maxpat"
 				}
 
@@ -121,7 +143,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 187.0, 345.000000000000057, 160.0, 20.0 ],
+					"patching_rect" : [ 187.0, 328.963636363636397, 160.0, 20.0 ],
 					"text" : "different speeds in 4 devices"
 				}
 
@@ -132,7 +154,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 187.0, 147.818181818181813, 132.0, 20.0 ],
+					"patching_rect" : [ 187.0, 136.818181818181813, 132.0, 20.0 ],
 					"text" : "sync video in 2 devices"
 				}
 
@@ -143,7 +165,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 85.0, 147.818181818181813, 100.0, 22.0 ],
+					"patching_rect" : [ 85.0, 136.818181818181813, 100.0, 22.0 ],
 					"text" : "#01.maxpat"
 				}
 
@@ -204,13 +226,6 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "#02.maxpat",
-				"bootpath" : "~/Documents/GitHub/PVM/examples",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "#03.maxpat",
 				"bootpath" : "~/Documents/GitHub/PVM/examples",
 				"patcherrelativepath" : ".",
@@ -226,6 +241,13 @@
 			}
 , 			{
 				"name" : "#05.maxpat",
+				"bootpath" : "~/Documents/GitHub/PVM/examples",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "#06.maxpat",
 				"bootpath" : "~/Documents/GitHub/PVM/examples",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",

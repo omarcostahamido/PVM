@@ -2,7 +2,7 @@
 	"name" : "examples",
 	"version" : 1,
 	"creationdate" : 3749418611,
-	"modificationdate" : 3749575098,
+	"modificationdate" : 3751668086,
 	"viewrect" : [ 25.0, 104.0, 300.0, 500.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
@@ -45,6 +45,16 @@
 				"kind" : "patcher",
 				"local" : 1
 			}
+,
+			"#06.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/PVM/examples",
+					"projectrelativepath" : "."
+				}
+
+			}
 
 		}
 
@@ -72,5 +82,6 @@
 	"devpathtype" : 0,
 	"devpath" : ".",
 	"sortmode" : 0,
-	"viewmode" : 0
+	"viewmode" : 0,
+	"includepackages" : 0
 }
