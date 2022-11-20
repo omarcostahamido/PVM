@@ -13,8 +13,8 @@ import sys
 HOME = str(Path.home()) + "/"  # The home directory, e.g. /home/pi/
 LOG_PATH = HOME + "PVM/log/"
 PEFIX_PATH = HOME + "Videos/" # Place your videos in this folder for autostart
-VIDEO_PATH_ONE = "jellyfish720p.mp4"
-VIDEO_PATH_TWO = "jellyfish720p.mp4"
+VIDEO_PATH_ONE = ""
+VIDEO_PATH_TWO = ""
 media1 = None
 media2 = None
 IS_FILE_SET = False
@@ -69,12 +69,12 @@ def parse_commands(*args):
 
 	# Only start and pause command need to delay 3s
 	if command == "start" or command == "pause":
-    	# Parse time and add 3 seconds
+		# Parse time and add 3 seconds
 		hh, mm, ss = args[1], args[2], args[3]
 		time_str = str(hh) + ":" + str(mm) + ":" + str(ss)
 		next_time = datetime.strptime(time_str, "%H:%M:%S") + timedelta(seconds=3)
 
-    	# If scheduled time is behind current time, return.
+		# If scheduled time is behind current time, return.
 		if next_time.time() <= datetime.now().time():
 			_logger.info("Command: %s failed because scheduled time(%s) is behind current time.", command, time_str)
 			return
@@ -90,7 +90,7 @@ def parse_commands(*args):
 				break
 			sleep(0.005)
 	
-    # Get value
+	# Get value
 	if len(args) == 6:
 		value = args[5]
 
@@ -250,7 +250,6 @@ def parse_commands(*args):
 
 # get fps from video path
 def get_rate(path, value):
-	media = OMXPlayer(VIDEO_PATH_ONE, dbus_name='org.mpris.MediaPlayer2.omxplayer', args=['--loop','--force-fps', fps])
 	video_info = subprocess.Popen(["omxplayer", "-i", VIDEO_PATH_ONE], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 	out, err = video_info.communicate()
 	out = out.decode(encoding='utf-8')
