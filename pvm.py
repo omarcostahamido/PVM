@@ -78,7 +78,7 @@ def parse_commands(*args):
 	try:
 		# File command
 		if command=="file":
-    		# If the file is already set, we exit OMX first
+			# If the file is already set, we exit OMX first
 			if IS_FILE_SET:
 				OMX.quit()
 				_logger.info("Quit previous file: %s", VIDEO_PATH)
