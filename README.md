@@ -133,7 +133,9 @@ on the terminal run
 
 after the last line add
 
-`@lxterminal -e sh $HOME/PVM/launch.sh`
+`@lxterminal -e sh $HOME/PVM/launch.sh 8001`
+
+`@lxterminal -e sh $HOME/PVM/launch.sh 8002`
 
 Note: this is assuming that you clone this repo on your raspberry pi in the main /home/pi folder and followed the steps in the <a target="_self" href="#installation">Installation</a> section above.
 
