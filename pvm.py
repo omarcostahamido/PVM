@@ -134,7 +134,7 @@ def parse_commands(*args):
 			_logger.info("%s command success.", command)
 		elif command == "relative_set_position":
 			_, total_seconds = get_info()
-			relative_pos = total_seconds / float(value)
+			relative_pos = total_seconds * float(value)
 			OMX.set_position(relative_pos)
 			_logger.info("%s command success.", command)
 		elif command == "set_rate":
