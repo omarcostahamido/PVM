@@ -106,8 +106,8 @@ source PVM/bin/activate
 python pvm.py
 # If you want a different port, example 8002
 python pvm.py --port 8002
-# Or with launsh script
-sh launsh.sh 8001
+# Or with launch script
+sh launch.sh 8001
 ```
 
 Read the help
@@ -123,10 +123,13 @@ optional arguments:
                  Default port is 8001
 ```
 
-On the control machine first edit the [max-init.txt](https://github.com/omarcostahamido/PVM/blob/main/max-init.txt) file. For each Pi device add a numbered line with the video filename, ip, and port. As in:
+On the control machine first edit the [max-init.txt](https://github.com/omarcostahamido/PVM/blob/main/max-init.txt) file. For each Pi device add a numbered line with the video filename, ip, and port. 
+By default, we use port 8001 to receive UDP for our main display. 8002 is used for additional displays. 
+As in:
 
 ```
 1, jellyfish720.mp4 192.168.1.108 8001;
+2, jellyfish720.mp4 192.168.1.108 8002;
 ```
 
 Then proceed to launch the main control interface: `pvm.maxproj`. The `pvm.maxpat` patch should automatically open. 

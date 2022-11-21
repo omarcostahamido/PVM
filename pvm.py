@@ -125,15 +125,8 @@ def parse_commands(*args):
 			OMX.set_position(float(value))
 			_logger.info("%s command success.", command)
 		elif command=="set_rate":
-			fps = get_rate(value)
-			if IS_FILE_SET:
-				OMX.quit()
-			params = params + ['--force-fps', fps]
-			OMX = OMXPlayer(VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=params)
-			OMX.pause()
-			CAN_START = True
-			CAN_PAUSE = False
-			_logger.info("%s command success set rate: %s. You can start now!", command, fps)
+			OMX.set_rate(float(value))
+			_logger.info("%s command success set rate: %s.", command, value)
 		else:
 			_logger.info("%s unknown.", command)
 	except Exception as e:
@@ -159,20 +152,6 @@ def _init_logger():
 	logger.addHandler(fileHandler)
 	handler.setFormatter(formatter)
 	logger.addHandler(handler)
-
-# get fps from video path
-def get_rate(value):
-	global VIDEO_PATH
-	video_info = subprocess.Popen(["omxplayer", "-i", VIDEO_PATH], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-	out, _ = video_info.communicate()
-	out = out.decode(encoding='utf-8')
-	splist = out.split(", ")
-	for s in splist:
-		if 'fps' in s:
-			fps_info = s.split(' ')
-			original_fps = float(fps_info[0])
-	fps = str(original_fps * float(value))
-	return fps
 
 def main(RECEIVE_PORT):
 	#OSC server
