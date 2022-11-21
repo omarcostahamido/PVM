@@ -128,9 +128,14 @@ def parse_commands(*args):
 			OMX.set_position(float(value))
 			_logger.info("%s command success.", command)
 		elif command == "set_frame":
-			fps = get_rate()
+			fps, _ = get_info()
 			frame_pos = 1.0 / fps * float(value)
 			OMX.set_position(frame_pos)
+			_logger.info("%s command success.", command)
+		elif command == "relative_set_position":
+			_, total_seconds = get_info()
+			relative_pos = total_seconds / float(value)
+			OMX.set_position(relative_pos)
 			_logger.info("%s command success.", command)
 		elif command == "set_rate":
 			OMX.set_rate(float(value))
@@ -141,18 +146,23 @@ def parse_commands(*args):
 		# `logger#exception method prints the stack trace`
 		_logger.exception("Function: parse_commands failed! %s" % (e))
 
-# Get fps from video path
-def get_rate():
+# Get info from video path
+# Return fps, total_seconds
+def get_info():
 	global VIDEO_PATH
 	video_info = subprocess.Popen(["omxplayer", "-i", VIDEO_PATH], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-	out, err = video_info.communicate()
+	out, _ = video_info.communicate()
 	out = out.decode(encoding='utf-8')
 	splist = out.split(", ")
 	for s in splist:
 		if 'fps' in s:
 			fps_info = s.split(' ')
-			original_fps = float(fps_info[0])
-	return original_fps
+			fps = float(fps_info[0])
+		if 'Duration:' in s:
+			duration_str = s.split('Duration: ')[1]
+			pt = datetime.strptime(duration_str, "%H:%M:%S.%f")
+			total_seconds = pt.second + pt.minute*60 + pt.hour*3600 + pt.microsecond / 1000
+	return fps, total_seconds
 
 # Output INFO-level logs to stderr and file
 def _init_logger():
