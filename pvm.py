@@ -84,7 +84,10 @@ def parse_commands(*args):
 				_logger.info("Quit previous file: %s", VIDEO_PATH)
 				IS_FILE_SET = False
 			VIDEO_PATH = PREFIX_VIDEOS_PATH + value
-			OMX = OMXPlayer(VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=params)
+			if PORT == 8001:
+				OMX = OMXPlayer(VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer1', args=params)
+			else:
+				OMX = OMXPlayer(VIDEO_PATH, dbus_name='org.mpris.MediaPlayer2.omxplayer2', args=params)	
 			# Because OMX has no user interface and will play automatically once the OMXPlayer object is created, 
 			# we need to call the puase() method after it is created.
 			OMX.pause()
