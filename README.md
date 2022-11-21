@@ -91,7 +91,7 @@ To use NTP to sync all Raspberry Pis' time in local network, please follow secti
 
 ## Videos
 
-Please save all the videos in the `/home/{your_user_name}/Videos/` folder for autostart. On Rapsberry Pi, your default directory should be `/home/pi/Videos/`.
+Please save all the videos in the `$HOME/Videos/` folder for autostart. On Rapsberry Pi, your default directory should be `/home/pi/Videos/`.
 
 
 ## Running
@@ -100,7 +100,14 @@ On each Pi device, start the script
 
 ```bash
 cd PVM
+# Activate python env
+source PVM/bin/activate
+# The default port is 8001
 python pvm.py
+# If you want a different port, example 8002
+python pvm.py --port 8002
+# Or with launch script
+sh launch.sh 8001
 ```
 
 Read the help
@@ -116,10 +123,13 @@ optional arguments:
                  Default port is 8001
 ```
 
-On the control machine first edit the [max-init.txt](https://github.com/omarcostahamido/PVM/blob/main/max-init.txt) file. For each Pi device add a numbered line with the video filename, ip, and port. As in:
+On the control machine first edit the [max-init.txt](https://github.com/omarcostahamido/PVM/blob/main/max-init.txt) file. For each Pi device add a numbered line with the video filename, ip, and port. 
+By default, we use port 8001 to receive UDP for our main display. 8002 is used for additional displays. 
+As in:
 
 ```
 1, jellyfish720.mp4 192.168.1.108 8001;
+2, jellyfish720.mp4 192.168.1.108 8002;
 ```
 
 Then proceed to launch the main control interface: `pvm.maxproj`. The `pvm.maxpat` patch should automatically open. 
@@ -133,7 +143,11 @@ on the terminal run
 
 after the last line add
 
-`@lxterminal -e sh $HOME/PVM/launch.sh`
+`@lxterminal -e sh $HOME/PVM/launch.sh 8001`
+
+add one more if you need two videos output
+
+`@lxterminal -e sh $HOME/PVM/launch.sh 8002`
 
 Note: this is assuming that you clone this repo on your raspberry pi in the main /home/pi folder and followed the steps in the <a target="_self" href="#installation">Installation</a> section above.
 
@@ -212,14 +226,15 @@ Also don't forget to checkout our [wiki](https://github.com/omarcostahamido/PVM/
 ### Logs
 Logs will be recorded by `pvm.py` during execution. These will be stored in the `log/` folder, within the install directory of `PVM` on the Raspberry Pi device. This folder will be created if it doesn't exist yet.
 
-Name convention for each log file is `{:%Y-%m-%d %H:%M:%S}.log`
+Name convention for each log file is `{:%Y-%m-%d %H:%M:%S}-$PORT.log`
 
 All output from the console is synchronized to the file in real-time.
 
 ```bash
-2022-10-31 13:34:21;INFO;Received command: file
-2022-10-31 13:34:21;INFO;Received value: jellyfish720p.mp4
-2022-10-31 13:34:21;INFO;File set: /home/pi/Videos/jellyfish720p.mp4
+2022-11-20 11:32:55.243;INFO;8001;Logging system initiated
+2022-11-20 11:32:55.243;INFO;8001;PVM - Pi Video Machine
+2022-11-20 11:32:55.244;INFO;8001;Omar Costa Hamido 2022
+2022-11-20 11:32:55.244;INFO;8001;Server now listenning on port 8001
 ```
 
 If you close the program and then reopen it, a new log file will be created.
