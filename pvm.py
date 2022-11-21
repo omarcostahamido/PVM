@@ -77,7 +77,7 @@ def parse_commands(*args):
 	# Catch the excpetion if Dbus is down.
 	try:
 		# File command
-		if command=="file":
+		if command == "file":
 			# If the file is already set, we exit OMX first
 			if IS_FILE_SET:
 				OMX.quit()
@@ -102,7 +102,7 @@ def parse_commands(*args):
 			_logger.info("Command %s failed because of the file is unset.", command)
 			return
 
-		if command=="start":
+		if command == "start":
 			if CAN_START:
 				OMX.play()
 				CAN_START = False
@@ -110,7 +110,7 @@ def parse_commands(*args):
 				_logger.info("%s command success.", command)
 			else:
 				_logger.info("%s command failed.", command)
-		elif command=="pause":
+		elif command == "pause":
 			if CAN_PAUSE:
 				OMX.pause()
 				CAN_PAUSE = False
@@ -118,16 +118,21 @@ def parse_commands(*args):
 				_logger.info("%s command success.", command)
 			else:
 				_logger.info("%s command failed.", command)
-		elif command=="stop":
+		elif command == "stop":
 			OMX.stop()
 			IS_FILE_SET = False
 			CAN_START = False
 			CAN_PAUSE = False
 			_logger.info("%s command success and %s has been unset.", command, VIDEO_PATH)
-		elif command=="set_position":
+		elif command == "set_position":
 			OMX.set_position(float(value))
 			_logger.info("%s command success.", command)
-		elif command=="set_rate":
+		elif command == "set_frame":
+			fps = get_rate()
+			frame_pos = 1.0 / fps * float(value)
+			OMX.set_position(frame_pos)
+			_logger.info("%s command success.", command)
+		elif command == "set_rate":
 			OMX.set_rate(float(value))
 			_logger.info("%s command success set rate: %s.", command, value)
 		else:
@@ -136,6 +141,20 @@ def parse_commands(*args):
 		# `logger#exception method prints the stack trace`
 		_logger.exception("Function: parse_commands failed! %s" % (e))
 
+# Get fps from video path
+def get_rate():
+	global VIDEO_PATH
+	video_info = subprocess.Popen(["omxplayer", "-i", VIDEO_PATH], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+	out, err = video_info.communicate()
+	out = out.decode(encoding='utf-8')
+	splist = out.split(", ")
+	for s in splist:
+		if 'fps' in s:
+			fps_info = s.split(' ')
+			original_fps = float(fps_info[0])
+	return original_fps
+
+# Output INFO-level logs to stderr and file
 def _init_logger():
 	global LOG_PATH
 	global PORT
