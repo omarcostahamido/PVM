@@ -189,13 +189,6 @@ cd PVM && git pull
 sudo reboot
 ```
 
-## Helpful links
-- https://www.raspberrypi.com/documentation/computers/remote-access.html#vnc
-- [forum thread: Rpi4: YouTube Full HD 1080p is slow! How to fix?](https://forums.raspberrypi.com/viewtopic.php?t=302787)
-- https://python-omxplayer-wrapper.readthedocs.io/en/latest/
-
-Also don't forget to checkout our [wiki](https://github.com/omarcostahamido/PVM/wiki)! It contains instructions on various topics like [_setting up remote access to the Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely) and how to run the examples.
-
 ## Development
 
 ### Logs
@@ -217,3 +210,8 @@ If you close the program and then reopen it, a new log file will be created.
 ## Run the test
 
 You could write tests for your combination of commands in the `test.py` file. Simply run `python3 test.py` on the console to perform the tests. When the test script is started, it will first **kill any existing `pvm.py` processes**, and then spawn a new one to test the commands, and end it again after test is finished.
+
+## Helpful links
+- https://python-omxplayer-wrapper.readthedocs.io/en/latest/
+
+Also don't forget to checkout our [wiki](https://github.com/omarcostahamido/PVM/wiki)! It contains instructions on various topics like [_setting up remote access to the Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely) ,[_VS Code ssh to Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/VS-Code-ssh-to-Raspberry-Pi) and [_The workflow in MAX_](https://github.com/omarcostahamido/PVM/wiki/The-workflow-in-MAX).
