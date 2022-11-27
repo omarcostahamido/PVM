@@ -124,15 +124,15 @@ def parse_commands(*args):
 			CAN_START = False
 			CAN_PAUSE = False
 			_logger.info("%s command success and %s has been unset.", command, VIDEO_PATH)
-		elif command == "set_position":
+		elif command == "set_sposition":
 			OMX.set_position(float(value))
 			_logger.info("%s command success.", command)
-		elif command == "set_frame":
+		elif command == "set_fposition":
 			fps, _ = get_info()
 			frame_pos = 1.0 / fps * float(value)
 			OMX.set_position(frame_pos)
 			_logger.info("%s command success.", command)
-		elif command == "relative_set_position":
+		elif command == "set_position":
 			_, total_seconds = get_info()
 			relative_pos = total_seconds * float(value)
 			OMX.set_position(relative_pos)
