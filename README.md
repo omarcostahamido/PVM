@@ -153,9 +153,6 @@ Note: this is assuming that you clone this repo on your raspberry pi in the main
 
 ## Structure
 
-```bash
-# PVM
-
 * [examples/](./PVM/examples) #example use cases to test our system
   * [#00.maxpat](./PVM/examples/#00.maxpat)
   * [#01.maxpat](./PVM/examples/#01.maxpat)
@@ -182,7 +179,6 @@ Note: this is assuming that you clone this repo on your raspberry pi in the main
 * [pvm.py](./PVM/pvm.py) #main python script, this runs on each pi device
 * [requirements.txt](./PVM/requirements.txt) #requirement for system python deps
 * [test.py](./PVM/test.py) #test python script to test our UDP connection
-```
 
 
 ## How to deploy your code when you testing in multiple rpis?
