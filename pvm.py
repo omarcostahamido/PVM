@@ -126,20 +126,23 @@ def parse_commands(*args):
 			_logger.info("%s command success and %s has been unset.", command, VIDEO_PATH)
 		elif command == "set_sposition":
 			OMX.set_position(float(value))
-			_logger.info("%s command success.", command)
+			pos = OMX.position()
+			_logger.info("%s command success, sec_pos: %s.", command, pos)
 		elif command == "set_fposition":
-			fps, _ = get_info()
+			fps = get_fps()
 			frame_pos = 1.0 / fps * float(value)
 			OMX.set_position(frame_pos)
-			_logger.info("%s command success.", command)
+			pos = OMX.position()
+			_logger.info("%s command success, frame_pos: %s.", command, pos)
 		elif command == "set_position":
-			_, total_seconds = get_info()
+			total_seconds = OMX.duration()
 			relative_pos = total_seconds * float(value)
 			OMX.set_position(relative_pos)
-			_logger.info("%s command success.", command)
+			pos = OMX.position()
+			_logger.info("%s command success, relative_pos: %s.", command, pos)
 		elif command == "set_rate":
 			OMX.set_rate(float(value))
-			_logger.info("%s command success set rate: %s.", command, value)
+			_logger.info("%s command success set_rate: %s.", command, value)
 		else:
 			_logger.info("%s unknown.", command)
 	except Exception as e:
@@ -147,8 +150,8 @@ def parse_commands(*args):
 		_logger.exception("Function: parse_commands failed! %s" % (e))
 
 # Get info from video path
-# Return fps, total_seconds
-def get_info():
+# Return fps
+def get_fps():
 	global VIDEO_PATH
 	video_info = subprocess.Popen(["omxplayer", "-i", VIDEO_PATH], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 	out, _ = video_info.communicate()
@@ -158,11 +161,7 @@ def get_info():
 		if 'fps' in s:
 			fps_info = s.split(' ')
 			fps = float(fps_info[0])
-		if 'Duration:' in s:
-			duration_str = s.split('Duration: ')[1]
-			pt = datetime.strptime(duration_str, "%H:%M:%S.%f")
-			total_seconds = pt.second + pt.minute*60 + pt.hour*3600 + pt.microsecond / 1000
-	return fps, total_seconds
+	return fps
 
 # Output INFO-level logs to stderr and file
 def _init_logger():
