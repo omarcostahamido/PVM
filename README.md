@@ -242,5 +242,3 @@ If you close the program and then reopen it, a new log file will be created.
 ## Run the test
 
 You could write tests for your combination of commands in the `test.py` file. Simply run `python3 test.py` on the console to perform the tests. When the test script is started, it will first **kill any existing `pvm.py` processes**, and then spawn a new one to test the commands, and end it again after test is finished.
-
-## Known limitations
