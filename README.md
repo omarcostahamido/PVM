@@ -124,7 +124,7 @@ optional arguments:
 ```
 
 On the control machine first edit the [max-init.txt](https://github.com/omarcostahamido/PVM/blob/main/max-init.txt) file. For each Pi device add a numbered line with the video filename, ip, and port. 
-By default, we use port 8001 to receive UDP for our main display. 8002 is used for additional displays. 
+Please use port 8001 to control the first display, and use any other port for the second display. 
 As in:
 
 ```
