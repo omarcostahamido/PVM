@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 3,
-			"revision" : 3,
+			"revision" : 0,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -176,7 +176,7 @@
 							}
 , 							{
 								"key" : 2,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.102", 8001, 5.0 ]
+								"value" : [ "pattern01_prores422.mov", "192.168.0.102", 8001, 0.5 ]
 							}
  ]
 					}
@@ -562,14 +562,7 @@
 
 			}
  ],
-		"dependency_cache" : [ 			{
-				"name" : "pvm_send.maxpat",
-				"bootpath" : "~/Documents/GitHub/PVM/lib",
-				"patcherrelativepath" : "../lib",
-				"type" : "JSON",
-				"implicit" : 1
-			}
- ],
+		"dependency_cache" : [  ],
 		"autosave" : 0
 	}
 
