@@ -53,8 +53,8 @@ During the first boot, there are some initial configurations necessary, which wi
 
 
 ### OMXPlayer
-
-To build the customized OMXPlayer, run the command below:
+The PIP team built a customized version of OMXPlayer and made a dedicated [release](https://github.com/KaneBetter/omxplayer/releases/tag/v1.0.0) in this [repo](https://github.com/KaneBetter/omxplayer).
+Run the command below to build the customized OMXPlayer:
 
 `./build_omxplayer.sh`
 

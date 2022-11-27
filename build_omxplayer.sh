@@ -10,10 +10,12 @@ then
 	echo "Directory /omxplayer does not exists, clone from github."
 	git clone https://github.com/KaneBetter/omxplayer.git
 	cd omxplayer
+	git checkout $tag -b latest
 else
 	echo "Directory /omxplayer exists, run git pull" 
 	cd omxplayer
 	git pull
+	git checkout $tag -b latest
 fi
 
 # Update apt and install requirments
