@@ -70,12 +70,9 @@ NTP is intended to [synchronize](https://en.wikipedia.org/wiki/Synchronize) all 
 To use NTP to sync all Raspberry Pis' time in the local network, please follow the section [Configure NTP Client to be Time Synced with the NTP Server](https://web.archive.org/web/20221112203702/https://rishabhdevyadav.medium.com/how-to-install-ntp-server-and-client-s-on-ubuntu-18-04-lts-f0562e41d0e1).
 
 
-## Videos
-
-Please save all the videos in the `$HOME/Videos/` folder for autostart. On Raspberry Pi, your default directory should be `/home/pi/Videos/`.
-
-
 ## Running
+
+### Raspberry Pi devices
 
 On each Pi device, start the script
 
@@ -91,7 +88,9 @@ python pvm.py --port 8002
 sh launch.sh 8001
 ```
 
-Read the help
+Please note that you must use the default port `8001` to control the first display. In order to control the second display you need to use any other port. To control both displays at the same time, you must run the `pvm.py` script twice.
+
+You can read the help on the terminal by using:
 
 `python pvm.py --help`
 
@@ -104,21 +103,10 @@ optional arguments:
                  Default port is 8001
 ```
 
-On the control machine first edit the [max-init.txt](https://github.com/omarcostahamido/PVM/blob/main/max-init.txt) file. For each Pi device add a numbered line with the video filename, ip, and port. 
-Please use port 8001 to control the first display, and use any other port for the second display. 
-As in:
 
-```
-1, jellyfish720.mp4 192.168.1.108 8001;
-2, jellyfish720.mp4 192.168.1.108 8002;
-```
+#### Autostart
 
-Then proceed to launch the main control interface: `pvm.maxproj`. The `pvm.maxpat` patch should automatically open. 
-
-
-## Autostart
-
-on the terminal run
+You can configure the Raspberry Pi devices to autostart the `pvm.pt` script on boot up. In order to achieve that, open the terminal and run:
 
 `sudo nano /etc/xdg/lxsession/LXDE-pi/autostart`
 
@@ -130,10 +118,35 @@ add one more if you need two videos output
 
 `@lxterminal -e sh $HOME/PVM/launch.sh 8002`
 
-Note: this is assuming that you clone this repo on your raspberry pi in the main /home/pi folder and followed the steps in the <a target="_self" href="#installation">Installation</a> section above.
+Note: this is assuming that you clone this repo on your raspberry pi in the main `/home/pi` folder and followed the steps in the <a target="_self" href="#installation">Installation</a> section above.
 
 
-## Structure
+#### Videos
+
+Please save all the videos on each Raspberry Pi device in the `$HOME/Videos/` folder. For the default `pi` user, this directory should be `/home/pi/Videos/`.
+
+
+### Control Machine
+
+On the control machine, first edit the [max-init.txt](https://github.com/omarcostahamido/PVM/blob/main/max-init.txt) file. For each display on each Pi device being used, add a numbered line with the video filename, ip, and port. 
+Please use port 8001 to control the first display, and the other corresponding port for the second display. 
+As in:
+
+```
+1, jellyfish720.mp4 192.168.1.108 8001;
+2, jellyfish720.mp4 192.168.1.108 8002;
+```
+
+Then proceed to launch the main control interface: `pvm.maxproj`. The `pvm.maxpat` patch should open automatically. Please read the wiki page [here](https://github.com/omarcostahamido/PVM/wiki/The-Control-Interface-in-MAX) to learn more about the Control Interface in Max.
+
+
+## Development
+
+### Structure
+
+This is the PVM project structure overview:
+
+{work in progress...}
 
 | _           | filename                                             | description                                                  |
 | ----------- | ---------------------------------------------------- | ------------------------------------------------------------ |
@@ -155,24 +168,22 @@ Note: this is assuming that you clone this repo on your raspberry pi in the main
 | -           | [deploy_code_to_rpi.sh](./PVM/deploy_code_to_rpi.sh) | shell script to deploy code to Raspberry Pi                  |
 
 
-## Development
-
 ### Deploy code to Raspberry Pi
 
-Use the [deploy_code_to_rpi.sh](https://github.com/omarcostahamido/PVM/blob/AddCDscript/deploy_code_to_rpi.sh) script.
-But there are two prerequisites:
+You can run the [deploy_code_to_rpi.sh](https://github.com/omarcostahamido/PVM/blob/main/deploy_code_to_rpi.sh) script on the Control Machine to deploy the latest PVM version to all your Raspberry Pi devices at the same time.
+There are two prerequisites:
 
-One is the need to set up passwordless ssh access.
+- One is the need to set up passwordless ssh access.
 For the passwordless ssh access please follow [here](https://danidudas.medium.com/how-to-connect-to-raspberry-pi-via-ssh-without-password-using-ssh-keys-3abd782688a).
 
-Second is the need to set the [autostart](https://github.com/omarcostahamido/PVM#autostart).
+- Second is the need to set the [Autostart](https://github.com/omarcostahamido/PVM#autostart).
 
-Once you're done, run the command on the control pc.
+Once you're done, run the command on the Control Machine.
 
 ```bash
 bash deploy_code_to_rpi.sh
 
-# Download the latest code on RPIs with the IP address in host_ip.txt.
+# Download the latest code on RPIs with the IP address in max-init.txt.
 cd PVM && git pull
 
 sudo reboot
@@ -202,7 +213,9 @@ If you close the program and then reopen it, a new log file will be created.
 You could write tests for your combination of commands in the `test.py` file. Simply run `python3 test.py` on the console to perform the tests. When the test script is started, it will first **kill any existing `pvm.py` processes**, and then spawn a new one to test the commands, and end it again after test is finished.
 
 
-## Examples
+## Getting Help
+
+### Examples
 
 On the control machine, navigate to the `examples` folder and open the `examples.maxproj` file.
 
@@ -211,7 +224,7 @@ A series of quick examples appear listed on the Max project window.
 Patch `#00.maxpat` serves as an index of the examples provided. For more information please see the wiki page [here](https://github.com/omarcostahamido/PVM/wiki/Examples).
 
 
-## Getting help
+### Knowledge base
 
 Don't forget to checkout our [wiki](https://github.com/omarcostahamido/PVM/wiki)! It contains instructions on various topics like [_setting up remote access to the Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely) ,[_VS Code ssh to Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/VS-Code-ssh-to-Raspberry-Pi), [_The Control Interface in MAX_](https://github.com/omarcostahamido/PVM/wiki/The-Control-Interface-in-MAX), and [_Examples_](https://github.com/omarcostahamido/PVM/wiki/Examples).
 
