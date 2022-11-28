@@ -6,6 +6,8 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 - [Python3](https://www.python.org/downloads/)
 - [Max/MSP](https://cycling74.com/)
+- [Raspberry Pi OS](https://downloads.raspberrypi.org/raspios_oldstable_armhf/images/raspios_oldstable_armhf-2022-09-26/2022-09-22-raspios-buster-armhf.img.xz)
+- [OMXPlayer](https://github.com/KaneBetter/omxplayer)
 
 
 ## Installation
@@ -13,7 +15,7 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 ### Raspberry Pi OS
 Operating System Requirement: 
 
-- Raspberry Pi OS (Legacy) Released: 2022-09-22
+- [Raspberry Pi OS (Legacy) Released: 2022-09-22](https://downloads.raspberrypi.org/raspios_oldstable_armhf/images/raspios_oldstable_armhf-2022-09-26/2022-09-22-raspios-buster-armhf.img.xz)
 
 
 ### OMXPlayer
