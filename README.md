@@ -166,9 +166,8 @@ sudo reboot
 ```
 
 
-## Development
+## Logs
 
-### Logs
 Logs will be recorded by `pvm.py` during execution. These will be stored in the `log/` folder, within the install directory of `PVM` on the Raspberry Pi device. This folder will be created if it doesn't exist yet.
 
 Name convention for each log file is `{:%Y-%m-%d %H:%M:%S}-$PORT.log`
