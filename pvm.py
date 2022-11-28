@@ -196,7 +196,10 @@ if __name__ == '__main__':
 	global PORT
 	global _logger
 	p = argparse.ArgumentParser()
-	p.add_argument('--port', type=int, nargs='?', default=8001, help='The port that pvm.py will use to receive control messages. Default port is 8001')
+	p.add_argument('--port', type=int, nargs='?', default=8001, help=
+					'The port that pvm.py will use to receive control messages. '
+					'Use the default port 8001 to control the first display. '
+					'Use any other port to control the second display.')
 	args = p.parse_args()
 	PORT = args.port
 	_init_logger()
