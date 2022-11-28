@@ -204,11 +204,11 @@ You could write tests for your combination of commands in the `test.py` file. Si
 
 ### Examples
 
-Navigate to the `examples` folder and open the `examples.maxproj` file.
+On the control machine, navigate to the `examples` folder and open the `examples.maxproj` file.
 
 A series of quick examples appear listed on the Max project window.
 
-Patch `#00.maxpat` serves as an index of the examples provided, for more information about Max see [here](https://github.com/omarcostahamido/PVM/wiki/The-workflow-in-MAX).
+Patch `#00.maxpat` serves as an index of the examples provided. For more information please see the wiki page [here](https://github.com/omarcostahamido/PVM/wiki/Examples).
 
 
 ## Helpful links
