@@ -228,3 +228,9 @@ You could write tests for your combination of commands in the `test.py` file. Si
 
 Also don't forget to checkout our [wiki](https://github.com/omarcostahamido/PVM/wiki)! It contains instructions on various topics like [_setting up remote access to the Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely) ,[_VS Code ssh to Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/VS-Code-ssh-to-Raspberry-Pi) and [_The workflow in MAX_](https://github.com/omarcostahamido/PVM/wiki/The-workflow-in-MAX).
 
+
+## Acknowledgements
+
+PVM is a project by [Omar Costa Hamido](https://omarcostahamido.com) and [Grant Speich](https://www.grantspeich.com/), initiated in early 2021.
+
+Between Sep 22, 2022, and Dec 8, 2022, the _PIP_ team at [MSWE](https://www.informatics.uci.edu/grad/mswe/) worked on this project as part of their Capstone project. _PIP_ is [Kaiqin Chen](https://github.com/KaneBetter), [Zejin Xu](https://github.com/rustberry), [Xin Tan](https://github.com/SSSSam141), and [Ruokun Xu](https://github.com/xrk-git).
