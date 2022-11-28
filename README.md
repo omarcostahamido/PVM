@@ -13,9 +13,9 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 ```mermaid
 graph TD;
-A[<a href='#install-the-required-raspberry-pi-os'>1. Install the required Raspberry Pi OS</a>] --> B;
-B[<a href='#build-and-install-customized-omxplayer'>2. Build and install customized OMXPlayer</a>] --> C;
-C[<a href='#set-up-the-environment-for-pvm'>3. Set up the environment for PVM</a>]
+A[1. Install the required Raspberry Pi OS] --> B;
+B[2. Build and install customized OMXPlayer] --> C;
+C[3. Set up the environment for PVM]
 ```
 
 
