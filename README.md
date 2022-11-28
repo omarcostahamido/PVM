@@ -211,10 +211,13 @@ A series of quick examples appear listed on the Max project window.
 Patch `#00.maxpat` serves as an index of the examples provided. For more information please see the wiki page [here](https://github.com/omarcostahamido/PVM/wiki/Examples).
 
 
-## Helpful links
-- https://python-omxplayer-wrapper.readthedocs.io/en/latest/
+## Getting help
 
-Also don't forget to checkout our [wiki](https://github.com/omarcostahamido/PVM/wiki)! It contains instructions on various topics like [_setting up remote access to the Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely) ,[_VS Code ssh to Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/VS-Code-ssh-to-Raspberry-Pi) and [_The workflow in MAX_](https://github.com/omarcostahamido/PVM/wiki/The-workflow-in-MAX).
+Don't forget to checkout our [wiki](https://github.com/omarcostahamido/PVM/wiki)! It contains instructions on various topics like [_setting up remote access to the Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely) ,[_VS Code ssh to Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/VS-Code-ssh-to-Raspberry-Pi), [_The Control Interface in MAX_](https://github.com/omarcostahamido/PVM/wiki/The-Control-Interface-in-MAX), and [_Examples_](https://github.com/omarcostahamido/PVM/wiki/Examples).
+
+For more information about the python omxplayer wrapper, please read the docs [here](https://python-omxplayer-wrapper.readthedocs.io/en/latest/).
+
+If you found a bug, or have a feature request, please open an issue [here](https://github.com/omarcostahamido/PVM/issues/new) (you will need a free Github account).
 
 
 ## Acknowledgments
