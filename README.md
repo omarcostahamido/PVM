@@ -9,6 +9,7 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 - [Raspberry Pi 4](https://www.raspberrypi.com/)
 - [OMXPlayer](https://github.com/KaneBetter/omxplayer)
 
+
 ## Installation
 
 ```mermaid
@@ -18,7 +19,6 @@ B[2. Build and install customized OMXPlayer] --> C;
 C[3. Set up the environment for PVM] --> D;
 D[4. Install MAX8 on the control PC]
 ```
-
 
 
 ### Install the required Raspberry Pi OS
@@ -57,9 +57,11 @@ pip install -r requirements.txt
 
 For more information about Raspberry Pi remote control see [here](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely).
 
+
 ### Install MAX8 on the control PC
 
 Download MAX8 [here](https://cycling74.com/downloads) and install it.
+
 
 ### [Optional]Network Time Protocol(NTP)
 
@@ -130,6 +132,7 @@ add one more if you need two videos output
 
 Note: this is assuming that you clone this repo on your raspberry pi in the main /home/pi folder and followed the steps in the <a target="_self" href="#installation">Installation</a> section above.
 
+
 ## Structure
 
 | _           | filename                                             | description                                                  |
@@ -150,6 +153,7 @@ Note: this is assuming that you clone this repo on your raspberry pi in the main
 | _           | [build_omxplayer.sh](./PVM/build_omxplayer.sh)       | shell script to build `omxplayer` with one *click*           |
 | -           | [requirements.txt](./PVM/requirements.txt)           | requirement for system python deps                           |
 | -           | [deploy_code_to_rpi.sh](./PVM/deploy_code_to_rpi.sh) | shell script to deploy code to Raspberry Pi                  |
+
 
 ## Development
 
@@ -196,6 +200,7 @@ If you close the program and then reopen it, a new log file will be created.
 ### Run the test
 
 You could write tests for your combination of commands in the `test.py` file. Simply run `python3 test.py` on the console to perform the tests. When the test script is started, it will first **kill any existing `pvm.py` processes**, and then spawn a new one to test the commands, and end it again after test is finished.
+
 
 ### Examples
 
