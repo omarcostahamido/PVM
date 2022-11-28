@@ -123,35 +123,26 @@ add one more if you need two videos output
 
 Note: this is assuming that you clone this repo on your raspberry pi in the main /home/pi folder and followed the steps in the <a target="_self" href="#installation">Installation</a> section above.
 
-
 ## Structure
 
-* [examples/](./PVM/examples) #example use cases to test our system
-  * [#00.maxpat](./PVM/examples/#00.maxpat)
-  * [#01.maxpat](./PVM/examples/#01.maxpat)
-  * [#02.maxpat](./PVM/examples/#02.maxpat)
-  * [#03.maxpat](./PVM/examples/#03.maxpat)
-  * [#04.maxpat](./PVM/examples/#04.maxpat)
-  * [#05.maxpat](./PVM/examples/#05.maxpat)
-  * [examples.maxproj](./PVM/examples/examples.maxproj) #main example patch, contains 5 examples
-* [lib/](./PVM/lib) #lib folder to store all maxpat libs
-  * [pvm.maxpat](./PVM/lib/pvm.maxpat) #Max project file. Openning this file will load all main control patches.
-  * [pvm_control.maxpat](./PVM/lib/pvm_control.maxpat) #abstraction with the control patch GUI to be embedded as a bpatcher
-  * [pvm_init.maxpat](./PVM/lib/pvm_init.maxpat) #abstraction responsible for parsing the `max-init.txt` file
-  * [pvm_send.maxpat](./PVM/lib/pvm_send.maxpat) #abstraction for OSC sending. Arguments: _ip port_. Attributes: `@ip` `@port`
-  * [pvm_warmup.maxpat](./PVM/lib/pvm_warmup.maxpat) #abstraction for interpolating playback rates, to be embedded as a bpatcher
-* [.gitattributes](./PVM/.gitattributes)
-* [.gitignore](./PVM/.gitignore)
-* [LICENSE](./PVM/LICENSE)
-* [README.md](./PVM/README.md)
-* [build_omxplayer.sh](./PVM/build_omxplayer.sh) #shell script to build `omxplayer` with one _click_
-* [deploy_code_to_rpi.sh](./PVM/deploy_code_to_rpi.sh) #shell script to deploy code to Raspberry Pi
-* [launch.sh](./PVM/launch.sh) #shell script to start `pvm.py` with `sh launch.sh <port>`
-* [max-init.txt](./PVM/max-init.txt) #this file can make control patch setup faster
-* [pvm.maxproj](./PVM/pvm.maxproj) #main control patch. controls 6 pvm devices at the same time
-* [pvm.py](./PVM/pvm.py) #main python script, this runs on each pi device
-* [requirements.txt](./PVM/requirements.txt) #requirement for system python deps
-* [test.py](./PVM/test.py) #test python script to test our UDP connection
+| _           | filename                                             | description                                                  |
+| ----------- | ---------------------------------------------------- | ------------------------------------------------------------ |
+| **device**  | [pvm.py](./PVM/pvm.py)                               | main python script, this runs on each pi device              |
+| **control** | [max-init.txt](./PVM/max-init.txt)                   | this file can make control patch setup faster                |
+| -           | [pvm.maxpat](./PVM/lib/pvm.maxpat)                   | main control patch. controls 6 pvm devices at the same time  |
+| _           | [lib/](./PVM/lib)                                    | lib folder to store all maxpat libs                          |
+| _           | [pvm_control.maxpat](./PVM/lib/pvm_control.maxpat)   | abstraction with the control patch GUI to be embedded as a bpatcher |
+| _           | [pvm_init.maxpat](./PVM/lib/pvm_init.maxpat)         | abstraction responsible for parsing the `max-init.txt` file  |
+| _           | [pvm_send.maxpat](./PVM/lib/pvm_send.maxpat)         | abstraction for OSC sending. Arguments: *ip port*. Attributes: `@ip` `@port` |
+| _           | [pvm_warmup.maxpat](./PVM/lib/pvm_warmup.maxpat)     | abstraction for interpolating playback rates, to be embedded as a bpatcher |
+| _           | [pvm.maxproj](./PVM/pvm.maxproj)                     | Max project file. Openning this file will load all main control patches. |
+| -           | [examples/](./PVM/examples)                          | example use cases to test our system                         |
+| -           | [examples.maxproj](./PVM/examples/examples.maxproj)  | main example patch, contains 5 examples                      |
+| **others**  | [test.py](./PVM/test.py)                             | test python script to test our UDP connection                |
+| -           | [launch.sh](./PVM/launch.sh)                         | shell script to start `pvm.py` with `sh launch.sh <port>`    |
+| _           | [build_omxplayer.sh](./PVM/build_omxplayer.sh)       | shell script to build `omxplayer` with one *click*           |
+| -           | [requirements.txt](./PVM/requirements.txt)           | requirement for system python deps                           |
+| -           | [deploy_code_to_rpi.sh](./PVM/deploy_code_to_rpi.sh) | shell script to deploy code to Raspberry Pi                  |
 
 
 ## How to deploy your code when you testing in multiple rpis?
