@@ -144,8 +144,10 @@ Note: this is assuming that you clone this repo on your raspberry pi in the main
 | -           | [requirements.txt](./PVM/requirements.txt)           | requirement for system python deps                           |
 | -           | [deploy_code_to_rpi.sh](./PVM/deploy_code_to_rpi.sh) | shell script to deploy code to Raspberry Pi                  |
 
+## Development
 
-## How to deploy your code when you testing in multiple rpis?
+### Deploy code to Raspberry Pi
+
 Use the [deploy_code_to_rpi.sh](https://github.com/omarcostahamido/PVM/blob/AddCDscript/deploy_code_to_rpi.sh) script.
 But there are two prerequisites:
 
@@ -166,7 +168,7 @@ sudo reboot
 ```
 
 
-## Logs
+### Logs
 
 Logs will be recorded by `pvm.py` during execution. These will be stored in the `log/` folder, within the install directory of `PVM` on the Raspberry Pi device. This folder will be created if it doesn't exist yet.
 
@@ -184,7 +186,7 @@ All output from the console is synchronized to the file in real-time.
 If you close the program and then reopen it, a new log file will be created.
 
 
-## Run the test
+### Run the test
 
 You could write tests for your combination of commands in the `test.py` file. Simply run `python3 test.py` on the console to perform the tests. When the test script is started, it will first **kill any existing `pvm.py` processes**, and then spawn a new one to test the commands, and end it again after test is finished.
 
