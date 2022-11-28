@@ -9,23 +9,31 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 - [Raspberry Pi OS](https://downloads.raspberrypi.org/raspios_oldstable_armhf/images/raspios_oldstable_armhf-2022-09-26/2022-09-22-raspios-buster-armhf.img.xz)
 - [OMXPlayer](https://github.com/KaneBetter/omxplayer)
 
-
 ## Installation
 
-### Raspberry Pi OS
+```mermaid
+graph TD;
+A[1. Install the required Raspberry Pi OS] --> B;
+B[2. Build and install customized OMXPlayer] --> C;
+C[3. Set up the environment for PVM]
+```
+
+
+
+### Install the required Raspberry Pi OS
 Operating System Requirement: 
 
 - [Raspberry Pi OS (Legacy) Released: 2022-09-22](https://downloads.raspberrypi.org/raspios_oldstable_armhf/images/raspios_oldstable_armhf-2022-09-26/2022-09-22-raspios-buster-armhf.img.xz)
 
 
-### OMXPlayer
+### Build and install customized OMXPlayer
 
 To build the customized OMXPlayer, run the command below:
 
 `./build_omxplayer.sh`
 
 
-### Set up environment
+### Set up the environment for PVM
 
 ```bash
 # Clone the repo
@@ -44,9 +52,6 @@ pip install --upgrade pip setuptools
 
 # Install dependencies
 pip install -r requirements.txt
-
-# (Optional) Download a sample video
-curl "https://test-videos.co.uk/vids/jellyfish/mp4/h264/720/Jellyfish_720_10s_5MB.mp4" --output jellyfish720p.mp4
 ```
 
 ### [Optional]Network Time Protocol(NTP)
