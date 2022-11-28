@@ -15,7 +15,8 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 graph TD;
 A[1. Install the required Raspberry Pi OS] --> B;
 B[2. Build and install customized OMXPlayer] --> C;
-C[3. Set up the environment for PVM]
+C[3. Set up the environment for PVM] --> D;
+D[4. Install MAX8 on the control PC]
 ```
 
 
@@ -56,16 +57,20 @@ pip install -r requirements.txt
 
 For more information about Raspberry Pi remote control see [here](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely).
 
+### Install MAX8 on the control PC
+
+Download MAX8 [here](https://cycling74.com/downloads) and install it.
+
 ### [Optional]Network Time Protocol(NTP)
 
-NTP is intended to [synchronize](https://en.wikipedia.org/wiki/Synchronize) all participating computers to within a few [milliseconds](https://en.wikipedia.org/wiki/Millisecond). The system time may not be so precisely synchronized between different Raspberry Pi's, which may have an impact on the playback of high frame rate videos.
+NTP is intended to [synchronize](https://en.wikipedia.org/wiki/Synchronize) all participating computers within a few [milliseconds](https://en.wikipedia.org/wiki/Millisecond). The system time may not be so precisely synchronized between different Raspberry Pi's, which may have an impact on the playback of high frame rate videos.
 
-To use NTP to sync all Raspberry Pis' time in local network, please follow section [Configure NTP Client to be Time Synced with the NTP Server](https://web.archive.org/web/20221112203702/https://rishabhdevyadav.medium.com/how-to-install-ntp-server-and-client-s-on-ubuntu-18-04-lts-f0562e41d0e1).
+To use NTP to sync all Raspberry Pis' time in the local network, please follow the section [Configure NTP Client to be Time Synced with the NTP Server](https://web.archive.org/web/20221112203702/https://rishabhdevyadav.medium.com/how-to-install-ntp-server-and-client-s-on-ubuntu-18-04-lts-f0562e41d0e1).
 
 
 ## Videos
 
-Please save all the videos in the `$HOME/Videos/` folder for autostart. On Rapsberry Pi, your default directory should be `/home/pi/Videos/`.
+Please save all the videos in the `$HOME/Videos/` folder for autostart. On Raspberry Pi, your default directory should be `/home/pi/Videos/`.
 
 
 ## Running
