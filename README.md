@@ -104,8 +104,8 @@ usage: pvm.py [-h] [--port [PORT]]
 optional arguments:
   -h, --help     show this help message and exit
   --port [PORT]  The port that pvm.py will use to receive control messages.
-                 Using the default port 8001 to control the first display.
-                 Using ny other port to control the second display.
+                 Use the default port 8001 to control the first display.
+                 Use any other port to control the second display.
 ```
 
 
