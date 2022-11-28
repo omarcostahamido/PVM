@@ -3,8 +3,8 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
-			"revision" : 3,
+			"minor" : 5,
+			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -176,7 +176,7 @@
 							}
 , 							{
 								"key" : 2,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.102", 8001, 5.0 ]
+								"value" : [ "pattern01_prores422.mov", "192.168.0.102", 8001, 0.5 ]
 							}
  ]
 					}
