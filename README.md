@@ -2,11 +2,6 @@
 Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry pi based, video player machine for video installations
 
 
-### { This is a work in progress }
-
-- TODO: Create another python file to control two display
-
-
 ## Requirements
 
 - [Python3](https://www.python.org/downloads/)
