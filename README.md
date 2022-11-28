@@ -17,7 +17,7 @@ graph TD;
 A[1. Install the required Raspberry Pi OS] --> B;
 B[2. Set up the environment for PVM] --> C;
 C[3. Build and install customized OMXPlayer] --> D;
-D[4. Install Max 8 on the control PC]
+D[4. Install Max 8]
 ```
 
 
@@ -26,8 +26,12 @@ Operating System Requirement:
 
 - [Raspberry Pi OS (Legacy) Released: 2022-09-22](https://downloads.raspberrypi.org/raspios_oldstable_armhf/images/raspios_oldstable_armhf-2022-09-26/2022-09-22-raspios-buster-armhf.img.xz)
 
+Please see the wiki page [here](https://github.com/omarcostahamido/PVM/wiki/Raspberry-Pi-OS) to learn more about the steps to install the Raspberry Pi OS.
+
 
 ### Set up the environment for PVM
+
+On each Raspberry Pi device you will need to run the following commands on the terminal to configure PVM:
 
 ```bash
 # Clone the repo
@@ -58,9 +62,9 @@ Run the command below to build the customized OMXPlayer:
 `./build_omxplayer.sh`
 
 
-### Install Max 8 on the control PC
+### Install Max 8
 
-Download Max 8 [here](https://cycling74.com/downloads) and install it.
+On the Control Machine, download Max 8 [here](https://cycling74.com/downloads) and install it. This will allow you to run the Control Interface (see <a target="_self" href="#control-machine">Control Machine</a> section below).
 
 
 ### [Optional]Network Time Protocol(NTP)
