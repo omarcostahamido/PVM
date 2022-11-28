@@ -120,7 +120,8 @@ usage: pvm.py [-h] [--port [PORT]]
 optional arguments:
   -h, --help     show this help message and exit
   --port [PORT]  The port that pvm.py will use to receive control messages.
-                 Default port is 8001
+                 Using the default port 8001 to control the first display.
+                 Using ny other port to control the second display.
 ```
 
 On the control machine first edit the [max-init.txt](https://github.com/omarcostahamido/PVM/blob/main/max-init.txt) file. For each Pi device add a numbered line with the video filename, ip, and port. 
