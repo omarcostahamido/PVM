@@ -15,9 +15,9 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 ```mermaid
 graph TD;
 A[1. Install the required Raspberry Pi OS] --> B;
-B[2. Build and install customized OMXPlayer] --> C;
-C[3. Set up the environment for PVM] --> D;
-D[4. Install MAX8 on the control PC]
+B[2. Set up the environment for PVM] --> C;
+C[3. Build and install customized OMXPlayer] --> D;
+D[4. Install Max 8 on the control PC]
 ```
 
 
@@ -25,13 +25,6 @@ D[4. Install MAX8 on the control PC]
 Operating System Requirement: 
 
 - [Raspberry Pi OS (Legacy) Released: 2022-09-22](https://downloads.raspberrypi.org/raspios_oldstable_armhf/images/raspios_oldstable_armhf-2022-09-26/2022-09-22-raspios-buster-armhf.img.xz)
-
-
-### Build and install customized OMXPlayer
-The PIP team built a customized version of OMXPlayer and made a dedicated [release](https://github.com/KaneBetter/omxplayer/releases/tag/v1.0.0) in this [repo](https://github.com/KaneBetter/omxplayer).
-Run the command below to build the customized OMXPlayer:
-
-`./build_omxplayer.sh`
 
 
 ### Set up the environment for PVM
@@ -55,12 +48,19 @@ pip install --upgrade pip setuptools
 pip install -r requirements.txt
 ```
 
-For more information about Raspberry Pi remote control see [here](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely).
+For more information about connecting remotely to a Raspberry Pi device, please see the wiki page [here](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely).
 
 
-### Install MAX8 on the control PC
+### Build and install customized OMXPlayer
+The PIP team built a customized version of OMXPlayer and made a dedicated [release](https://github.com/KaneBetter/omxplayer/releases/tag/v1.0.0) in this [repo](https://github.com/KaneBetter/omxplayer).
+Run the command below to build the customized OMXPlayer:
 
-Download MAX8 [here](https://cycling74.com/downloads) and install it.
+`./build_omxplayer.sh`
+
+
+### Install Max 8 on the control PC
+
+Download Max 8 [here](https://cycling74.com/downloads) and install it.
 
 
 ### [Optional]Network Time Protocol(NTP)
