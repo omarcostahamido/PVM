@@ -54,6 +54,8 @@ pip install --upgrade pip setuptools
 pip install -r requirements.txt
 ```
 
+For more information about Raspberry Pi remote control see [here](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely).
+
 ### [Optional]Network Time Protocol(NTP)
 
 NTP is intended to [synchronize](https://en.wikipedia.org/wiki/Synchronize) all participating computers to within a few [milliseconds](https://en.wikipedia.org/wiki/Millisecond). The system time may not be so precisely synchronized between different Raspberry Pi's, which may have an impact on the playback of high frame rate videos.
@@ -180,7 +182,7 @@ All output from the console is synchronized to the file in real-time.
 2022-11-20 11:32:55.243;INFO;8001;Logging system initiated
 2022-11-20 11:32:55.243;INFO;8001;PVM - Pi Video Machine
 2022-11-20 11:32:55.244;INFO;8001;Omar Costa Hamido 2022
-2022-11-20 11:32:55.244;INFO;8001;Server now listenning on port 8001
+2022-11-20 11:32:55.244;INFO;8001;Server now listening on port 8001
 ```
 
 If you close the program and then reopen it, a new log file will be created.
@@ -205,7 +207,7 @@ Patch `#00.maxpat` serves as an index of the examples provided, for more informa
 Also don't forget to checkout our [wiki](https://github.com/omarcostahamido/PVM/wiki)! It contains instructions on various topics like [_setting up remote access to the Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/How-to-connect-to-a-Raspberry-Pi-remotely) ,[_VS Code ssh to Raspberry Pi_](https://github.com/omarcostahamido/PVM/wiki/VS-Code-ssh-to-Raspberry-Pi) and [_The workflow in MAX_](https://github.com/omarcostahamido/PVM/wiki/The-workflow-in-MAX).
 
 
-## Acknowledgements
+## Acknowledgments
 
 PVM is a project by [Omar Costa Hamido](https://omarcostahamido.com) and [Grant Speich](https://www.grantspeich.com/), initiated in early 2021.
 
