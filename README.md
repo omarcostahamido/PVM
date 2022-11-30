@@ -131,6 +131,8 @@ Note: this is assuming that you clone this repo on your raspberry pi in the main
 
 Please save all the videos on each Raspberry Pi device in the `$HOME/Videos/` folder. For the default `pi` user, this directory should be `/home/pi/Videos/`.
 
+To use omxplayer you'll want to make sure your video is encoded with an H.264 codec and is in a file format like .avi, .mov, .mkv, .mp4, or .m4v.
+
 
 ### Control Machine
 
