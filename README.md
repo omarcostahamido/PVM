@@ -164,7 +164,7 @@ This is the PVM project structure overview:
 | _           | [pvm_init.maxpat](./PVM/lib/pvm_init.maxpat)         | abstraction responsible for parsing the `max-init.txt` file  |
 | _           | [pvm_send.maxpat](./PVM/lib/pvm_send.maxpat)         | abstraction for OSC sending. Arguments: *ip port*. Attributes: `@ip` `@port` |
 | _           | [pvm_warmup.maxpat](./PVM/lib/pvm_warmup.maxpat)     | abstraction for interpolating playback rates, to be embedded as a bpatcher |
-| _           | [pvm.maxpat](./PVM/lib/pvm.maxpat)                   | Max project file. Openning this file will load all main control patches. |
+| _           | [pvm.maxproj](./PVM/pvm.maxproj)                   | Max project file. Opening this file will load all main control patches. |
 | -           | [examples/](./PVM/examples)                          | example use cases to test our system                         |
 | -           | [examples.maxproj](./PVM/examples/examples.maxproj)  | main example patch, contains 5 examples                      |
 | **others**  | [test.py](./PVM/test.py)                             | test python script to test our UDP connection                |
