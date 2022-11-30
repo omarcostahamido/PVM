@@ -158,7 +158,7 @@ This is the PVM project structure overview:
 | ----------- | ---------------------------------------------------- | ------------------------------------------------------------ |
 | **device**  | [pvm.py](./PVM/pvm.py)                               | main python script, this runs on each pi device              |
 | **control** | [max-init.txt](./PVM/max-init.txt)                   | this file can make control patch setup faster                |
-| -           | [pvm.maxproj](./PVM/pvm.maxproj)                     | main control patch. controls 6 pvm devices at the same time  |
+| -           | [pvm.maxpat](./PVM/lib/pvm.maxpat)                     | main control patch. controls 6 pvm devices at the same time  |
 | _           | [lib/](./PVM/lib)                                    | lib folder to store all maxpat libs                          |
 | _           | [pvm_control.maxpat](./PVM/lib/pvm_control.maxpat)   | abstraction with the control patch GUI to be embedded as a bpatcher |
 | _           | [pvm_init.maxpat](./PVM/lib/pvm_init.maxpat)         | abstraction responsible for parsing the `max-init.txt` file  |
