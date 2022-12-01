@@ -7,13 +7,13 @@ cd /home/pi
 # Check if omxplayer exists
 if [ -d "/omxplayer" ] 
 then
-	echo "Directory /omxplayer does not exists, clone from github."
-	git clone https://github.com/KaneBetter/omxplayer.git
-	cd omxplayer
-else
 	echo "Directory /omxplayer exists, run git pull" 
 	cd omxplayer
 	git pull
+else
+	echo "Directory /omxplayer does not exists, clone from github."
+	git clone https://github.com/KaneBetter/omxplayer.git
+	cd omxplayer
 fi
 
 # Update apt and install requirments
