@@ -5,7 +5,7 @@ set -eou pipefail
 
 cd /home/pi
 # Check if omxplayer exists
-if [ -d "/omxplayer" ] 
+if [ -d "./omxplayer" ] 
 then
 	echo "Directory /omxplayer exists, run git pull" 
 	cd omxplayer
