@@ -21,6 +21,7 @@ OMX = None	# OMXPlayer object
 IS_FILE_SET = False # File set flag
 CAN_PAUSE = False # Can pause flag
 CAN_START = False # Can start flag
+COUNT = 0
 
 '''
 UDP command example:
@@ -34,6 +35,7 @@ def parse_commands(*args):
 	global CAN_START
 	global CAN_PAUSE
 	global PORT
+	global COUNT
 
 	# Get command
 	command = args[4]
@@ -77,7 +79,7 @@ def parse_commands(*args):
 	# Catch the excpetion if Dbus is down.
 	try:
 		# File command
-		if command == "file":
+		if command == "file" and COUNT > 0:
 			# If the file is already set, we exit OMX first
 			if IS_FILE_SET:
 				OMX.quit()
@@ -99,6 +101,7 @@ def parse_commands(*args):
 
 		# If file is unset, then we should not execute any command below.
 		if not IS_FILE_SET:
+			COUNT += 1
 			_logger.info("Command %s failed because of the file is unset.", command)
 			return
 
