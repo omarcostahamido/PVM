@@ -80,6 +80,10 @@ def parse_commands(*args):
 	try:
 		# File command
 		if command == "file" and COUNT > 0:
+			# If the file name is the same, ignore
+			if VIDEO_PATH == PREFIX_VIDEOS_PATH + value:
+				return
+			
 			# If the file is already set, we exit OMX first
 			if IS_FILE_SET:
 				OMX.quit()
@@ -126,6 +130,8 @@ def parse_commands(*args):
 			IS_FILE_SET = False
 			CAN_START = False
 			CAN_PAUSE = False
+			# reset the file name
+			VIDEO_PATH = None
 			_logger.info("%s command success and %s has been unset.", command, VIDEO_PATH)
 		elif command == "set_sposition":
 			OMX.set_position(float(value))
