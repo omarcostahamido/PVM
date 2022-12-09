@@ -21,7 +21,6 @@ OMX = None	# OMXPlayer object
 IS_FILE_SET = False # File set flag
 CAN_PAUSE = False # Can pause flag
 CAN_START = False # Can start flag
-COUNT = 0
 
 '''
 UDP command example:
@@ -35,7 +34,6 @@ def parse_commands(*args):
 	global CAN_START
 	global CAN_PAUSE
 	global PORT
-	global COUNT
 
 	# Get command
 	command = args[4]
@@ -79,7 +77,7 @@ def parse_commands(*args):
 	# Catch the excpetion if Dbus is down.
 	try:
 		# File command
-		if command == "file" and COUNT > 0:
+		if command == "file":
 			# If the file name is the same, ignore
 			if VIDEO_PATH == PREFIX_VIDEOS_PATH + value:
 				return
@@ -105,7 +103,6 @@ def parse_commands(*args):
 
 		# If file is unset, then we should not execute any command below.
 		if not IS_FILE_SET:
-			COUNT += 1
 			_logger.info("Command %s failed because of the file is unset.", command)
 			return
 
@@ -130,7 +127,7 @@ def parse_commands(*args):
 			IS_FILE_SET = False
 			CAN_START = False
 			CAN_PAUSE = False
-			# reset the file name
+			# Reset the file name
 			VIDEO_PATH = None
 			_logger.info("%s command success and %s has been unset.", command, VIDEO_PATH)
 		elif command == "set_sposition":
