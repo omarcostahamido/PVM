@@ -3,16 +3,16 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 ```mermaid
 flowchart TD
-    A(Control Machine fa:fa-computer) -->B{<font size=6><b>PVM fa:fa-microchi</b><br><font size=3>raspberry pi}
-    A -->C{<font size=6><b>PVM fa:fa-microchi</b><br><font size=3>raspberry pi}
-    A -->D{<font size=6><b>PVM fa:fa-microchi</b><br><font size=3>raspberry pi}
+    A(Control Machine) -->B{<font size=6><b>PVM</b><br><font size=3>raspberry pi}
+    A -->C{<font size=6><b>PVM</b><br><font size=3>raspberry pi}
+    A -->D{><b>PVM</b><br>raspberry pi}
     A -->K{...}
-    B -->E[fa:fa-tv 1]
-    B -->F[fa:fa-tv 2]
-    C -->G[fa:fa-tv 1]
-    C -->H[fa:fa-tv 2]
-    D -->I[fa:fa-tv 1]
-    D -->J[fa:fa-tv 2]
+    B -->E[screen 1]
+    B -->F[screen 2]
+    C -->G[screen 1]
+    C -->H[screen 2]
+    D -->I[screen 1]
+    D -->J[screen 2]
 ```
 
 ## Requirements
