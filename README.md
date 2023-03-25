@@ -109,7 +109,7 @@ optional arguments:
 
 #### Autostart
 
-You can configure the Raspberry Pi devices to autostart the `pvm.pt` script on boot up. In order to achieve that, open the terminal and run:
+You can configure the Raspberry Pi devices to autostart the `pvm.py` script on boot up. In order to achieve that, open the terminal and run:
 
 `sudo nano /etc/xdg/lxsession/LXDE-pi/autostart`
 
