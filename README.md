@@ -1,7 +1,7 @@
 # PVM
 Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry pi based, video player machine for video installations
 
-```
+```mermaid
 flowchart TD
     A(Control Machine fa:fa-computer) -->B{<font size=6><b>PVM fa:fa-microchi</b><br><font size=3>raspberry pi}
     A -->C{<font size=6><b>PVM fa:fa-microchi</b><br><font size=3>raspberry pi}
