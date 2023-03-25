@@ -12,13 +12,10 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 ## Installation
 
-```mermaid
-graph LR;
-A[1. <a href='#install-the-required-raspberry-pi-os'>Install the required <br />Raspberry Pi OS</a>] --> B;
-B[2. <a href='#set-up-the-environment-for-pvm'>Set up the <br />environment for PVM</a>] --> C;
-C[3. <a href='#build-and-install-customized-omxplayer'>Build and install <br />customized OMXPlayer</a>] --> D;
-D[4. <a href='https://github.com/omarcostahamido/PVM#install-max-8'>Install Max 8</a>]
-```
+1. [Install the required Raspberry Pi OS](#install-the-required-raspberry-pi-os)
+2. [Set up the environment for PVM](#set-up-the-environment-for-pvm)
+3. [Build and install customized OMXPlayer](#build-and-install-customized-omxplayer)
+4. [Install Max 8](https://github.com/omarcostahamido/PVM#install-max-8)
 
 
 ### Install the required Raspberry Pi OS
