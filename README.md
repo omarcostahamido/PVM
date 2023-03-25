@@ -1,6 +1,19 @@
 # PVM
 Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry pi based, video player machine for video installations
 
+```
+flowchart TD
+    A(Control Machine fa:fa-computer) -->B{<font size=6><b>PVM fa:fa-microchi</b><br><font size=3>raspberry pi}
+    A -->C{<font size=6><b>PVM fa:fa-microchi</b><br><font size=3>raspberry pi}
+    A -->D{<font size=6><b>PVM fa:fa-microchi</b><br><font size=3>raspberry pi}
+    A -->K{...}
+    B -->E[fa:fa-tv 1]
+    B -->F[fa:fa-tv 2]
+    C -->G[fa:fa-tv 1]
+    C -->H[fa:fa-tv 2]
+    D -->I[fa:fa-tv 1]
+    D -->J[fa:fa-tv 2]
+```
 
 ## Requirements
 
@@ -19,7 +32,7 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 
 ### Install the required Raspberry Pi OS
-Operating System Requirement: 
+On the Raspberry Pi device, install the required Operating System (OS): 
 
 - [Raspberry Pi OS (Legacy) Released: 2022-09-22](https://downloads.raspberrypi.org/raspios_oldstable_armhf/images/raspios_oldstable_armhf-2022-09-26/2022-09-22-raspios-buster-armhf.img.xz)
 
@@ -28,7 +41,7 @@ Please see the wiki page [here](https://github.com/omarcostahamido/PVM/wiki/Rasp
 
 ### Set up the environment for PVM
 
-On each Raspberry Pi device you will need to run the following commands on the terminal to configure PVM:
+On each Raspberry Pi device, you will need to run the following commands on the terminal to configure PVM:
 
 ```bash
 # Clone the repo
@@ -53,7 +66,7 @@ For more information about connecting remotely to a Raspberry Pi device, please 
 
 
 ### Build and install customized OMXPlayer
-The PIP team built a customized version of OMXPlayer and made a dedicated [release](https://github.com/KaneBetter/omxplayer/releases/tag/v1.0.0) in this [repo](https://github.com/KaneBetter/omxplayer).
+The _PIP team_ built a customized version of OMXPlayer and made a dedicated [release](https://github.com/KaneBetter/omxplayer/releases/tag/v1.0.0) in this [repo](https://github.com/KaneBetter/omxplayer).
 Run the command below to build the customized OMXPlayer:
 
 `./build_omxplayer.sh`
