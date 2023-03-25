@@ -3,9 +3,9 @@ Pi Video Machine - a scalable, synchronized, and networked-controlled, raspberry
 
 ```mermaid
 flowchart TD
-    A(Control Machine) -->B{<font size=6><b>PVM</b><br><font size=3>raspberry pi}
-    A -->C{<font size=6><b>PVM</b><br><font size=3>raspberry pi}
-    A -->D{><b>PVM</b><br>raspberry pi}
+    A(Control Machine) -->B{<b>PVM</b><br>raspberry pi}
+    A -->C{<b>PVM</b><br>raspberry pi}
+    A -->D{<b>PVM</b><br>raspberry pi}
     A -->K{...}
     B -->E[screen 1]
     B -->F[screen 2]
