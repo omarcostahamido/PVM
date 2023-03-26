@@ -3,7 +3,7 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
+			"minor" : 5,
 			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
@@ -183,19 +183,19 @@
 						"count" : 4,
 						"data" : [ 							{
 								"key" : 1,
-								"value" : [ "pattern01_prores422.mov", "192.168.1.108", 8001, 0.0 ]
+								"value" : [ "pattern01_h264.mov", "192.168.1.108", 8001, 0.0 ]
 							}
 , 							{
 								"key" : 2,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.102", 8001, 0.25 ]
+								"value" : [ "pattern01_h264.mov", "192.168.0.102", 8001, 0.25 ]
 							}
 , 							{
 								"key" : 3,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.103", 8001, 0.5 ]
+								"value" : [ "pattern01_h264.mov", "192.168.0.103", 8001, 0.5 ]
 							}
 , 							{
 								"key" : 4,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.104", 8001, 0.75 ]
+								"value" : [ "pattern01_h264.mov", "192.168.0.104", 8001, 0.75 ]
 							}
  ]
 					}
