@@ -191,12 +191,11 @@ This is the PVM project structure overview:
 You can run the [deploy_code_to_rpi.sh](https://github.com/omarcostahamido/PVM/blob/main/deploy_code_to_rpi.sh) script on the Control Machine to deploy the latest PVM version to all your Raspberry Pi devices at the same time.
 There are two prerequisites:
 
-- One is the need to set up passwordless ssh access.
-For the passwordless ssh access please follow [here](https://danidudas.medium.com/how-to-connect-to-raspberry-pi-via-ssh-without-password-using-ssh-keys-3abd782688a).
+- One is the need to set up passwordless ssh access. Please follow the guide [here](https://archive.is/ygsMr).
 
 - Second is the need to set the [Autostart](https://github.com/omarcostahamido/PVM#autostart).
 
-Once you're done, run the command on the Control Machine.
+Once you're done, run the command on the Control Machine:
 
 ```bash
 bash deploy_code_to_rpi.sh
@@ -210,11 +209,11 @@ sudo reboot
 
 ### Logs
 
-Logs will be recorded by `pvm.py` during execution. These will be stored in the `log/` folder, within the install directory of `PVM` on the Raspberry Pi device. This folder will be created if it doesn't exist yet.
+Logs will always be recorded by `pvm.py` during execution. These will be stored in the `log/` folder, within the install directory of `PVM` on the Raspberry Pi device. This folder will be created if it doesn't exist yet.
 
 Name convention for each log file is `{:%Y-%m-%d %H:%M:%S}-$PORT.log`
 
-All output from the console is synchronized to the file in real-time.
+All output from the terminal is synchronized to the log file in real-time.
 
 ```bash
 2022-11-20 11:32:55.243;INFO;8001;Logging system initiated
@@ -223,12 +222,12 @@ All output from the console is synchronized to the file in real-time.
 2022-11-20 11:32:55.244;INFO;8001;Server now listening on port 8001
 ```
 
-If you close the program and then reopen it, a new log file will be created.
+Every time `pvm.py` is launched, a new log file will be created.
 
 
 ### Run the test
 
-You could write tests for your combination of commands in the `test.py` file. Simply run `python3 test.py` on the console to perform the tests. When the test script is started, it will first **kill any existing `pvm.py` processes**, and then spawn a new one to test the commands, and end it again after test is finished.
+You could write tests for a combination of commands in the `test.py` file. Simply run `python3 test.py` on the terminal of the Raspberry Pi to perform the tests. When the test script is started, it will first **kill any existing `pvm.py` processes**, then spawn a new one to test the commands, and end it again after the test is finished.
 
 
 ## Getting Help
