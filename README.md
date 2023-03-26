@@ -7,12 +7,12 @@ flowchart TD
     A -->C{<b>PVM</b><br>raspberry pi}
     A -->D{<b>PVM</b><br>raspberry pi}
     A -->K{...}
-    B -->E[screen 1]
-    B -->F[screen 2]
-    C -->G[screen 1]
-    C -->H[screen 2]
-    D -->I[screen 1]
-    D -->J[screen 2]
+    B -->E[display 1]
+    B -->F[display 2]
+    C -->G[display 1]
+    C -->H[display 2]
+    D -->I[display 1]
+    D -->J[display 2]
 ```
 
 ## Requirements
@@ -66,7 +66,7 @@ For more information about connecting remotely to a Raspberry Pi device, please 
 
 
 ### Build and install customized OMXPlayer
-The _PIP team_ built a customized version of OMXPlayer and made a dedicated [release](https://github.com/KaneBetter/omxplayer/releases/tag/v1.0.0) in this [repo](https://github.com/KaneBetter/omxplayer).
+The _PIP team_ [[1]](#acknowledgments) built a customized version of OMXPlayer and made a dedicated [release](https://github.com/KaneBetter/omxplayer/releases/tag/v1.0.0) in this [repo](https://github.com/KaneBetter/omxplayer).
 Run the command below to build the customized OMXPlayer:
 
 `./build_omxplayer.sh`
@@ -77,18 +77,18 @@ Run the command below to build the customized OMXPlayer:
 On the Control Machine, download Max 8 [here](https://cycling74.com/downloads) and install it. This will allow you to run the Control Interface (see <a target="_self" href="#control-machine">Control Machine</a> section below).
 
 
-### [Optional]Network Time Protocol(NTP)
+### [Optional] Network Time Protocol (NTP)
 
 NTP is intended to [synchronize](https://en.wikipedia.org/wiki/Synchronize) all participating computers within a few [milliseconds](https://en.wikipedia.org/wiki/Millisecond). The system time may not be so precisely synchronized between different Raspberry Pi's, which may have an impact on the playback of high frame rate videos.
 
-To use NTP to sync all Raspberry Pis' time in the local network, please follow the section [Configure NTP Client to be Time Synced with the NTP Server](https://web.archive.org/web/20221112203702/https://rishabhdevyadav.medium.com/how-to-install-ntp-server-and-client-s-on-ubuntu-18-04-lts-f0562e41d0e1).
+To use NTP to sync all Raspberry Pis' time in the local network, please follow the guide [Configure NTP Client to be Time Synced with the NTP Server](https://web.archive.org/web/20221112203702/https://rishabhdevyadav.medium.com/how-to-install-ntp-server-and-client-s-on-ubuntu-18-04-lts-f0562e41d0e1).
 
 
 ## Running
 
 ### Raspberry Pi devices
 
-On each Pi device, start the script
+On each Pi device, start the script using the terminal
 
 ```bash
 cd PVM
@@ -102,11 +102,13 @@ python pvm.py --port 8002
 sh launch.sh 8001
 ```
 
-Please note that you must use the default port `8001` to control the first display. In order to control the second display you need to use any other port. To control both displays at the same time, you must run the `pvm.py` script twice.
+Please note that you must use the default port `8001` to control the first display. In order to control the second display you need to use any other port. To control both displays at the same time, you must run the `pvm.py` script twice - for example, by using two terminal windows or by running them in the [background](https://linuxize.com/post/how-to-run-linux-commands-in-background/).
 
 You can read the help on the terminal by using:
 
 `python pvm.py --help`
+
+That will print:
 
 ```bash
 usage: pvm.py [-h] [--port [PORT]]
@@ -130,11 +132,11 @@ after the last line add
 
 `@lxterminal -e sh $HOME/PVM/launch.sh 8001`
 
-add one more if you need two videos output
+add one more line like this if you need two videos output
 
 `@lxterminal -e sh $HOME/PVM/launch.sh 8002`
 
-Note: this is assuming that you clone this repo on your raspberry pi in the main `/home/pi` folder and followed the steps in the <a target="_self" href="#installation">Installation</a> section above.
+> Note: this is assuming that you clone this repo on your raspberry pi in the main `/home/pi` folder and followed the steps in the <a target="_self" href="#installation">Installation</a> section above.
 
 
 #### Videos
@@ -155,7 +157,7 @@ As in:
 2, jellyfish720.mp4 192.168.1.108 8002;
 ```
 
-Then proceed to launch the main control interface: `pvm.maxproj`. The `pvm.maxpat` patch should open automatically. Please read the wiki page [here](https://github.com/omarcostahamido/PVM/wiki/The-Control-Interface-in-MAX) to learn more about the Control Interface in Max.
+Then proceed to launch the main Control Interface: `pvm.maxproj`. The `pvm.maxpat` patch should open automatically. Please read the wiki page [here](https://github.com/omarcostahamido/PVM/wiki/The-Control-Interface-in-MAX) to learn more about the Control Interface in Max.
 
 
 ## Development
