@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 5,
-			"revision" : 1,
+			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -50,7 +50,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 5,
-							"revision" : 1,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -400,7 +400,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 295.5, 221.0, 130.0, 20.0 ],
-					"presentation_linecount" : 2,
 					"text" : "change # of repetitions",
 					"textjustification" : 2
 				}
@@ -419,7 +418,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 5,
-							"revision" : 1,
+							"revision" : 3,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -877,51 +876,51 @@
 						"count" : 12,
 						"data" : [ 							{
 								"key" : 1,
-								"value" : [ "pattern01_prores422.mov", "192.168.1.108", 8001 ]
+								"value" : [ "pattern01_h264.mov", "192.168.1.108", 8001 ]
 							}
 , 							{
 								"key" : 2,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.108", 8002 ]
+								"value" : [ "pattern01_h264.mov", "192.168.0.108", 8002 ]
 							}
 , 							{
 								"key" : 3,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.107", 8001 ]
+								"value" : [ "pattern01_h264.mov", "192.168.0.107", 8001 ]
 							}
 , 							{
 								"key" : 4,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.107", 8002 ]
+								"value" : [ "pattern01_h264.mov", "192.168.0.107", 8002 ]
 							}
 , 							{
 								"key" : 5,
-								"value" : [ "pattern01_prores422.mov", "192.168.1.106", 8001 ]
+								"value" : [ "pattern01_h264.mov", "192.168.1.106", 8001 ]
 							}
 , 							{
 								"key" : 6,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.106", 8002 ]
+								"value" : [ "pattern01_h264.mov", "192.168.0.106", 8002 ]
 							}
 , 							{
 								"key" : 7,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.105", 8001 ]
+								"value" : [ "pattern01_h264.mov", "192.168.0.105", 8001 ]
 							}
 , 							{
 								"key" : 8,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.105", 8002 ]
+								"value" : [ "pattern01_h264.mov", "192.168.0.105", 8002 ]
 							}
 , 							{
 								"key" : 9,
-								"value" : [ "pattern01_prores422.mov", "192.168.1.104", 8001 ]
+								"value" : [ "pattern01_h264.mov", "192.168.1.104", 8001 ]
 							}
 , 							{
 								"key" : 10,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.104", 8002 ]
+								"value" : [ "pattern01_h264.mov", "192.168.0.104", 8002 ]
 							}
 , 							{
 								"key" : 11,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.103", 8001 ]
+								"value" : [ "pattern01_h264.mov", "192.168.0.103", 8001 ]
 							}
 , 							{
 								"key" : 12,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.103", 8002 ]
+								"value" : [ "pattern01_h264.mov", "192.168.0.103", 8002 ]
 							}
  ]
 					}
