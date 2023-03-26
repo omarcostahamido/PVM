@@ -168,24 +168,24 @@ This is the PVM project structure overview:
 
 | _           | filename                                         | description                                                      |
 | ----------- | ------------------------------------------------ | ---------------------------------------------------------------- |
-| **device**  | [pvm.py](./pvm.py)                               | main python script, this runs on each pi device                  |
-| **control** | [max-init.txt](./max-init.txt)                   | this file can make control patch setup faster                    |
+| **device**  | [pvm.py](./pvm.py)                               | main python script, this runs PVM on each raspberry pi device    |
+| **control** | [max-init.txt](./max-init.txt)                   | this file can help speed up the control patch setup              |
 | -           | [pvm.maxpat](./lib/pvm.maxpat)                   | main control patch. controls 6 pvm devices at the same time      |
-| _           | [lib/](./lib)                                    | lib folder to store all maxpat libs                              |
-| _           | [pvm_control.maxpat](./lib/pvm_control.maxpat)   | abstraction with the control patch GUI to be embedded as a bpatcher |
+| _           | [lib/](./lib)                                    | folder to store all Max dependencies: abstractions               |
+| _           | [pvm_control.maxpat](./lib/pvm_control.maxpat)   | abstraction (bpatcher) with the main control patch GUI           |
 | _           | [pvm_init.maxpat](./lib/pvm_init.maxpat)         | abstraction responsible for parsing the `max-init.txt` file      |
-| _           | [pvm_send.maxpat](./lib/pvm_send.maxpat)         | abstraction for OSC sending. Arguments: *ip port*. Attributes: `@ip` `@port` |
-| _           | [pvm_warmup.maxpat](./lib/pvm_warmup.maxpat)     | abstraction for interpolating playback rates, to be embedded as a bpatcher |
-| _           | [pvm.maxproj](./pvm.maxproj)                     | Max project file. Opening this file will load all main control patches. |
-| -           | [examples/](./examples)                          | example use cases to test our system                             |
-| -           | [examples.maxproj](./examples/examples.maxproj)  | main example patch, contains 5 examples                          |
-| **setup**   | [test.py](./test.py)                             | test python script to test our UDP connection                    |
+| _           | [pvm_send.maxpat](./lib/pvm_send.maxpat)         | abstraction for sending the control messages                     |
+| _           | [pvm_warmup.maxpat](./lib/pvm_warmup.maxpat)     | abstraction (bpatcher) for interpolating playback rates          |
+| _           | [pvm.maxproj](./pvm.maxproj)                     | Max project file. Opening this will load the main control patch  |
+| -           | [examples/](./examples)                          | example use cases to learn and test the system                   |
+| -           | [examples.maxproj](./examples/examples.maxproj)  | Max project file. Opening this will load all the example patches |
+| **setup**   | [test.py](./test.py)                             | python script to test the UDP connection                         |
 | -           | [launch.sh](./launch.sh)                         | shell script to start `pvm.py` with `sh launch.sh <port>`        |
 | _           | [build_omxplayer.sh](./build_omxplayer.sh)       | shell script to build `omxplayer` with one *click*               |
 | -           | [requirements.txt](./requirements.txt)           | list of PVM installation dependency requirements                 |
-| -           | [deploy_code_to_rpi.sh](./deploy_code_to_rpi.sh) | shell script to deploy code to Raspberry Pi                      |
+| -           | [deploy_code_to_rpi.sh](./deploy_code_to_rpi.sh) | shell script to help deploying code to all Raspberry Pi devices  |
 
----------------------------------------------------------------------------- |
+
 ### Deploy code to Raspberry Pi
 
 You can run the [deploy_code_to_rpi.sh](https://github.com/omarcostahamido/PVM/blob/main/deploy_code_to_rpi.sh) script on the Control Machine to deploy the latest PVM version to all your Raspberry Pi devices at the same time.
