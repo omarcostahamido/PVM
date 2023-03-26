@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 5,
-			"revision" : 1,
+			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -172,11 +172,11 @@
 						"count" : 2,
 						"data" : [ 							{
 								"key" : 1,
-								"value" : [ "pattern01_prores422.mov", "192.168.1.108", 8001, 0.0 ]
+								"value" : [ "pattern01_h264.mov", "192.168.1.108", 8001, 0.0 ]
 							}
 , 							{
 								"key" : 2,
-								"value" : [ "pattern01_prores422.mov", "192.168.0.102", 8001, 0.5 ]
+								"value" : [ "pattern01_h264.mov", "192.168.0.102", 8001, 0.5 ]
 							}
  ]
 					}
