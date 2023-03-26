@@ -3,7 +3,7 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
+			"minor" : 5,
 			"revision" : 3,
 			"architecture" : "x64",
 			"modernui" : 1
@@ -118,8 +118,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 241.5, 283.0, 165.0, 22.0 ],
-					"text" : "file pattern01_prores422.mov"
+					"patching_rect" : [ 241.5, 283.0, 137.0, 22.0 ],
+					"text" : "file pattern01_h264.mov"
 				}
 
 			}
