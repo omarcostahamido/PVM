@@ -206,6 +206,19 @@ cd PVM && git pull
 sudo reboot
 ```
 
+Alternatively, you can also update the PVM code on an individual Raspberry Pi device by running on its terminal:
+
+```bash
+git pull
+```
+
+If this command outputs some messages that ends with `Please commit your changes or stash them before you merge. Aborting`, then it means that some of the the code files were changed. In this case (assuming you haven't git committed) you might want to discard those changes first, by running:
+
+```bash
+git restore *
+git pull
+```
+
 
 ### Logs
 
